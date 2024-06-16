@@ -1,0 +1,11 @@
+{{ for page of search.pages("post") }}
+    <div>
+        <div class="post-title-container">
+            <h2>
+                <a href="{{ page.url }}">{{ page.title }}</a>
+            </h2>
+            <time class="post-date" datetime="{{ page.date }}">{{ page.date.toISOString().split("T")[0] }}</time>
+        </div>
+        {{ page.description }}
+    </div>
+{{ /for }}

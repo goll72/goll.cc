@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
+
+header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#site-name {
+    font-size: 2em;
+    font-weight: bold;
+    text-shadow: 3px 3px var(--highlight);
+    color: var(--emphasis);
+
+    margin: 0 0.2em;
+    align-self: center;
+}
+
+#site-sections {
+    list-style: none;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+
+    width: max(20rem, 45vw);
+    margin-left: auto;
+    margin-right: 0.2em;
+}
+
+#site-sections > li, #site-sections > li > a {
+    display: inline-block;
+
+    color: var(--color);
+    text-decoration: none;
+
+    font-weight: 700;
+    font-size: 1.2em;
+
+    min-width: 20%;
+    text-align: center;
+}
+
+:root {
+    --background: #ddd;
+    --color: #222;
+    --emphasis: #b72a2a;
+    --highlight: #4b7799;
+    --contrast: #000;
+    --dimmed: #444;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #222;
+        --color: #ddd;
+        --emphasis: #ffcf00;
+        --highlight: #df00cf;
+        --contrast: #222;
+        --dimmed: #aaa;
+    }
+}
+
+:root {
+    font-family: "Fira Code";
+    color: var(--color);
+    background-color: var(--background);
+
+    margin: auto;
+}
+
+@media (min-width: 900px) {
+    :root {
+        width: min(75vw, 1300px);
+    }
+}
+
+#content {
+    margin: 0.6rem;
+    padding: 0.6rem;
+}
+
+a {
+    color: var(--highlight);
+}
+
+a:visited {
+    color: color-mix(in lch, var(--highlight) 70%, var(--contrast));
+}
+
+:is(h1, h2, h3, h4, h5, h6) > a.header-anchor {
+    color: var(--color);
+    text-decoration: none;
+}
+
+@media (min-width: 900px) {
+    :is(h1, h2, h3, h4, h5, h6) > a.header-anchor {
+        padding-left: 2rem;
+
+        position: relative;
+        left: -2rem;
+    }
+
+    :is(h1, h2, h3, h4, h5, h6) > a.header-anchor:hover {
+        left: -2.9rem;
+    }
+
+    :is(h1, h2, h3, h4, h5, h6) > a.header-anchor:hover::before {
+        content: "#";
+        margin: -1rem;
+        margin-right: 1rem;
+    }
+}
+
+.post-title-container {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post-title-container > h2 > a {
+    color: var(--color);
+    text-decoration: none;
+}
+
+time.post-date {
+    color: var(--dimmed);
+    margin-left: 8px;
+}

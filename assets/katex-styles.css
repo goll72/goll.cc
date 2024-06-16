@@ -1,0 +1,10 @@
+/* FIXME: Very hacky */
+.katex-display {
+    overflow: scroll hidden;
+}
+
+/* Places tags on the left */
+.katex-display > .katex > .katex-html > .tag {
+   position: absolute !important;
+   left: -92%;
+}

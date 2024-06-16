@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{{ title }}</title>
+
+        <link type="text/css" rel="stylesheet" href="/styles.css">
+        {{ if tags.includes("code") }}
+            <link type="text/css" rel="stylesheet" href="/prism.css">
+        {{ /if }}
+        {{ if tags.includes("latex") }}
+            <link type="text/css" rel="stylesheet" href="/katex.css">
+            <link type="text/css" rel="stylesheet" href="/katex-styles.css">
+        {{ /if }}
+    </head>
+
+    <body>
+        <header>
+            <div id="site-name">goll.cc</div>
+
+            <ul id="site-sections">
+                <li>
+                    <a href="/">
+                        {{ if url === "/" }}
+                            .
+                        {{ else }}
+                            ~
+                        {{ /if }}
+                    </a>
+                </li>
+                <li>
+                    <a href="/blog">
+                        {{ if url === "/blog/" }}
+                            .
+                        {{ else if url.startsWith("/blog/") }}
+                            ..
+                        {{ else }}
+                            ~/blog
+                        {{ /if }}
+                    </a>
+                </li>
+                <li>
+                    <a href="/demos">
+                        {{ if url === "/demos/" }}
+                            .
+                        {{ else if url.startsWith("/demos/") }}
+                            ..
+                        {{ else }}
+                            ~/demos
+                        {{ /if }}
+                    </a>
+                </li>
+            </ul>
+        </header>
+
+        <article id="content">
+            {{ content }}
+        </article>
+    </body>
+</html>
