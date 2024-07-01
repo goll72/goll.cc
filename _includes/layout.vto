@@ -22,7 +22,7 @@
 
             {{ if url !== "/blog/" && url.startsWith("/blog/") }}
                 <meta property="og:type" content="article">
-                <meta property="og:article:published_time" content="{{ page.date }}">
+                <meta property="og:article:published_time" content="{{ date.toISOString() }}">
             {{ /if }}
 
             {{ if image }}
