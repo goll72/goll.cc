@@ -1,5 +1,6 @@
 import lume from "lume/mod.ts";
 import esbuild from "lume/plugins/esbuild.ts";
+import minifyHTML from "lume/plugins/minify_html.ts";
 import katex from "lume/plugins/katex.ts";
 import prism from "lume/plugins/prism.ts";
 
@@ -23,6 +24,7 @@ const site = lume({}, { markdown });
 site.ignore("README.md");
 
 site.use(esbuild());
+site.use(minifyHTML());
 site.use(katex({
     options: {
         delimiters: [

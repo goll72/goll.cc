@@ -52,13 +52,13 @@ numbers always have the form $ 4^{t} $. One interesting property about
 numbers of that form is that they can always be written as a sum of the
 first $ 2^t $ odd numbers. This follows directly from
 
-\\[ 0^2 = 0 \\]
-\\[ (n + 1)^2 = n^2 + 2n +  1 \\]
+$$ 0^2 = 0 $$
+$$ (n + 1)^2 = n^2 + 2n +  1 $$
 
 i.e. all perfect squares can be expressed as a sum of consecutive odd numbers,
 starting from $ 1 $. In fact:
 
-\\[ \sum_{n = 1}^{p} \left(2n - 1\right) = 2\frac{p(p + 1)}{2} - p = p^{2} \\]
+$$ \sum_{n = 1}^{p} \left(2n - 1\right) = 2\frac{p(p + 1)}{2} - p = p^{2} $$
 
 From there we can derive a trivial but inefficient approach to finding the
 integer square root: just subtract consecutive odd numbers from $ X $, while
@@ -98,11 +98,11 @@ positive number. $ \mathcal{P}\_{i, A}(\mathcal{O}\_{k}) $ contains all consecut
 odd numbers that have been "grouped" to be subtracted in the current layer. This
 definition of $ \mathcal{P} $ can be intuitively understood by verifying that
 when $ A = \varnothing $ and $ i = 0 $ we get the first $ \frac{2^{k}}{2} $
-odd numbers and that this value is halved each time when incrementing $ i $ until
-we get to $ i = k - 1 $, showing that this method employs a divide-and-conquer
-technique in a way that relates to powers of two. At the same time, it's possible
-to realize that $ T_{A} $ simply serves to offset the sequence to account for the
-odd numbers that have been subtracted already.
+odd numbers and that this value is halved each time if $ A $ is fixed and $ i $
+is incremented until we get to $ i = k - 1 $, suggesting that this method employs
+a divide-and-conquer technique in a way that relates to powers of two. At the
+same time, it's possible to realize that $ T_{A} $ simply serves to offset the
+sequence to account for the odd numbers that have been subtracted already.
 
 By our definition, $ \sum\_{\mathcal{P}\_{i, A}(\mathcal{O}\_{k})} $ must be equal
 to the number being subtracted in the current layer. Let's show that, in fact, it is.
@@ -119,7 +119,10 @@ $$
 \begin{split}
  \sum\_{\mathcal{P}\_{i, A}(\mathcal{O}\_{k})}
  ~ &= ~
- \sum\_{n = 1}^{M} (2n - 1)  - \sum\_{n = 1}^{N} (2n - 1) = M^{2} - N^{2}
+ \sum\_{n = 1}^{M} (2n - 1)  - \sum\_{n = 1}^{N} (2n - 1)
+ \newline
+ ~ &= ~
+  M^{2} - N^{2}
  \newline
  ~ &= ~
  \cancel{\left(2^{k - 1} \sum\_{a \in A} \frac{1}{2^{a}} \right)^{2}} +
@@ -138,10 +141,12 @@ $$
 \end{split}
 $$
 
-This is exactly what we were looking for, i.e. the number that is subtracted
-at each step.
+This is exactly what we were looking for, i.e. a "canonical" or "direct"
+representation of the number that is subtracted at each step.
 Note that when $ i = 0 $ (and consequently $ A = \varnothing $), we get
-$ 2^{2k - 2} $, which is the value that gets subtracted at the first step.
+$ 2^{2k - 2} $, which is the value that gets subtracted at the first step. In
+other words, the $ 1 $ corresponds to the bit that is always set when
+subtracting.
 Each term of the sum corresponds directly to $ q_{k - a - 1} $.
 As $ i $ is incremented, each term of the sum that was already present for
 the previous value of $ i $ is multiplied by 2, which can be visualized as the
@@ -152,7 +157,8 @@ Next, consider $ S_{k} \subset \left\lbrace ~ 0, \dotsc, k -  1 ~ \right\rbrace 
 s.t. $ s \in S_{k} \Leftrightarrow q_{k - s - 1} = 1 $. By our definition of $ Q $,
 $ Q = \sum\_{s \in S_{k}} 2^{k - s - 1} $. Consider also
 $ A^{\*}\_{s} = \left\lbrace ~ s^{\prime} \in S_{k} ~ ~ \middle| ~ ~ s^{\prime} < s ~ \right\rbrace $.
-We will show that $ \sum\_{s \in S_{k}} \left(\sum\_{\mathcal{P}\_{s, A^{\*}\_{s}}(\mathcal{O_{k}})} \right)  = Q^{2} $
+We will show that
+$ \sum\_{s \in S_{k}} \left(\sum\_{\mathcal{P}\_{s, A^{\*}\_{s}}(\mathcal{O_{k}})} \right)  = Q^{2} $
 , that is, the sum of all the numbers subtracted by the circuit is equal to $ Q^{2} $.
 
 $$
