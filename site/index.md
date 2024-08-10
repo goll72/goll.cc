@@ -1,8 +1,6 @@
 ---
 title: goll.cc
 layout: base.njk
-tags:
- - code
 ---
 
 # About me

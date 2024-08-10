@@ -95,8 +95,6 @@ const handleMarkdownFile = async (path: string) => {
 
         pages.sort((a, b) => (a.published as Date).getTime() - (b.published as Date).getTime());
 
-        console.log(pages);
-
         return pages;
     });
 
