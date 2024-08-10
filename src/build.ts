@@ -105,11 +105,14 @@ const handleMarkdownFile = async (path: string) => {
             config
         });
 
+    const { matter } = file.data;
+
     const output = await unified()
         .use(rehypeParse)
         .use(rehypeMeta, {
-            title: file.data.matter.title,
-            description: file.data.matter.description,
+            ...matter,
+            type: (matter.tags ?? []).includes("post") ? "article" : "website",
+            image: "/favicon.png",
             og: true
         })
         .use(rehypeMinifyWhitespace, {
