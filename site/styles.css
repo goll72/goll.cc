@@ -1,0 +1,277 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
+
+header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#site-name {
+    font-size: 2em;
+    font-weight: bold;
+    text-shadow: 3px 3px var(--highlight);
+    color: var(--emphasis);
+
+    margin: 0 0.2em;
+    align-self: center;
+}
+
+#site-sections {
+    list-style: none;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+
+    width: max(20rem, 45vw);
+    margin-left: auto;
+    margin-right: 0.2em;
+}
+
+#site-sections > li, #site-sections > li > a {
+    display: inline-block;
+
+    color: var(--color);
+    text-decoration: none;
+
+    font-weight: 700;
+    font-size: 1.2em;
+
+    min-width: 20%;
+    text-align: center;
+}
+
+:root {
+    --background: #ddd;
+    --color: #222;
+    --emphasis: #b72a2a;
+    --highlight: #4b7799;
+    --contrast: #000;
+    --dimmed: #444;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #222;
+        --color: #ddd;
+        --emphasis: #ffcf00;
+        --highlight: #df00cf;
+        --contrast: #1f1f1f;
+        --dimmed: #aaa;
+    }
+}
+
+:root {
+    font-family: "Fira Code";
+    color: var(--color);
+    background-color: var(--background);
+
+    margin: auto;
+}
+
+@media (min-width: 900px) {
+    :root {
+        width: min(75vw, 1300px);
+    }
+}
+
+#content {
+    margin: 0.6rem;
+    padding: 0.6rem;
+}
+
+a {
+    color: var(--highlight);
+}
+
+a:visited {
+    color: color-mix(in lch, var(--highlight) 70%, var(--contrast));
+}
+
+.heading-autolink:is(h1, h2, h3, h4, h5, h6) > a {
+    color: var(--color);
+    text-decoration: none;
+}
+
+@media (min-width: 900px) {
+    .heading-autolink:is(h1, h2, h3, h4, h5, h6) > a {
+        padding-left: 2rem;
+
+        position: relative;
+        left: -2rem;
+    }
+
+    .heading-autolink:is(h1, h2, h3, h4, h5, h6) > a:hover {
+        left: -2.9rem;
+    }
+
+    .heading-autolink:is(h1, h2, h3, h4, h5, h6) > a:hover::before {
+        content: "#";
+        margin: -1rem;
+        margin-right: 1rem;
+    }
+}
+
+.post-title-container {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post-title-container > h2 > a {
+    color: var(--color);
+    text-decoration: none;
+}
+
+time.post-date {
+    color: var(--dimmed);
+    margin-left: 8px;
+}
+
+.text-center {
+    margin: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-links {
+    display: block;
+    text-align: center;
+    margin: 3rem 0 3rem 0;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+button {
+    background: var(--background);
+    color: var(--color);
+    border: var(--dimmed);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+blockquote {
+    margin-left: 0.1rem;
+    margin-right: 0;
+    padding-left: 0.8rem;
+    border-left: 3px solid var(--dimmed);
+}
+
+/** Comments */
+
+#comments-rule {
+    margin: 0 0 3rem 0;
+}
+
+form[action*="/comments/"] {
+    margin-bottom: 2rem;
+}
+
+input[type="text"], textarea {
+    background: var(--background);
+    color: var(--color);
+    border: 1px solid var(--dimmed);
+    font-family: "Fira Code";
+    border-radius: 3px;
+}
+
+#new-comment-content {
+    width: 100%;
+    height: 6em;
+    margin: 0.8rem 0 0.8rem 0;
+}
+
+#new-comment-disclaimer {
+    display: flex;
+    justify-content: space-between;
+    sub {
+        margin: 0.2rem;
+    }
+}
+
+.comment-heading {
+    display: flex;
+    justify-content: space-between;
+
+    vertical-align: super;
+    font-size: 0.87em;
+    color: var(--dimmed);
+
+    .comment-info {
+        display: flex;
+        justify-content: end;
+
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        * {
+            margin-left: 1rem;
+            margin-right: 0.3rem;
+
+            color: var(--dimmed);
+        }
+    }
+}
+
+.comment-thread {
+    margin-top: 0.6rem;
+    margin-bottom: 2rem;
+}
+
+/** Code blocks */
+
+pre {
+    background-color: var(--contrast);
+    border-radius: 8px;
+    padding: 1rem;
+
+    overflow-x: scroll;
+}
+
+pre code {
+    font-family: "Fira Code";
+}
+
+pre code[class*="language-"]  {
+    .keyword {
+        color: #ff7b72;
+    }
+    .comment {
+        color: #8b949e;
+    }
+    .constant {
+        color: #5cb1fd;
+    }
+    .variable {
+        color: #f0f0f0;
+    }
+    .string {
+        color: #a5d6ff;
+    }
+    .type {
+        color: #c84e4e;
+    }
+    .number {
+        color: #fffea5;
+    }
+}
+
+/** Katex styles */
+
+/* XXX: Very hacky */
+.katex-display {
+    overflow: scroll hidden;
+}
+
+/* Places tags on the left */
+.katex-display > .katex > .katex-html > .tag {
+   position: absolute !important;
+   left: -92%;
+}
