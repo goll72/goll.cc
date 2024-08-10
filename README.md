@@ -2,8 +2,8 @@ goll.cc
 =======
 
 My (mostly-statically-generated) website. Written using Markdown with support
-for embedded $ \LaTeX $, Nunjucks templates and server-side support for
-comments. It uses the following componenets:
+for embedded LaTeX, Nunjucks templates and server-side support for comments.
+It uses the following componenets:
 
  - remark and rehype
  - vite
