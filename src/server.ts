@@ -109,7 +109,7 @@ router.get("(.*/)comments", async ctx => {
 
     try {
         thread = await renderCommentThread(ctx.params[0], Number.isNaN(commentId) ? undefined : commentId);
-    } catch (err) {
+    } catch {
         ctx.response.body = await notFound(ctx.request.url.pathname);
         ctx.response.status = Status.NotFound;
 
@@ -159,7 +159,7 @@ router.get("(/.*)", async (ctx, next) => {
         }
 
         ctx.response.body = await readFile(filePath);
-    } catch (err) {
+    } catch {
         await next();
     }
 });
@@ -182,7 +182,7 @@ router.get("(/.*)", async ctx => {
 
         try {
             thread = await renderCommentThread(ctx.params[0], undefined);
-        } catch (err) {}
+        } catch {}
 
         const { div, h2, form, input, label, textarea, sub, button } = html;
 
@@ -207,7 +207,7 @@ router.get("(/.*)", async ctx => {
         );
 
         ctx.response.body = output;
-    } catch (err) {
+    } catch {
         ctx.response.body = await notFound(ctx.request.url.pathname);
         ctx.response.status = Status.NotFound;
     }
@@ -249,7 +249,7 @@ router.post("(.*/)comments", async ctx => {
                     id: parentId
                 }
             });
-        } catch (err) {
+        } catch {
             ctx.response.body = await renderTemplateCentered(html.h1({}, "Invalid comment to reply to"));
             ctx.response.status = Status.BadRequest;
 
@@ -265,7 +265,7 @@ router.post("(.*/)comments", async ctx => {
                 url: ctx.params[0]
             }
         });
-    } catch (err) {
+    } catch {
         ctx.response.body = await renderTemplateCentered(html.h1({}, "Invalid page"));
         ctx.response.status = Status.BadRequest;
 
