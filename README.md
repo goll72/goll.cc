@@ -13,20 +13,20 @@ It uses the following componenets:
  - nunjucks
  - oak
 
-Please do *not* use this code. It is *funky*.
+This code may have high doses of *funkiness*.
 
 ## Building
 
-Run `node --import=tsx src/build.ts build` from the project root.
-Use `serve` instead of `build` to run a dev server (vite).
+Run
 
-The actual server-side logic doesn't run when using the dev server,
-but rather when using `server.ts`.
+```sh
+$ git submodule update --init --recursive
+$ npm install
+$ prisma generate
+$ node --import=tsx src/build.ts
+```
 
-### Why are there two servers?
-
-I chose to use two servers as vite can do HMR, while oak's routing is
-more comprehensible thanks to its use of path-to-regexp.
+from the project root.
 
 ## Why did you create your own SSG?
 
@@ -40,4 +40,4 @@ Eventually I noticed pretty much nothing was going to cut it. Alas, here we are.
 # TODO
 
  - Create a dependency tree for Markdown files (only rebuild them if they've changed)
- - Use workers to process files in parallel
+ - Use workers to process files in parallel(?)

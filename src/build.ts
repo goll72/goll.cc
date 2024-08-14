@@ -3,13 +3,13 @@
 
 import path from "node:path";
 import { readdirSync, readFileSync } from "node:fs";
-import { writeFile, mkdir, symlink, readdir, stat, cp, rm } from "node:fs/promises";
+import { writeFile, mkdir, symlink, readdir, stat, cp } from "node:fs/promises";
 
 import { unified } from "unified";
 import { VFile } from "vfile";
 import { matter } from "vfile-matter";
 
-import { build, createServer } from "vite";
+import { build } from "vite";
 
 import rehypeParse from "rehype-parse";
 import rehypeStringify from "rehype-stringify";
@@ -61,11 +61,6 @@ const handleMarkdownFile = async (path: string) => {
     console.log(`[md] ${source}`);
 
     const file = handleFrontMatter(url, source);
-
-    if (mode === "build" && file.data.matter.draft) {
-        await rm(dest, { force: true });
-        return;
-    }
 
     await markdownProcessor({ trusted: true })
         .process(file);
@@ -152,12 +147,6 @@ const handleFile = async (path: string) => {
     }
 };
 
-if (process.argv[2] !== "build" && process.argv[2] !== "serve") {
-    throw Error(`Invalid argument. Usage: ${process.argv[0]} ${process.argv[1]} <build|serve>`);
-}
-
-const mode: "build" | "serve" = process.argv[2];
-
 // Scaffolding
 try {
     await stat("public/katex.css");
@@ -166,39 +155,36 @@ try {
     await cp("node_modules/katex/dist/katex.min.css", "public/katex.css");
 }
 
-if (mode === "serve") {
-    const watcher = new Watcher(config.server.source, { recursive: true });
-    const server = await createServer(config.vite);
+const watcher = new Watcher(config.server.source, { recursive: true });
 
-    server.middlewares.use((req, _, next) => {
-        if (req.originalUrl !== "/" && !req.originalUrl?.endsWith("index.html")) {
-            req.url += "/index.html";
-        }
+const files = (await readdir(`${projectRoot}/${config.server.source}`, { withFileTypes: true, recursive: true }))
+    .filter(x => x.isFile() && x.name.endsWith(".md"))
+    .map(x => `${x.parentPath}/${x.name}`);
 
-        next();
-    });
+const htmlFiles = files.map(x => x.replace(/\.md$/, ".html"));
 
-    await server.listen();
+for (const [index, _] of files.entries()) {
+    try {
+        const { mtime: htmlMtime } = await stat(htmlFiles[index]);
+        const { mtime: mdMtime } = await stat(files[index]);
 
-    for (const event of ["add", "change"]) {
-        watcher.on(event, handleFile);
+        if (mdMtime > htmlMtime)
+            handleFile(files[index])
+    } catch {
+        handleFile(files[index]);
     }
-} else if (mode === "build") {
-    const files = (await readdir(`${projectRoot}/${config.server.source}`, { withFileTypes: true, recursive: true }))
-        .filter(x => x.isFile() && x.name.endsWith(".md"))
-        .map(x => `${x.parentPath}/${x.name}`);
-
-    for (const path of files) {
-        handleFile(path);
-    }
-
-    await build({
-        ...config.vite,
-        build: {
-            rollupOptions: {
-                input: files.map(x => x.replace(/\.md$/, ".html"))
-            },
-            ...config.vite.build
-        }
-    });
 }
+
+watcher.on("change", handleFile);
+
+await build({
+    ...config.vite,
+    build: {
+        watch: {},
+        rollupOptions: {
+            input: htmlFiles,
+            "cache": true
+        },
+        ...config.vite.build
+    }
+}).then(() => console.log());

@@ -32,15 +32,11 @@ const server = {
 export default {
     server,
     vite: {
-        server: {
-            host: server.host,
-            port: server.port,
-            hmr: true
-        },
         root: server.source,
         build: {
             outDir: `../${server.root}`,
             emptyOutDir: true,
+            minify: "esbuild"
         },
         plugins: [sitemap({
             /* Unfortunately, this option has a bad name */
