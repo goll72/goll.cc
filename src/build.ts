@@ -9,7 +9,7 @@ import { unified } from "unified";
 import { VFile } from "vfile";
 import { matter } from "vfile-matter";
 
-import { build } from "vite";
+import { build, createServer } from "vite";
 
 import rehypeParse from "rehype-parse";
 import rehypeStringify from "rehype-stringify";
@@ -19,7 +19,6 @@ import rehypeMinifyWhitespace from "rehype-minify-whitespace";
 import njk from "nunjucks";
 
 import Watcher from "watcher";
-import { PrismaClient } from "@prisma/client";
 
 import config from "./config.ts";
 import { markdownProcessor } from "./process.ts";
@@ -48,15 +47,13 @@ const handleFrontMatter = (url: string, path: string) => {
     return file;
 }
 
-const prisma = new PrismaClient();
-
 const handleMarkdownFile = async (path: string) => {
     if (!path.endsWith("index.md"))
         return;
 
-    const url = path.replace(urlRegex(config.server.source), (_, slug) => slug);
-    const source = `${config.server.source}${url}index.md`;
-    const dest = `${config.server.source}${url}index.html`;
+    const url = path.replace(urlRegex(config.root), (_, slug) => slug);
+    const source = `${config.root}${url}index.md`;
+    const dest = `${config.root}${url}index.html`;
 
     console.log(`[md] ${source}`);
 
@@ -128,14 +125,6 @@ const handleMarkdownFile = async (path: string) => {
             await symlink(`${projectRoot}/${source}`, `tags/${tag}${url}index.md`, "file");
         } catch {}
     }
-
-    if (file.data.matter.layout === "with-comments.njk") {
-        await prisma.page.upsert({
-            create: { url },
-            update: {},
-            where: { url }
-        });
-    }
 }
 
 const handleFile = async (path: string) => {
@@ -155,9 +144,7 @@ try {
     await cp("node_modules/katex/dist/katex.min.css", "public/katex.css");
 }
 
-const watcher = new Watcher(config.server.source, { recursive: true });
-
-const files = (await readdir(`${projectRoot}/${config.server.source}`, { withFileTypes: true, recursive: true }))
+const files = (await readdir(`${projectRoot}/${config.root}`, { withFileTypes: true, recursive: true }))
     .filter(x => x.isFile() && x.name.endsWith(".md"))
     .map(x => `${x.parentPath}/${x.name}`);
 
@@ -175,16 +162,26 @@ for (const [index, _] of files.entries()) {
     }
 }
 
-watcher.on("change", handleFile);
-
-await build({
-    ...config.vite,
+const configWithHtml = {
+    ...config,
     build: {
-        watch: {},
         rollupOptions: {
             input: htmlFiles,
-            "cache": true
+            cache: true
         },
-        ...config.vite.build
+        ...config.build
     }
-}).then(() => console.log());
+};
+
+// Production
+if (process.argv.includes("-p")) {
+    await build(configWithHtml);
+} else {
+    const watcher = new Watcher(config.root, { recursive: true });
+    watcher.on("change", handleFile);
+
+    const server = await createServer(configWithHtml);
+    await server.listen();
+    
+    console.log(`[vite] dev server started`);
+}

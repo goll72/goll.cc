@@ -1,9 +1,8 @@
 goll.cc
 =======
 
-My (mostly-statically-generated) website. Written using Markdown with support
-for embedded LaTeX, Nunjucks templates and server-side support for comments.
-It uses the following componenets:
+My (statically generated) website. Written using Markdown with support
+for embedded LaTeX, and Nunjucks templates. It uses the following componenets:
 
  - remark and rehype
  - vite
@@ -11,9 +10,6 @@ It uses the following componenets:
  - tree-sitter
  - prisma
  - nunjucks
- - oak
-
-This code may have high doses of *funkiness*.
 
 ## Building
 
@@ -22,7 +18,6 @@ Run
 ```sh
 $ git submodule update --init --recursive
 $ npm install
-$ prisma generate
 $ node --import=tsx src/build.ts
 ```
 

@@ -4,7 +4,7 @@ description: How the restoring integer square root algorithm works
 published: 2024-06-16
 tags:
  - post
-layout: with-comments.njk
+layout: base.njk
 ---
 
 # Restoring Integer Square Root Explained
@@ -12,31 +12,28 @@ layout: with-comments.njk
 
 You may have heard of the restoring integer square root circuit/algorithm before:
 I certainly have. And I became puzzled trying to understand how it works.
-Even though it's conceptually simple, made up of only subtractor units and
-restoring units, it's not really obvious at first sight what it's doing (at
-least it wasn't for me). For some reason, this seems to be one of those topics
-where if you just try to look it up you will get stuff that will either fly
-over your head or be so dumbed down and lackluster, without any explanations,
-that it might as well be useless.
+Even though it's conceptually simple, being able to be described in terms of 
+digital logic as a set of only subtractor units and restoring units, 
+it's not really obvious at first sight what it's doing (at least it wasn't for me). 
 
-Maybe I just don't know how to use a search engine. Anyway, I believe to have found
-an intuitive explanation for how and why this circuit works, and now I'd like to
-present it to anyone who might be interested. Keep in mind that this is just one
-explanation, it doesn't mean there aren't other ways of conceptualizing it.
+For some reason, trying to look up how it works didn't bring up anything interesting
+at first, so I just tried to figure this out on my own, and here I've present a
+sketch that explains *why* this method works.
 
 ## What it does
 
 Given a number $ X $, the circuit outputs $ Q $ and $ R $ satisfying the
-relation $ X = Q^{2} + R, ~ ~ X, Q, R \in \mathbb{N_{0}} $, where $ Q $ is
+relation $ X = Q^{2} + R, \  X, Q, R \in \mathbb{N_{0}} $, where $ Q $ is
 maximized. To do so, it works with pairs of bits at a time, so $ X $ must
 be a $ 2k $-digit binary number. We start with the most significant pair
 and try to subtract 1 from it. If the subtraction leaves a positive result,
 then we know that $ q_{k - 1} $, the most significant digit of $ Q $, is 1,
 otherwise it's 0 and the previous value is restored. Then, we take that
 result, concatenate it with the next pair and try to subtract
-$ \overline{0q_{k-1} ~ 01} $ from it. The result determines $ q_{k - 2} $. On
-the next layer, we try to subtract $ \overline{00 ~ q_{k-1}q_{k-2} ~ 01} $ and so
-on. After we've dealt with the last pair, the remainder of the last
+$ \overline{0q_{k-1} ~ 01} $ from it (the overline denotes concatenation). 
+The result determines $ q_{k - 2} $. On the next layer, we try to subtract 
+$ \overline{00 ~ q_{k-1}q_{k-2} ~ 01} $ and so on. 
+After we've dealt with the last pair, the remainder of the last
 subtraction is $ R $.
 
 ## How it works
@@ -44,10 +41,11 @@ subtraction is $ R $.
 Note that I will be treating subtractions as operations that affect the
 entirety of their operands (as they do), even though in the actual circuit
 implementation subtraction is only done starting from the least significant
-set bit, as subtracting zero doesn't affect the result.
+set bit, as subtracting a zero on the right doesn't affect the result of the 
+rest of the subtraction, to the left. 
 
-If you play around with a sufficiently small version of the circuit, for
-instance, when $ k = 3 $, you may find an interesting pattern across the
+If you play around with a sufficiently small version of the circuit/algorithm, 
+for instance, when $ k = 3 $, you may find an interesting pattern across the
 numbers that are being subtracted: if you consider $ Q = 0 $, then these
 numbers always have the form $ 4^{t} $. One interesting property about
 numbers of that form is that they can always be written as a sum of the
@@ -76,10 +74,10 @@ core, it subtracts consecutive odd numbers from $ X $, but rather than
 doing it one a time, it does it in groups, while still allowing for $ Q $
 and $ R $ to be uniquely determined.
 
-Playing around with the circuit once again, you could show that, for a set
+Playing around with it once again, you could show that, for a set
 value of $ k $, all paths (taking into account all possible intermediate
 values of $ Q $) would uniquely determine a sequence of consecutive odd
-numbers.
+numbers to be subtracted.
 
 ## Modeling the problem
 
@@ -98,24 +96,24 @@ $$
 T_{A} = \sum_{a \in A} 2^{k - a - 1}
 $$
 $$
-\mathcal{P}_{i, A}(\mathcal{O}_{k}) = \left\lbrace ~ \mathcal{o} \in \mathcal{O}_{k} ~ ~ \middle| ~ ~ 2\left(T_{A} + 1 \right) - 1 \leq \mathcal{o} \leq 2\left(T_{A} + 2^{k - i - 1} \right) - 1 ~ \right\rbrace
+\mathcal{P}_{i}^{A}(\mathcal{O}_{k}) = \left\lbrace ~ \mathcal{o} \in \mathcal{O}_{k} ~ ~ \middle| ~ ~ 2\left(T_{A} + 1 \right) - 1 \leq \mathcal{o} \leq 2\left(T_{A} + 2^{k - i - 1} \right) - 1 ~ \right\rbrace
 $$
 
 where $ i \in \{ ~ 0, \, \mathellipsis, \, k - 1 ~ \} $ corresponds to the current
 layer, starting from $ 0 $, and $ A $ is such that $ i > a \; \forall a \in A $
-and $ a \in A \Leftrightarrow q_{k - 1 - a} = 1 $, that is, $ A $ represents all
+and $ a \in A \iff q_{k - 1 - a} = 1 $, that is, $ A $ represents all
 previous layers where the subtraction succeeded or, equivalently, resulted in a
-positive number. $ \mathcal{P}_{i, A}(\mathcal{O}_{k}) $ contains all consecutive
-odd numbers that have been "grouped" to be subtracted in the current layer. This
-definition of $ \mathcal{P} $ can be intuitively understood by verifying that
-when $ A = \varnothing $ and $ i = 0 $ we get the first $ \frac{2^{k}}{2} $
-odd numbers and that this value is halved each time if $ A $ is fixed and $ i $
+positive number. $ \mathcal{P}_{i}^{A} $ contains all consecutive odd numbers
+that have been "grouped" to be subtracted in the current layer. This definition
+of $ \mathcal{P} $ can be intuitively understood by verifying that when
+$ A = \varnothing $ and $ i = 0 $ we get the first $ \frac{2^{k}}{2} $ odd
+numbers and that this value is halved each time if $ A $ is fixed and $ i $
 is incremented until we get to $ i = k - 1 $, suggesting that this method employs
 a divide-and-conquer technique in a way that relates to powers of two. At the
 same time, it's possible to realize that $ T_{A} $ simply serves to offset the
 sequence to account for the odd numbers that have been subtracted already.
 
-By our definition, $ \sum_{\mathcal{P}_{i, A}(\mathcal{O}_{k})} $ must be equal
+By our definition, $ \sum_{\mathcal{P}_{i}^{A}(\mathcal{O}_{k})} $ must be equal
 to the number being subtracted in the current layer. Let's show that, in fact, it is.
 
 Since we have a sum over an arbitrary consecutive sequence of odd numbers, say,
@@ -132,28 +130,22 @@ N = 2^{k - 1} \sum_{a \in A} \frac{1}{2^{a}}
 $$
 $$
 \begin{split}
- \sum_{\mathcal{P}_{i, A}(\mathcal{O}_{k})}
+ \sum_{\mathcal{P}_{i}^{A}}
  ~ &= ~
- \sum_{n = 1}^{M} (2n - 1)  - \sum_{n = 1}^{N} (2n - 1)
- \newline
- ~ &= ~
-  M^{2} - N^{2}
+ \sum_{n = 1}^{M} (2n - 1)  - \sum_{n = 1}^{N} (2n - 1) = M^{2} - N^{2}
  \newline
  ~ &= ~
  \cancel{\left(2^{k - 1} \sum_{a \in A} \frac{1}{2^{a}} \right)^{2}} +
  2 \cdot 2^{k - 1 - i} \cdot 2^{k - 1} \sum_{a \in A} \frac{1}{2^{a}} +
  \left(2^{k - 1 - i}\right)^{2} -
  \cancel{\left(2^{k - 1} \sum_{a \in A} \frac{1}{2^{a}}\right)^{2}}
- \newline
- ~ &= ~
- 2^{2k - i - 1} \sum_{a \in A} \frac{1}{2^{a}} + 2^{2k - 2i - 2}
- \newline
- ~ &= ~
- 2^{2(k - i - 1)} \left(2^{i + 1} \sum_{a \in A} \frac{1}{2^{a}} + 1\right)
- \newline
- ~ &= ~
-  2^{2(k - i - 1)} \left(\sum_{a \in A} 2^{i - a + 1} + 1\right)
 \end{split}
+$$
+
+With some rearranging of terms, we get:
+
+$$
+\sum_{\mathcal{P}_{i}^{A}} = 2^{2(k - i - 1)} \left(\sum_{a \in A} 2^{i - a + 1} + 1\right)
 $$
 
 This is exactly what we were looking for, i.e. a "canonical" or "direct"
@@ -162,23 +154,27 @@ Note that when $ i = 0 $ (and consequently $ A = \varnothing $), we get
 $ 2^{2k - 2} $, which is the value that gets subtracted at the first step. In
 other words, the $ 1 $ corresponds to the bit that is always set when
 subtracting.
-Each term of the sum corresponds directly to $ q_{k - a - 1} $.
+Each term of the resulting sum corresponds directly to $ q_{k - a - 1} $.
 As $ i $ is incremented, each term of the sum that was already present for
 the previous value of $ i $ is multiplied by 2, which can be visualized as the
 left shift performed by the circuit to each $ q_{n} $ when comparing
 the previous layer to the current one.
 
 Next, consider $ S_{k} \subset \left\lbrace ~ 0, \dotsc, k - 1 ~ \right\rbrace $
-s.t. $ s \in S_{k} \Leftrightarrow q_{k - s - 1} = 1 $. By our definition of $ Q $,
+s.t. $ s \in S_{k} \iff q_{k - s - 1} = 1 $. By our definition of $ Q $,
 $ Q = \sum_{s \in S_{k}} 2^{k - s - 1} $. Consider also
 $ A^{*}_{s} = \left\lbrace ~ s^{\prime} \in S_{k} ~ ~ \middle| ~ ~ s^{\prime} < s ~ \right\rbrace $.
-We will show that
-$ \sum_{s \in S_{k}} \left(\sum_{\mathcal{P}_{s, A^{*}_{s}}(\mathcal{O_{k}})} \right)  = Q^{2} $
-, that is, the sum of all the numbers subtracted by the circuit is equal to $ Q^{2} $.
+We will show that:
+
+$$
+\sum_{s \in S_{k}} \left(\sum_{\mathcal{P}_{s}^{A^{*}_{s}}} \right)  = Q^{2} 
+$$
+
+That is, the sum of all the numbers subtracted at the end of the process is equal to $ Q^{2} $.
 
 $$
 \begin{split}
- \sum_{\mathcal{P}_{s, A^{*}_{s}}(\mathcal{O_{k}})}
+ \sum_{\mathcal{P}_{s, A^{*}_{s}}}
  ~ &= ~
  2^{2(k - s - 1)} \left(\sum_{a \in A^{*}_{s}} 2^{s - a + 1} + 1\right)
  \newline
@@ -216,13 +212,13 @@ $$
 $$
 
 Note that from $ (1) $ to $ (2) $, we use the fact that
-$ (a + b + c + \dots)^{2} = a^{2} + b^{2} + c^{2} + (\dots + 2ab + 2ac + \dots + 2bc + \cdots) $
+$ (a + b + c + \cdots)^{2} = a^{2} + b^{2} + c^{2} + \cdots + 2ab + 2ac + \cdots + 2bc + \cdots $
 
 ## Conclusions
 
 From the derivations shown above, we can conclude that $ Q $ and $ R $, as
 obtained at the end of the procedure performed by the restoring integer square
-root circuit, satisfy the relation $ X = Q^{2} + R $. Note, however, that I
+root algorithm. satisfy the relation $ X = Q^{2} + R $. Note, however, that I
 haven't proven that $ Q $ is maximized or that $ Q $ and $ R $ are uniquely
 determined. That will be left as an exercise to the reader 😃
 
