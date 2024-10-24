@@ -9,7 +9,7 @@ import { unified } from "unified";
 import { VFile } from "vfile";
 import { matter } from "vfile-matter";
 
-import { build, createServer } from "vite";
+import { build as viteBuild, createServer as viteServe } from "vite";
 
 import rehypeParse from "rehype-parse";
 import rehypeStringify from "rehype-stringify";
@@ -173,15 +173,16 @@ const configWithHtml = {
     }
 };
 
-// Production
-if (process.argv.includes("-p")) {
-    await build(configWithHtml);
-} else {
-    const watcher = new Watcher(config.root, { recursive: true });
-    watcher.on("change", handleFile);
+export default async function build(environment?: "production" | "development") {
+    if (environment === "production") {
+        await viteBuild(configWithHtml);
+    } else {
+        const watcher = new Watcher(config.root, { recursive: true });
+        watcher.on("change", handleFile);
 
-    const server = await createServer(configWithHtml);
-    await server.listen();
-    
-    console.log(`[vite] dev server started`);
-}
+        const server = await viteServe(configWithHtml);
+        await server.listen();
+
+        console.log("[vite] dev server started");
+    }
+};

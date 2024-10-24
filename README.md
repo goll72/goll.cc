@@ -18,7 +18,7 @@ Run
 ```sh
 $ git submodule update --init --recursive
 $ npm install
-$ node --import=tsx src/build.ts
+$ npm run build
 ```
 
 from the project root.
