@@ -36,6 +36,7 @@
     "tsx": "^4.16.5"
   },
   "scripts": {
-    "build": "node --import=tsx ./scripts/build.ts"
+    "build": "node --import=tsx ./scripts/build.ts",
+    "webhook": "node --import=tsx ./scripts/webhook.ts"
   }
 }
