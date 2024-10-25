@@ -58,7 +58,7 @@ const handleWebhook = async (request: IncomingMessage, response: ServerResponse)
     await build("production");
 
     // XXX: this is duplicated in src/config.ts  
-    const rsync = await spawnWithExitCode("rsync", ["-r", "-p", "--delete", "dist", process.env.SERVER_ROOT]);
+    const rsync = await spawnWithExitCode("rsync", ["-r", "-p", "--delete", "./dist/", process.env.SERVER_ROOT]);
 
     if (rsync !== 0)
         console.warn("[webhook] `rsync' failed!");
