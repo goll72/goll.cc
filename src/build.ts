@@ -47,7 +47,7 @@ const handleFrontMatter = (url: string, path: string) => {
     return file;
 }
 
-const handleMarkdownFile = async (path: string) => {
+const handleMarkdownFile = async (path: string, files: Set<string>) => {
     if (!path.endsWith("index.md"))
         return;
 
@@ -59,8 +59,10 @@ const handleMarkdownFile = async (path: string) => {
 
     const file = handleFrontMatter(url, source);
 
+    for (const dependantUrl of file.data.matter.rebuild ?? [])
+        files.add(`${projectRoot}/${config.root}${dependantUrl}index.md`);
+
     for (const tag of file.data.matter.tags ?? []) {
-        console.log(`tags/${tag}${url}`);
         await mkdir(`tags/${tag}${url}`, { recursive: true });
 
         try {
@@ -128,9 +130,9 @@ const handleMarkdownFile = async (path: string) => {
     await writeFile(dest, String(output));
 }
 
-const handleFile = async (path: string) => {
+const handleFile = async (path: string, files: Set<string>) => {
     try {
-        await handleMarkdownFile(path);
+        await handleMarkdownFile(path, files);
     } catch (err) {
         console.error(`[err] ${err.message}`);
         console.error(err.stack);
@@ -151,6 +153,8 @@ export default async function build(environment?: "production" | "development") 
         .map(x => `${x.parentPath}/${x.name}`)
         .reverse();
 
+    const needsRebuild: Set<string> = new Set();
+
     const htmlFiles = files.map(x => x.replace(/\.md$/, ".html"));
 
     for (const [index, _] of files.entries()) {
@@ -159,11 +163,14 @@ export default async function build(environment?: "production" | "development") 
             const { mtime: mdMtime } = await stat(files[index]);
 
             if (mdMtime > htmlMtime)
-                handleFile(files[index])
+                needsRebuild.add(files[index]);
         } catch {
-            handleFile(files[index]);
+            needsRebuild.add(files[index]);
         }
     }
+
+    for (const filePath of needsRebuild)
+        handleFile(filePath, needsRebuild);
 
     const configWithHtml = {
         ...config,

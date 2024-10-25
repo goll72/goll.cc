@@ -4,6 +4,8 @@ description: How the restoring integer square root algorithm works
 published: 2024-06-16
 tags:
  - post
+rebuild:
+ - /blog/
 layout: base.njk
 ---
 
