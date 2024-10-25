@@ -18,4 +18,13 @@ Hi! I'm a Computer Science undergrad who's also a FOSS enthusiast. You may find 
     </span>
 </span>
 
+```c
+#include <stdio.h>
+
+int main(void) 
+{
+    printf("Hello, world!\n");
+}
+```
+
 <hr>
