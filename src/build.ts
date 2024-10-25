@@ -59,6 +59,15 @@ const handleMarkdownFile = async (path: string) => {
 
     const file = handleFrontMatter(url, source);
 
+    for (const tag of file.data.matter.tags ?? []) {
+        console.log(`tags/${tag}${url}`);
+        await mkdir(`tags/${tag}${url}`, { recursive: true });
+
+        try {
+            await symlink(`${projectRoot}/${source}`, `tags/${tag}${url}index.md`, "file");
+        } catch {}
+    }
+
     await markdownProcessor({ trusted: true })
         .process(file);
 
@@ -117,14 +126,6 @@ const handleMarkdownFile = async (path: string) => {
         .process(file);
 
     await writeFile(dest, String(output));
-
-    for (const tag of file.data.matter.tags ?? []) {
-        await mkdir(`tags/${tag}${url}`, { recursive: true });
-
-        try {
-            await symlink(`${projectRoot}/${source}`, `tags/${tag}${url}index.md`, "file");
-        } catch {}
-    }
 }
 
 const handleFile = async (path: string) => {
@@ -146,7 +147,8 @@ try {
 
 const files = (await readdir(`${projectRoot}/${config.root}`, { withFileTypes: true, recursive: true }))
     .filter(x => x.isFile() && x.name.endsWith(".md"))
-    .map(x => `${x.parentPath}/${x.name}`);
+    .map(x => `${x.parentPath}/${x.name}`)
+    .reverse();
 
 const htmlFiles = files.map(x => x.replace(/\.md$/, ".html"));
 

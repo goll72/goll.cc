@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "nunjucks": "^3.2.4",
     "rehype": "^13.0.1",
     "rehype-autolink-headings": "^7.1.0",

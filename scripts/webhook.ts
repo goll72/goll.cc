@@ -5,6 +5,8 @@ import build from "../src/build.ts";
 import { spawn } from "node:child_process";
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 
+import "dotenv/config";
+
 const webhooks = new Webhooks({
     secret: process.env.WEBHOOK_SECRET!,
 });
