@@ -137,45 +137,45 @@ const handleFile = async (path: string) => {
     }
 };
 
-// Scaffolding
-try {
-    await stat("public/katex.css");
-} catch {
-    await cp("node_modules/katex/dist/fonts", "public/fonts", { recursive: true });
-    await cp("node_modules/katex/dist/katex.min.css", "public/katex.css");
-}
-
-const files = (await readdir(`${projectRoot}/${config.root}`, { withFileTypes: true, recursive: true }))
-    .filter(x => x.isFile() && x.name.endsWith(".md"))
-    .map(x => `${x.parentPath}/${x.name}`)
-    .reverse();
-
-const htmlFiles = files.map(x => x.replace(/\.md$/, ".html"));
-
-for (const [index, _] of files.entries()) {
-    try {
-        const { mtime: htmlMtime } = await stat(htmlFiles[index]);
-        const { mtime: mdMtime } = await stat(files[index]);
-
-        if (mdMtime > htmlMtime)
-            handleFile(files[index])
-    } catch {
-        handleFile(files[index]);
-    }
-}
-
-const configWithHtml = {
-    ...config,
-    build: {
-        rollupOptions: {
-            input: htmlFiles,
-            cache: true
-        },
-        ...config.build
-    }
-};
-
 export default async function build(environment?: "production" | "development") {
+    // Scaffolding
+    try {
+        await stat("public/katex.css");
+    } catch {
+        await cp("node_modules/katex/dist/fonts", "public/fonts", { recursive: true });
+        await cp("node_modules/katex/dist/katex.min.css", "public/katex.css");
+    }
+
+    const files = (await readdir(`${projectRoot}/${config.root}`, { withFileTypes: true, recursive: true }))
+        .filter(x => x.isFile() && x.name.endsWith(".md"))
+        .map(x => `${x.parentPath}/${x.name}`)
+        .reverse();
+
+    const htmlFiles = files.map(x => x.replace(/\.md$/, ".html"));
+
+    for (const [index, _] of files.entries()) {
+        try {
+            const { mtime: htmlMtime } = await stat(htmlFiles[index]);
+            const { mtime: mdMtime } = await stat(files[index]);
+
+            if (mdMtime > htmlMtime)
+                handleFile(files[index])
+        } catch {
+            handleFile(files[index]);
+        }
+    }
+
+    const configWithHtml = {
+        ...config,
+        build: {
+            rollupOptions: {
+                input: htmlFiles,
+                cache: true
+            },
+            ...config.build
+        }
+    };
+
     if (environment === "production") {
         await viteBuild(configWithHtml);
     } else {
