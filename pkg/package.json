@@ -1,0 +1,13 @@
+{
+  "name": "goll.cc",
+  "version": "0.1.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goll72/goll.cc.git"
+  },
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "esbuild": "^0.24.2"
+  }
+}

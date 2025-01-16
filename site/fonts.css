@@ -1,0 +1,55 @@
+@font-face {
+    font-family: "Fira Code";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src: url("./assets/fonts/FiraCode-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Fira Code";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 600;
+    src: url("./assets/fonts/FiraCode-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Fira Code";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 800;
+    src: url("./assets/fonts/FiraCode-Bold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "XITS";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src: url("./assets/fonts/XITS-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "XITS";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 800;
+    src: url("./assets/fonts/XITS-Bold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "XITS Math";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src: url("./assets/fonts/XITSMath-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "XITS Math";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 800;
+    src: url("./assets/fonts/XITSMath-Bold.woff2") format("woff2");
+}

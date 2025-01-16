@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+$if(lang)$
+<html lang="$lang$">
+$else$
+<html lang="en">
+$endif$
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+$if(description)$
+        <meta name="description" value="$description$">
+$endif$
+
+        <link rel="icon" href="/assets/favicon.png" data-external="1">
+        <link rel="stylesheet" type="text/css" href="/styles.css" data-external="1">
+        
+        <title>
+$if(pagetitle)$
+            $pagetitle$
+$else$
+            $title$
+$endif$
+        </title>
+$if(css)$
+
+$endif$
+$for(css)$
+        <link rel="stylesheet" type="text/css" href="$css$" data-external="1">
+$endfor$
+$if(script)$
+
+$endif$
+$for(script)$
+        <script type="module" src="$script$" data-external="1"></script>
+$endfor$
+    </head>
+    <body>
+        <header>
+            <div id="site-name">goll.cc</div>
+            <div id="site-sections">
+                $site-sections$
+            </div>
+        </header>
+    
+        <article>
+$if(title)$
+            <h1 class="title">$title$</h1>
+$endif$
+$if(subtitle)$
+            <p class="subtitle">$subtitle$</p>
+$endif$
+
+            $body$
+        </article>
+    </body>
+</html>

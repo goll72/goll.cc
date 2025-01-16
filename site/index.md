@@ -1,21 +1,25 @@
 ---
-title: goll.cc
-layout: base.njk
+pagetitle: goll.cc
+css:
+ - code.css
 ---
 
 # About me
 
-Hi! I'm a Computer Science undergraduate student who's also a FOSS enthusiast. You may find some cool stuff here (eventually).
+Hi! I'm a computer science undergraduate student who is also a FOSS enthusiast
+and interested in *wave. You may find some cool stuff here (eventually).
 
-<span class="icon-links"><span>[{% include "resources/icons/github.svg" %}](https://github.com/goll72)
-[{% include "resources/icons/gitlab.svg" %}](https://gitlab.com/goll72)
-[{% include "resources/icons/discord.svg" %}](discord://.goll.)
-[{% include "resources/icons/mastodon.svg" %}](https://masto.ai/@goll)
-    </span>
-    <span>
-        [{% include "resources/icons/cc.svg" %}](https://creativecommons.org/)
-        [{% include "resources/icons/cc-zero.svg" %}](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
-    </span>
-</span>
+[
+    [
+            [![](./assets/icons/github.svg)](https://github.com/goll72 "My Github Page")
+            [![](./assets/icons/gitlab.svg)](https://gitlab.com/goll "My GitLab Page")
+            [![](./assets/icons/discord.svg)](https://discord.com/users/504830046465163265 "My Discord Profile")
+            [![](./assets/icons/mastodon.svg)](https://masto.ai/@goll "My Mastodon Profile")
+    ]{}
+    [
+            [![](./assets/icons/cc.svg)](https://creativecommons.org "Creative Commons")
+            [![](./assets/icons/cc-zero.svg)](https://creativecommons.org/publicdomain/zero/1.0/deed.en "This site is under the CC0")
+    ]{}
+]{.icon-links}
 
-<hr>
+ *    *    * 

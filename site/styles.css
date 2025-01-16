@@ -1,14 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
+@import "./fonts.css";
 
-header {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+
+/** Header */
+header * {
+    font-family: "Fira Code";
 }
 
 #site-name {
     font-size: 2em;
-    font-weight: bold;
+    font-weight: 700;
+
     text-shadow: 3px 3px var(--highlight);
     color: var(--emphasis);
 
@@ -16,54 +17,59 @@ header {
     align-self: center;
 }
 
-#site-sections {
-    list-style: none;
-
+#site-sections > ul {
     display: flex;
     flex-direction: row;
+    
+    justify-content: space-around;
 
-    justify-content: space-between;
+    > li, > li > a {
+        display: inline-block;
 
-    width: max(20rem, 45vw);
-    margin-left: auto;
-    margin-right: 0.2em;
+        color: var(--color);
+        text-decoration: none;
+
+        font-weight: 600;
+        font-size: 1em;
+
+        min-width: 20%;
+        text-align: center;
+    }
 }
 
-#site-sections > li, #site-sections > li > a {
-    display: inline-block;
 
-    color: var(--color);
-    text-decoration: none;
-
-    font-weight: 700;
-    font-size: 1.2em;
-
-    min-width: 20%;
-    text-align: center;
-}
-
+/** Colors */
 :root {
     --background: #ddd;
+    --bg-contrast: #bbb;
     --color: #222;
     --emphasis: #b72a2a;
     --highlight: #4b7799;
-    --contrast: #000;
+    --contrast: #111;
     --dimmed: #444;
+    --link: #44f;
+    --link-visited: #ad1bff;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --background: #222;
+        --bg-contrast: #2a2a2a;
         --color: #ddd;
         --emphasis: #ffcf00;
         --highlight: #df00cf;
-        --contrast: #1f1f1f;
+        --contrast: #1d1d1d;
         --dimmed: #aaa;
+        --link: #8e96ff;
+        --link-visited: #d560ff;
     }
 }
 
+
+/** Misc. */
 :root {
-    font-family: "Fira Code";
+    font-family: "XITS", "XITS Math";
+    
     color: var(--color);
     background-color: var(--background);
 
@@ -72,73 +78,99 @@ header {
 
 @media (min-width: 900px) {
     :root {
-        width: min(75vw, 1300px);
+        font-size: 1.2rem;
+        width: min(75vw, 1200px);
     }
 }
 
-#content {
+article {
     margin: 0.6rem;
     padding: 0.6rem;
 }
 
+.footnote-back {
+    margin-left: 1em;
+}
+
+
+
+/** Links */
 a {
-    color: var(--highlight);
+    color: var(--link);
+
+    text-decoration-thickness: 0.07em;
+    text-decoration-style: dotted;
+    text-underline-offset: 2px; 
 }
 
 a:visited {
-    color: color-mix(in lch, var(--highlight) 70%, var(--contrast));
+    color: var(--link-visited);
 }
 
-.heading-autolink:is(h1, h2, h3, h4, h5, h6) > a {
-    color: var(--color);
-    text-decoration: none;
+a:hover {
+    text-decoration-style: solid;
 }
 
-@media (min-width: 900px) {
-    .heading-autolink:is(h1, h2, h3, h4, h5, h6) > a {
-        padding-left: 2rem;
 
-        position: relative;
-        left: -2rem;
-    }
-
-    .heading-autolink:is(h1, h2, h3, h4, h5, h6) > a:hover {
-        left: -2.9rem;
-    }
-
-    .heading-autolink:is(h1, h2, h3, h4, h5, h6) > a:hover::before {
-        content: "#";
-        margin: -1rem;
-        margin-right: 1rem;
+/** Math */
+math {
+    font-size: 105%;
+    
+    * {
+        font-family: math, "XITS", "XITS Math";
+        /* This is needed to make the *script adjusting below work */
+        font-size: 100%;
     }
 }
 
-.post-title-container {
-    display: flex;
-    flex-direction: row;
-
-    align-items: center;
-    justify-content: space-between;
+/* Set display style for display math */
+math[display="block"] * {
+    math-style: normal;
 }
 
-.post-title-container > h2 > a {
-    color: var(--color);
-    text-decoration: none;
+/* Adjust {sub,super}scripts to render properly with XITS */
+:is(msub, msup, msubsup, mmultiscripts, munder, mover, munderover) > :not(:first-child) {
+    font-size: 0.8em;
 }
 
-time.post-date {
-    color: var(--dimmed);
-    margin-left: 8px;
+/* Hack for Chromium */
+mtd[columnalign="center"] {
+    text-align: -webkit-center !important;
 }
 
-.text-center {
-    margin: auto;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+msup {
+    margin-right: 0.2em;
 }
 
+
+/** Prose */
+h1 {
+    font-size: 1.8em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Fira Code";
+}
+
+p {
+    text-align: justify;
+    hyphens: auto;
+
+    overflow: auto hidden;
+}
+
+blockquote {
+    border-left: solid var(--dimmed);
+    padding-left: 1em;
+    margin-right: 0;
+
+    blockquote {
+        margin-left: 0.2em;
+    }
+}
+
+
+/** Icon links (index.md) */
 .icon-links {
     display: flex;
 
@@ -148,7 +180,7 @@ time.post-date {
     text-align: center;
 
     > span {
-        margin: 0.5rem 1.5rem 0.5rem 1.5rem;
+        margin: 1rem 1.5rem 0.5rem 1.5rem; 
     }
 
     a {
@@ -156,129 +188,56 @@ time.post-date {
     }
 }
 
-button {
-    background: var(--background);
-    color: var(--color);
-    border: var(--dimmed);
-    border-radius: 3px;
-    cursor: pointer;
-}
 
-blockquote {
-    margin-left: 0.1rem;
-    margin-right: 0;
-    padding-left: 0.8rem;
-    border-left: 3px solid var(--dimmed);
-}
+/** Page list filter (page-list.lua) */
+.page-list > ul {
+    list-style-type: none;
+    padding: 0;
+    
+    > li {
+        > :first-child {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
 
-/** Comments */
+            margin-bottom: 0.5em;
+        }
 
-#comments-rule {
-    margin: 0 0 3rem 0;
-}
+        > p {
+            margin: 0;
+        }
+        
+        .page-list-title {
+            font-family: "Fira Code";
+            font-weight: 600;
 
-form[action*="/comments/"] {
-    margin-bottom: 2rem;
-}
+            margin-right: auto;
 
-input[type="text"], textarea {
-    background: var(--background);
-    color: var(--color);
-    border: 1px solid var(--dimmed);
-    font-family: "Fira Code";
-    border-radius: 3px;
-}
+            color: var(--color);
+            text-decoration: none;
+        }
 
-#new-comment-content {
-    width: 100%;
-    height: 6em;
-    margin: 0.8rem 0 0.8rem 0;
-}
-
-#new-comment-disclaimer {
-    display: flex;
-    justify-content: space-between;
-    sub {
-        margin: 0.2rem;
-    }
-}
-
-.comment-heading {
-    display: flex;
-    justify-content: space-between;
-
-    vertical-align: super;
-    font-size: 0.87em;
-    color: var(--dimmed);
-
-    .comment-info {
-        display: flex;
-        justify-content: end;
-
-        flex-direction: row;
-        flex-wrap: wrap;
-
-        * {
-            margin-left: 1rem;
-            margin-right: 0.3rem;
+        .page-list-date {
+            font-family: "Fira Code";
+            font-size: 0.8em;
+            text-align: end;
+            
+            margin-left: auto;
 
             color: var(--dimmed);
         }
+
+        padding: 0.6em;
+        margin: 0.6em 0;
+        border-radius: 5px;
+
+        background-color: var(--bg-contrast);
     }
 }
 
-.comment-thread {
-    margin-top: 0.6rem;
-    margin-bottom: 2rem;
-}
 
-/** Code blocks */
-
-pre {
-    background-color: var(--contrast);
-    border-radius: 8px;
-    padding: 1rem;
-
-    overflow-x: scroll;
-}
-
-pre code {
-    font-family: "Fira Code";
-}
-
-pre code[class*="language-"]  {
-    .keyword {
-        color: #ff7b72;
-    }
-    .comment {
-        color: #8b949e;
-    }
-    .constant {
-        color: #5cb1fd;
-    }
-    .variable {
-        color: #f0f0f0;
-    }
-    .string {
-        color: #a5d6ff;
-    }
-    .type {
-        color: #c84e4e;
-    }
-    .number {
-        color: #fffea5;
-    }
-}
-
-/** Katex styles */
-
-/* XXX: Very hacky */
-.katex-display {
-    overflow: scroll hidden;
-}
-
-/* Places tags on the left */
-.katex-display > .katex > .katex-html > .tag {
-   position: absolute !important;
-   left: -92%;
+/** Pikchr */
+.pikchr {
+    display: block;
+    margin: auto;
 }

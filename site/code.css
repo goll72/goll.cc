@@ -1,0 +1,86 @@
+code {
+    font-size: 0.75em;
+    font-family: "Fira Code";
+    
+    color: #ddd;
+    background-color: var(--contrast);
+
+    margin: 0 0.1em;
+    padding: 1px 3px;
+    border-radius: 4px;
+}
+
+pre {
+    color: #ddd;
+    background-color: var(--contrast);
+
+    padding: 0.7em;
+    border-radius: 5px;
+
+    overflow: auto;
+
+    code {
+        font-size: 0.9em;
+
+        margin: 0;
+        padding: 0;
+        border-radius: 0;
+    }
+}
+
+/* Theme inspired on Helix's spin on Fleet Dark:
+ * https://github.com/helix-editor/helix/blob/main/runtime/themes/fleet_dark.toml
+ */
+.sourceCode {
+    /* NOTE: .bu uses the same color as .dt, otherwise built-in types would
+     * be rendered as built-ins rather than types even in a type hint context
+     */
+    .dt, .bu {
+        color: #2886ff;
+    }
+    .co {
+        color: #888;
+    }
+    .cf, .kw {
+        color: #2b9;
+    }
+    .st, .im {
+        color: #d5c;
+    }
+    .pp {
+        color: #ea8020
+    }
+    .fu, .dv, .fl {
+        color: #da0;
+    }
+    .at {
+        color: #86a;
+    }
+
+    /* Language-specific overrides */
+    .python .va {
+        color: #d24;
+    }
+    .vhdl {
+        font-variant-ligatures: none;
+    }
+}
+
+pre.numberSource code {
+    counter-reset: source-line;
+}
+
+pre.numberSource code > span > a:first-child {
+    color: var(--dimmed);
+    text-decoration: none;
+
+    margin-right: 1em;
+
+    &::before {
+        content: counter(source-line);
+    }
+}
+
+pre.numberSource code > span {
+    counter-increment: source-line;
+}

@@ -1,7 +1,2 @@
-dist/
-node_modules/
-public/
-tags/
-
-**/*.html
-.env
+**/__pycache__
+/.mypy_cache
