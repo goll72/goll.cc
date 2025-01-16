@@ -1,6 +1,7 @@
 import os
 import hmac
 import socket
+import itertools
 import subprocess
 
 import argparse
@@ -14,6 +15,7 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 
 SERVER_ROOT = os.getenv("SERVER_ROOT")
 WEBHOOK_SECRET = os.getenvb(b"WEBHOOK_SECRET")
+RSYNC_EXCLUDE_FILE = os.getenv("RSYNC_EXCLUDE_FILE")
 
 
 parser = argparse.ArgumentParser()
@@ -24,7 +26,12 @@ args = parser.parse_args()
 def build(builddir: Path):
     subprocess.run(["git", "pull"]).check_returncode()
     subprocess.run(["ninja", "-C", builddir]).check_returncode()
-    subprocess.run(["rsync", "-r", "-p", "--delete", builddir / "dist", SERVER_ROOT]).check_returncode()
+
+    with open(RSYNC_EXCLUDE_FILE, "r") as f:
+        exclude = f.read().rstrip().split("\n")
+
+    exclude_args = itertools.chain(*zip(itertools.repeat("--exclude"), exclude))
+    subprocess.run(["rsync", "-r", "-p", "-v", "--delete", *exclude_args, f"{builddir}/dist/", SERVER_ROOT]).check_returncode()
 
 
 class WebhookRequestHandler(BaseHTTPRequestHandler):
