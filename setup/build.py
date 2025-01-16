@@ -199,7 +199,7 @@ with open(builddir / "build.ninja", "w") as f:
 
     ninja.rule(
         "cc",
-        f"{cc} $cflags $in -o $out",
+        f"{cc} $cflags $in $libs -o $out",
         description="Compiling C file $in"
     )
 
@@ -303,7 +303,7 @@ with open(builddir / "build.ninja", "w") as f:
         "pikchr", 
         "cc", 
         build(rootdir / "deps" / "pikchr.c"), 
-        variables={ "cflags": " ".join(["-DPIKCHR_SHELL", "-lm"]) }
+        variables={ "cflags": "-DPIKCHR_SHELL", "libs": "-lm"  }
     )
 
     ninja.line()
