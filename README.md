@@ -13,8 +13,9 @@ My website, written in Markdown, using Pandoc.
  - Ninja 1.10
  - A C compiler
 
-> [!NOTE] Pandoc needs to use Lua 5.4 as its scripting engine and it has to
-> be linked dynamically, otherwise it won't be able to load Lua libraries
+> [!NOTE] 
+> Pandoc needs to use Lua 5.4 as its scripting engine and it has to be
+> linked dynamically, otherwise it won't be able to load Lua libraries
 > written in C.
 
 ## Building
