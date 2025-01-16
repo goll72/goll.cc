@@ -28,9 +28,15 @@ local function Meta(metadata)
 
         local created, updated
 
+        -- If there is only one date in git's output and the metadata already specifies a creation date,
+        -- then the date from `git` will be the "updated" date. Otherwise it will be the "created" date.
         if #dates == 1 then
-            created = dates[1]
-        elseif #dates > 1 then
+            if metadata.date then
+                updated = dates[1]
+            else
+                created = dates[1]
+            end
+        else
             updated = dates[1]
             created = dates[#dates]
         end            
