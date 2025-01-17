@@ -1,3 +1,4 @@
+import os
 import sys
 import shutil
 import itertools
@@ -72,7 +73,7 @@ npm = find_binary_path("npm")
 luarocks = find_binary_path(f"luarocks-{LUA_VERSION}", "luarocks")
 pandoc = find_binary_path("pandoc")
 jq = find_binary_path("jq")
-cc = find_binary_path("cc", "clang", "gcc")
+cc = find_binary_path("clang", "gcc", "cc")
 
 builddir = Path(args.builddir).resolve()
 rootdir = Path(__file__).parent.parent
@@ -113,7 +114,7 @@ with subprocess.Popen([luarocks, *luarocks_args, "path", "--lr-path"], stdout=su
 with subprocess.Popen([luarocks, *luarocks_args, "path", "--lr-cpath"], stdout=subprocess.PIPE, text=True) as lr_cpath_proc:
     lua_cpath = lr_cpath_proc.stdout.read().strip()
 
-pandoc_env = { "LUA_PATH": lua_path, "LUA_CPATH": lua_cpath, "SITEDIR": str(build(sitedir)) }
+pandoc_env = { "LUA_PATH": lua_path, "LUA_CPATH": lua_cpath, "SITEDIR": str(build(sitedir)), "TMPDIR": os.getenv("TMPDIR") }
 python_env = { "PYTHONPATH": str(rootdir) }
 node_env = { "NODE_PATH": "node_modules" }
 
