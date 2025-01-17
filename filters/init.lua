@@ -6,7 +6,7 @@ local deps = require("filters.deps")
 local sections = require("filters.sections")
 -- depends on: <compilation order>
 local page_list = require("filters.page-list")
-    local diagram = require("filters.diagram")
+local diagram = require("filters.diagram")
 
 -- Filters must be ordered such that each
 -- filter is run before its dependents

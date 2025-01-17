@@ -44,11 +44,13 @@ local function Div(element)
         end
     end
 
+    local stringify = pandoc.utils.stringify
+
     pages:sort(function (a, b)
         if a.date == b.date or not a.date or not b.date then
-            return a.url < b.url
+            return a.url > b.url
         else
-            return a.date < b.date
+            return stringify(a.date) > stringify(b.date)
         end
     end)
 
@@ -74,7 +76,7 @@ local function Div(element)
         
         return pandoc.Blocks {
             pandoc.Div(heading),
-            pandoc.Para(x.description)
+            pandoc.Para(x.description or "No description")
         }
     end)
 
