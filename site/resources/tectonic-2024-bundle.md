@@ -32,7 +32,7 @@ hosting it [here](/texlive2024/bundle.ttb).
  - If you want to use the `20240312` bundle, you will have to build `tectonic` from
    source or use one of the binaries found in the CI pipeline artifacts, since the
    bundle format has been updated and the latest release of Tectonic available on
-   [Github](https://github.com/tectonic-typesetting/tectonic) does not support it,
+   [GitHub](https://github.com/tectonic-typesetting/tectonic) does not support it,
    as it's too old. 
 
  - If you want to build it yourself, you should be able to just follow the instructions
