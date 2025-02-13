@@ -1,6 +1,0 @@
-[submodule "src/grammars/tree-sitter-c"]
-	path = src/grammars/tree-sitter-c
-	url = https://github.com/tree-sitter/tree-sitter-c
-[submodule "src/grammars/tree-sitter-bash"]
-	path = src/grammars/tree-sitter-bash
-	url = https://github.com/tree-sitter/tree-sitter-bash
