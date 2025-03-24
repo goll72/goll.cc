@@ -6,8 +6,9 @@ css:
 
 # About me
 
-Hi! I'm a computer science undergraduate student who is also a FOSS enthusiast
-and interested in *wave. You may find some cool stuff here (eventually).
+Hi! I'm a computer science undergraduate student who is also a FOSS enthusiast.
+I like to listen to *wave, Touhou OST (and retro game OST in general), j-pop, etc.
+You may find some cool stuff here (eventually).
 
 [
     [
