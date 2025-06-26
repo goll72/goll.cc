@@ -19,13 +19,19 @@ p {
 
 @media (min-width: 900px) {
     article > *:not(.quiz-question),
-    .quiz-question > * {
-        max-width: min(65vw, 1200px);
+    .quiz-question > *,
+    header {
+        max-width: min(75vw, 1200px);
         margin: 0.5rem 2rem;
     }
 
-    article > *:not(.quiz-question) {
+    article > *:not(.quiz-question),
+    header {
         margin-left: 10vw;
+    }
+
+    header {
+            padding: 0 2em;
     }
 }
 
