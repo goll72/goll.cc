@@ -1,90 +1,62 @@
 ---
 script:
  - ./quiz.js
+css:
+ - ./styles.css
 ---
 
 # O caminho do código --- do C à máquina
+
 A presente página visa orientar, de forma clara e intuitiva, como funciona o processo de transformação de um programa escrito em linguagem alto nível para linguagem de máquina. Para isso, vamos introduzir os conceitos fundamentais para que todos possam, ao final da leitura, entender o passo a passo desse procedimento tão interessante.
 A linguagem utilizada nos exemplos de linhas de código de programas é a linguagem C a qual é muito adotada em cursos universitários para introdução dos alunos à área de programação
 
-## O que é uma linguagem de programação e linguagem de máquina?
+## Linguagens de programação e linguagem de máquina
+
 O computador, para processar e rodar nossos programas, precisa que as instruções estejam em linguagem de máquina, que é uma sequencia ordenada de  0´s e 1´s representando o passo a passo dos comandos que devem ser executados pelo computador.
 Percebe-se que seria extremamente difícil
 
-## Visão Geral da Arquitetura de Computadores 
+## Como um computador funciona 
 
 ### CPU e seu papel na execução de instruções
 
-### Conceito de registradores, memória, barramentos
+### Registradores, memória, barramentos
 
-### Unidade de controle e unidade lógica e aritmética (ALU)
+### Unidade de controle
 
-## Assembly
-
-### O que é linguagem assembly?
-
-### Características de uma linguagem de baixo nível
-
-### Como cada instrução de alto nível é traduzida para uma ou mais instruções de assembly
-
-### Exemplo prático
-
-### Quiz Assembly
+## Assembly: uma receita bem minuciosa
 
 ## Compilador
 
-### Análise léxica, sintática e semântica
+### As várias análises
 
-### Geração de código intermediário
+### Código intermediário
 
-### Otimização de código
+### Otimização
 
 ### Geração de código assembly
 
-### Compiladores vs interpretadores
-
-### Quiz Compilador
+> ### Compiladores *vs.* interpretadores
+>
+>
 
 ## Montador
 
 ### O que faz um assembler?
 
-### Tradução para códigos binários (opcodes)
-
 ### Tabela de símbolos
 
-### Exemplo simples de como uma instrução assembly vira binário
+## Linguagem de máquina
 
-### Quiz Montador
+### Formato
 
-## Codigo Binario
+## Análise do código
 
-### O que é a linguagem de máquina
+<!-- disassemblers (ex: objdump, Ghidra) -->
 
-### Formato de instrução (opcode + operandos)
+ *    *    *
 
-### Exemplos
+<!-- considerações finais (importância para a sociedade(?), programadores, etc.) -->
 
-### Quiz Codigo Binário
+## Quer saber mais?
 
-## Exemplos e Feramentas práticas
-
-### Como usar um desassemblador (ex: objdump, Ghidra)
-
-### Como compilar um programa em C para gerar o .s (assembly) e .o (binário)
-
-### Análise de um trecho de código em todas as camadas
-
-### Quiz Ferramentas práticas
-
-## Considerações finais e importância do tema para nossa sociedade
-
-### A importância desse conhecimento para programadores
-
-### Impacto em performance e segurança
-
-### Possibilidades de aprofundamento (compiladores, arquitetura, engenharia reversa…)
-
-### Quiz revisão geral
-
-
+<!-- compiladores, arquitetura, engenharia reversa… -->
