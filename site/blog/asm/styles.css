@@ -1,0 +1,36 @@
+:root {
+    width: 100vw !important;
+    margin: 0;
+}
+
+body,
+article {
+    margin: 0;
+    padding: 0;
+}
+
+@media (min-width: 900px) {
+    article > *:not(.quiz-question),
+    .quiz-question > * {
+        max-width: min(75vw, 1200px);
+        margin: 0.5rem 2rem;
+    }
+}
+
+.quiz-question {
+    display: inline-block;
+    width: 100vw;
+    
+    padding: 1rem 0.2rem;
+    margin: 1.2rem 0;
+    
+    background-color: var(--bg-contrast);
+
+    li {
+        list-style-type: none;
+
+        input {
+            margin-right: 1em;
+        }
+    }
+}
