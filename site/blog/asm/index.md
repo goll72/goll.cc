@@ -81,5 +81,25 @@ A ULA pode ser definida como um circuito digital que realiza operações matemá
 
 ## Quer saber mais?
 
-## Referência
-Vozes da minha cabeça
+::: {.quiz-question .multiple-choice}
+
+Lorem ipsum dolor sit amet. Consectetur adipising elit.
+
+ - [ ] Wrong answer
+ - [x] Correct answer
+ - [x] Correct answer
+ - [ ] Wrong answer
+
+:::
+
+::: {.quiz-question .single-choice #bar}
+
+Lorem ipsum.
+
+ - [x] Correct answer
+ - [ ] Wrong answer
+ - [ ] Wrong answer
+
+:::
+
+<!-- não há necessidade de uma seção dedicada para referências (use footnotes Markdown) -->
