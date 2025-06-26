@@ -13,8 +13,7 @@ for(let quiz of allQuizes){
 
 	const correct : boolean[] = [];
 	for(let choice of choices){
-		let tmp : boolean = choice.checked;
-		correct.push(tmp);
+		correct.push(choice.checked);
 			
 		if(singleChoice){
 			choice.setAttribute("type", "radio");
@@ -62,6 +61,5 @@ function checkQuiz(quiz : HTMLElement, singleChoice : boolean, correct : boolean
 			}
 		}
 	}
-
 
 }
