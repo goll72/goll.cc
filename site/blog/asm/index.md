@@ -7,12 +7,20 @@ css:
 
 # O caminho do código --- do C à máquina
 
-A presente página visa orientar, de forma clara e intuitiva, como funciona o processo de transformação de um programa escrito em linguagem alto nível para linguagem de máquina. Para isso, vamos introduzir os conceitos fundamentais para que todos possam, ao final da leitura, entender o passo a passo desse procedimento tão interessante.
-A linguagem utilizada nos exemplos de linhas de código de programas é a linguagem C a qual é muito adotada em cursos universitários para introdução dos alunos à área de programação
+Como um programa escrito em uma linguagem de alto nível, como C, é transformado em
+algo que o computador entenda? Você pode não perceber, mas esse programa passa por
+várias etapas até chegar nesse ponto. Explicaremos esse processo, mostrando algumas
+das etapas envolvidas, usando C para exemplificar, uma vez que essa linguagem é tão
+difundida na área de programação de sistemas de baixo nível.
 
 ## Linguagens de programação e linguagem de máquina
 
-O computador, para processar e rodar nossos programas, precisa que as instruções estejam em linguagem de máquina, que é uma sequencia ordenada de  0´s e 1´s representando o passo a passo dos comandos que devem ser executados pelo computador.
+Bem, o que é um programa e como um computador interpreta um programa? Para que um
+programa, que nada mais é que um conjunto de instruções para realizar uma determinada
+tarefa, seja executado, ele deve ser antes convertido para linguagem de máquina, uma
+sequência ordenada de bits (`0`s e `1`s) que recebem um significado especial,
+representando o passo a passo dos comandos que devem ser executados.
+
 Percebe-se que seria extremamente difícil
 
 ## Como um computador funciona 
