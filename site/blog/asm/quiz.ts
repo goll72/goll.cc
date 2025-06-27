@@ -65,6 +65,9 @@ function checkQuiz(quiz : HTMLElement, singleChoice : boolean, correct : boolean
 
 			quiz.querySelector(`#answer${i}`).hidden = false;
 		}
+		else if(correct[i]){
+			choices[i].parentElement.style.color = "green";
+		}
 
 	}
 }
