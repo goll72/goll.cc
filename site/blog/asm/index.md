@@ -37,6 +37,31 @@ Após produzir o código em linguagem de alto nível que mais se encaixar com su
 necessidades, é necessário convertê-la para a linguagem de máquina para que possa ser
 executada pelo computador. É justamente esse processo de conversão que iremos nos aprofundar.
 
+::: {.quiz-question .single-choice #linguagens}
+
+Qual das seguintes afirmativas está correta?
+
+ - [ ] As pessoas costumam escrever código que o computador já consegue processar.
+
+   [O computador entende apenas código binário, enquanto as pessoas costumam escrever
+   em uma linguagem mais natural e compreensível.]{.explanation}
+       
+ - [ ] As linguagens de programação são semelhantes às linguagens de máquina, de modo que é
+ necessário apenas uma simples tradução entre as duas.
+
+   [As linguagens de programação contém letras, palavras e diversas abstrações que auxiliam
+   o programador, enquanto a linguagem de máquina consiste apenas de `0`s e `1`s. O processo
+   de tradução da linguagem de alto nível para de máquina é muito complexo.]{.explanation}
+
+ - [x] São necessárias diversas etapas para converter o código escrito por humanos para o
+ código que o computador entende.
+
+   [Os programadores preferem utilizar linguagens de programação, que são mais próximas da
+   linguagem falada, porém computadores apenas processam código binário. Diversas ferramentas
+   são utilizadas para converter entre os dois.]{.explanation}
+
+:::
+
 ## Como um computador funciona 
 
 Em bem mais alto nível podemos definir um computador composto pela CPU, memória, e 

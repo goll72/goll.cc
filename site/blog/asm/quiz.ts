@@ -22,7 +22,7 @@ for(let quiz of allQuizzes) {
 		choice.checked = false;
 	}
 
-	const answerBlocks : NodeListOf<HTMLElement> = quiz.querySelectorAll(".answer");
+	const answerBlocks : NodeListOf<HTMLElement> = quiz.querySelectorAll(".explanation");
 	for(let ansBlk of answerBlocks) {
 		ansBlk.hidden = true;
 	}
@@ -37,8 +37,6 @@ for(let quiz of allQuizzes) {
 
 	button.addEventListener("click", () => {
 		button.disabled = true;
-		button.value = "Disabled";
-
 		checkQuiz(quiz, singleChoice, correct);
 	})
 
@@ -64,7 +62,7 @@ function checkQuiz(quiz : HTMLElement, singleChoice : boolean, correct : boolean
 				choices[i].style.color = "red";
 			}
 
-			choices.querySelector(".explanation").hidden = false;
+			choices[i].querySelector(".explanation").hidden = false;
 		}
 		else if(correct[i]) {
 			choices[i].style.color = "green";
