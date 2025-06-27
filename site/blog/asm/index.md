@@ -65,7 +65,9 @@ A ULA pode ser definida como um circuito digital que realiza operações matemá
 
 ### Geração de código assembly
 
-### Compiladores *vs.* interpretadores
+> ### Compiladores *vs.* interpretadores
+> 
+> 
 
 ## Montador
 

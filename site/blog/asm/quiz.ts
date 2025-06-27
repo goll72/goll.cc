@@ -1,46 +1,44 @@
+const allQuizzes : NodeListOf<HTMLElement> = document.querySelectorAll(".quiz-question");
 
-const allQuizes : HTMLElement[] = document.querySelectorAll(".quiz-question");
+for(let quiz of allQuizzes) {
+	const choices = quiz.getElementsByTagName("input");
+	const singleChoice = quiz.classList.contains("single-choice");
+	let name: string | null = null;
 
-
-for(let quiz of allQuizes){
-	const choices : HTMLElement = quiz.getElementsByTagName("input");
-	let singleChoice : boolean = false;
-	let name : string;
-
-	if(quiz.classList.contains("single-choice")){
+	if (singleChoice) {
 		name = quiz.getAttribute("id");
-		singleChoice = true;
 	}
 
 	const correct : boolean[] = [];
-	for(let choice of choices){
+	
+	for (const choice of choices) {
 		correct.push(choice.checked);
 			
-		if(singleChoice){
+		if(singleChoice) {
 			choice.setAttribute("type", "radio");
-			choice.setAttribute("name", name);
+			choice.setAttribute("name", name ?? "");
 		}
 
 		choice.checked = false;
 	}
 
-	const answerBlocks : HTMLElement[] = quiz.querySelectorAll(".answer");
+	const answerBlocks : NodeListOf<HTMLElement> = quiz.querySelectorAll(".answer");
 	for(let ansBlk of answerBlocks){
 		ansBlk.hidden = true;
 	}
 
-	let button : HTMLElement = document.createElement("button");
+	const button : HTMLButtonElement = document.createElement("button");
 
-	if(singleChoice){
+	if (singleChoice) {
 		button.textContent = "Verificar resposta";
-	}
-	else{
+	} else {
 		button.textContent = "Verificar respostas";
 	}
 
 	button.addEventListener("click", () => {
 		button.disabled = true;
 		button.value = "Disabled";
+
 		checkQuiz(quiz, singleChoice, correct);
 	})
 
@@ -48,7 +46,7 @@ for(let quiz of allQuizes){
 }
 
 function checkQuiz(quiz : HTMLElement, singleChoice : boolean, correct : boolean[]): void {
-	const choices : HTMLElements[] = quiz.getElementsByTagName("input");
+	const choices: HTMLCollectionOf<HTMLInputElement> = quiz.getElementsByTagName("input");
 
 	for(let i = 0; i < choices.length; i++){
 		// An answer will be marked green, in a single choice quiz,
@@ -68,9 +66,5 @@ function checkQuiz(quiz : HTMLElement, singleChoice : boolean, correct : boolean
 			quiz.querySelector(`#answer${i}`).hidden = false;
 		}
 
-		else if(correct[i]){
-			choices[i].parentElement.style.color = "green";
-		}
 	}
-
 }
