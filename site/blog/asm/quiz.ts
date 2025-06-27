@@ -23,7 +23,7 @@ for(let quiz of allQuizzes) {
 	}
 
 	const answerBlocks : NodeListOf<HTMLElement> = quiz.querySelectorAll(".answer");
-	for(let ansBlk of answerBlocks){
+	for(let ansBlk of answerBlocks) {
 		ansBlk.hidden = true;
 	}
 
@@ -31,7 +31,7 @@ for(let quiz of allQuizzes) {
 
 	if (singleChoice) {
 		button.textContent = "Verificar resposta";
-	} else {
+	} else{
 		button.textContent = "Verificar respostas";
 	}
 
@@ -45,28 +45,29 @@ for(let quiz of allQuizzes) {
 	quiz.appendChild(button);
 }
 
-function checkQuiz(quiz : HTMLElement, singleChoice : boolean, correct : boolean[]): void {
-	const choices: HTMLCollectionOf<HTMLInputElement> = quiz.getElementsByTagName("input");
 
-	for(let i = 0; i < choices.length; i++){
+function checkQuiz(quiz : HTMLElement, singleChoice : boolean, correct : boolean[]): void {
+	const choices: HTMLCollectionOf<HTMLInputElement> = quiz.getElementsByTagName("li");
+
+	for(let i = 0; i < choices.length; i++) {
 		// An answer will be marked green, in a single choice quiz,
 		// if it is simply the correct one, or, in a multiple choice one,
 		// if it is marked. It will be marked red if it was incorrect but was
 		// selected. The ones that were not selected and also were not correct
 		// will be left the original color.
 
-		if(correct[i] != choices[i].checked){
-			if(singleChoice && correct[i]){
-				choices[i].parentElement.style.color = "green";
+		if(correct[i] != choices[i].querySelector("input").checked) {
+			if(singleChoice && correct[i]) {
+				choices[i].style.color = "green";
 			}
-			else{
-				choices[i].parentElement.style.color = "red";
+			else {
+				choices[i].style.color = "red";
 			}
 
-			quiz.querySelector(`#answer${i}`).hidden = false;
+			choices.querySelector(".explanation").hidden = false;
 		}
-		else if(correct[i]){
-			choices[i].parentElement.style.color = "green";
+		else if(correct[i]) {
+			choices[i].style.color = "green";
 		}
 
 	}
