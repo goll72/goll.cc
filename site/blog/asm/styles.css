@@ -37,6 +37,8 @@ p {
 .quiz-question {
     display: inline-block;
     width: 100vw;
+
+    font-size: 0.9rem;
     
     padding: 1rem 0.2rem;
     margin: 1.2rem 0;
