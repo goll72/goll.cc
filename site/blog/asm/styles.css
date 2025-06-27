@@ -22,12 +22,7 @@ p {
     .quiz-question > *,
     header {
         max-width: min(75vw, 1200px);
-        margin: 0.5rem 2rem;
-    }
-
-    article > *:not(.quiz-question),
-    header {
-        margin-left: 10vw;
+        margin: 0.5rem 2rem 0.5rem 10vw;
     }
 
     header {
