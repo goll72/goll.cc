@@ -2,6 +2,7 @@
 script:
  - ./quiz.js
 css:
+ - /code.css
  - ./styles.css
 ---
 
@@ -31,24 +32,34 @@ Algumas das linguagens mais comuns atualmente são:
  * Python
  * Java
  * C++
- * JavaScript
+ * Javascript
 
 Após produzir o código em linguagem de alto nível que mais se encaixar com suas
 necessidades, é necessário convertê-la para a linguagem de máquina para que possa ser
-executada pelo computador. É justamente esse processo de conversão que iremos nos aprofundar.
+executada pelo computador. É justamente esse processo de conversão que será abordado.
+No entanto, nem todas as linguagens de programação são compiladas em um código de
+máquina. Das linguagens listadas acimas, C++ é a única que é geralmente compilada para
+código de máquina antes de ser executada.
 
-## Como um computador funciona 
+<!-- será que é muito relevante essa seção? -->
 
-Em bem mais alto nível podemos definir um computador composto pela CPU, memória, e 
- de Entrada e Saída, sendo tais componentes interconectado entre si por barramentos.
+## O que é o computador? 
 
-### CPU e seu papel na execução de instruções
+De forma simplificada, é possível definir um computador como um sistema composto de
+uma CPU e memória e outros dispositivos, chamados de dispositivos de entrada/saída,
+que o permite conversar com o mundo ao seu redor: internet, armazenamento, áudio,
+vídeo, tudo isso é realizado usando dispositivos de E/S.
 
-A CPU possui como principal funcionamento decodificar a combinação unica de bits que 
-carregam uma instrução, em sinais de controle na Unidade de Controle (UC), que orquestram 
-todo o comportamento da CPU. Além disso no interior da CPU, temos a Unidade Logica Aritmetica 
-(ULA), utilizada para realizar operações matemáticas, e por fim a memória para guardar dados 
-de tais operações.
+### A CPU
+
+A CPU se encarrega de executar os comandos, ou instruções, que fazem parte de um prorgrama.
+Para tal, deve decodificar a combinação unica de bits que compõe uma instrução, convertendo-os
+para sinais de controle na Unidade de Controle (UC), que orquestra todo o comportamento da CPU.
+Além disso, a Unidade Lógica e Aritmética (ULA) é um outro componente da CPU, utilizada para
+realizar operações matemáticas.
+
+Para executar as instruções, essas instruções devem ser primeiro guardadas em algum lugar:
+a memória.
 
 ### Registradores, memória, barramentos
 
@@ -70,22 +81,29 @@ como (soma, subtração, divisão e multiplicação) além de operações logica
 
 ## Assembly: uma receita bem minuciosa
 
-Podemos definir um Assembly como uma linguagem de montagem, como se fosse uma notação 
-mais simples e legível para nós humanos (porque ninguém merece ter que ler binário em 
-todo momento né) por exemplo:
+Assembly é nada mais que uma representação em forma de texto do código de máquina, uma 
+forma mais simples e legível para nós humanos (ninguém merece ter que ler binário a
+todo momento, né?). Por exemplo:
 
-MOV A0, 1       ; Move o valor 1 para o espaço de memória A0
-isso é análogo em escrever:
+<!-- que arquitetura é essa? -->
+
+```asm
+mov a0, 1       ; Move o valor 1 para o espaço de memória A0
+```
+Isso é análogo a escrever:
+
+```
 10111000 00000001 00000000 00000000 00000000
+```
 
 Logo, com Assembly é possível que possamos ter uma correspondência unica entre um comando
 e seu respectivo valor binário, além de ser muito mais legível para nos humanos :-)
 
 ## Compilador
 
-Podemos pensar de maneira bem simplificada que um compilador é um transformador de uma 
-linguagem de programação que é mais textualmente entendida, por uma linguagem mais próxima 
-da linguagem de maquina ou do nosso Assembly.
+Podemos pensar, de maneira bem simplificada, que um compilador é um programa capaz
+de transformar um outro programa de uma linguagem de programação , para uma linguagem
+mais próxima da linguagem de maquina ou do nosso Assembly.
 
 ### Código intermediário
 
@@ -95,19 +113,23 @@ esse processo
 
 ### Geração de código assembly
 
+<!-- compiladar binária??? -->
+
 Por fim, nosso compiladar alcança seu grande objetivo de transformar a linguagem de alto nível 
 no último estágio antes do código binária, o código Assembly
 
-### Compiladores *vs.* interpretadores
-
-Uma curiosidade que pode aparecer é a diferença entre dois grandes rivais, Compilador contra 
-interpretador. De forma bem resumida também podemos pensar que o compilador é como se fosse um engenheiro 
-que projeta e entrega um prédio pronto, com o cliente apenas para usar, ou seja, o compilador 
-faz todo o processo por trás e entrega o resultado depois de tudo feito, enquanto o interpretador 
-é como se fosse um mestre de obras que vai construindo o prédio passo a passo com o cliente 
-assistindo, logo, o interpretador vai executando linha por linha de forma imediata e executando
-
-Sobre quem é o melhor, vai depender de vários contextos e seus objetivos
+> ### Compiladores *vs.* interpretadores
+>
+> Como já foi mencionado, compilar não é a única forma de executar um programa (fazer algo útil
+> com o seu computador). É possível também "interpretar": nesse caso, não é gerado código de máquina;
+> o código do programa a ser interpretado é lido e a conversão para instruções em linguagem de máquina
+> é feita na hora de executá-lo. Um programa que interpreta outro programa é chamado de interpretador.
+>
+> Se houvesse um programa cujo objetivo fosse uma degustação culinária, o compilador seria um *chef*
+> que prepara, planeja e analisa os pratos com antecedência, entregando-os na mesa para a refeição,
+> enquanto um interpretador espera você pedir por um prato para prepará-lo a partir de uma receita.
+>
+> ![](./assets/icons/chip0.svg){.inline-svg}
 
 ## Montador
 Mesmo que façamos o código de nossa aplicação próximo da linguagem de máquina por meio da 
@@ -208,3 +230,4 @@ Lorem ipsum.
 :::
 
 <!-- não há necessidade de uma seção dedicada para referências (use footnotes Markdown) -->
+
