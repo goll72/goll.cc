@@ -102,17 +102,20 @@ A ULA pode ser definida como um circuito digital que realiza operações matemá
 Lorem ipsum dolor sit amet. Consectetur adipising elit.
 
  - [ ] Wrong answer
+
+   [Você está errado porque eu estou correto]{.explanation}
+
  - [x] Correct answer
+
+   [Tá certo. Fonte: vozes da minha cabeça]{.explanation}
+
  - [x] Correct answer
+
+   [Tá certo. Fonte: vozes da minha cabeça]{.explanation}
+      
  - [ ] Wrong answer
 
-### Voce tá errado porque eu estou correto {.answer #answer0}
-
-### Ta certo. Fonte: vozes da minha cabeca {.answer #answer1}
-
-### Ta certo. Fonte: vozes da minha cabeca {.answer #answer2}
-
-### Voce nao sabe o algoritmo {.answer #answer3}
+   [Você não sabe o algoritmo]{.explanation}
 
 :::
 
@@ -121,14 +124,16 @@ Lorem ipsum dolor sit amet. Consectetur adipising elit.
 Lorem ipsum.
 
  - [x] Correct answer
+
+   [vvvvvv]{.explanation}
+       
  - [ ] Wrong answer
+
+   [xxxxxx]{.explanation}
+
  - [ ] Wrong answer
 
-### Ta certo. Fonte: vozes da minha cabeca {.answer #answer0}
-
-### Voce tá errado porque eu estou correto {.answer #answer1}
-
-### Voce nao sabe o algoritmo {.answer #answer2}
+   [aaaaaa]{.explanation}
 
 :::
 
