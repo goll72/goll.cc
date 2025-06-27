@@ -90,6 +90,14 @@ Lorem ipsum dolor sit amet. Consectetur adipising elit.
  - [x] Correct answer
  - [ ] Wrong answer
 
+### Voce tá errado porque eu estou correto {.answer #answer0}
+
+### Ta certo. Fonte: vozes da minha cabeca {.answer #answer1}
+
+### Ta certo. Fonte: vozes da minha cabeca {.answer #answer2}
+
+### Voce nao sabe o algoritmo {.answer #answer3}
+
 :::
 
 ::: {.quiz-question .single-choice #bar}
@@ -99,6 +107,12 @@ Lorem ipsum.
  - [x] Correct answer
  - [ ] Wrong answer
  - [ ] Wrong answer
+
+### Ta certo. Fonte: vozes da minha cabeca {.answer #answer0}
+
+### Voce tá errado porque eu estou correto {.answer #answer1}
+
+### Voce nao sabe o algoritmo {.answer #answer2}
 
 :::
 
