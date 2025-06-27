@@ -47,7 +47,7 @@ function checkQuiz(quiz : HTMLElement, singleChoice : boolean, correct : boolean
 		if (correct[i]) { // Opção é uma correta resposta
 			if (singleChoice || choices[i].checked) {
 				choices[i].parentElement!.style.color = "green";
-			} else{
+			} else {
 				choices[i].parentElement!.style.color = "red";
 			}
 		} else {
