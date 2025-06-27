@@ -110,16 +110,60 @@ assistindo, logo, o interpretador vai executando linha por linha de forma imedia
 Sobre quem é o melhor, vai depender de vários contextos e seus objetivos
 
 ## Montador
+Mesmo que façamos o código de nossa aplicação próximo da linguagem de máquina por meio da 
+linguagem Assembly, ainda é necessário fazer a conversão desse mesmo código para instruções binárias em 
+que finalmente será possível ser executado pelo computador. Essa conversão é feita pelo montador.
 
 ### O que faz um assembler?
-
-### Tabela de símbolos
+O Montador(também chamado de assembler), de acordo com as regras impostas pela arquitetura, consegue identificar
+a correspondência de uma instrução em linguagem Assembly e sua respectiva equência binária. Assim, ao analisar
+todo o código Assembly, o assembler irá produzir um arquivo binário correspondente o qual poderá ser executado pelo 
+computador.
 
 ## Linguagem de máquina
+Mas porquê a linguagem de máquina é tão importante e necessária? Bom, isso ocorre devido ao funcionamentos dos
+circuitos eletrônicos presentes no computador. Os circuitos podem ter apenas dois estados:
+
+1. Sem corrente elétrica(0)
+2. Com corrente elétrica(1)
+
+Com isso é muito benéfico representar esses estados com os valores 0 e 1. Por isso que a única linguagem que o
+computador entende é o binário, que vai indicar onde deve interromper a corrente e onde deve passar corrente nos
+componentes do computador. Essa sequencia de 0´s e 1´s que indicam a execução de um programa é chamado de
+linguagem de máquina
 
 ### Formato
+Vamos ver alguns formatos de instruções presentes em uma arquitetura conhecida chamada RISC-V:
+
+```asm
+add x5, x6, x7   # x5 = x6 + x7
+```
+
+Transformando em binário:
+
+```
+00000000011100110000001010110011
+```
+
+Formato de interpretação do binário:
+
+```
+0000000 |  000111 | 00110 | 000 | 00101 | 0110011
+```
 
 ## Análise do código
+
+O comando acima executa a função de pegar os valores dentro dos registradores `x6` e `x7`,soma eles
+e guarda o resultado em `x5`. Cada pedaço do código binário tem um significado que são importantes para o computador
+entender o que deve fazer. 
+Por exemplo a sequência de números: `00111`, `00110` e `00101` são as partes do código que representam quais registradores
+devem ser utilizados.Se convertermos esses valores binários para decimais veremos que:
+
+ - `00101 = 5`
+ - `00110 = 6`
+ - `00111 = 7`
+
+Os demais números presentes na sequência servem para indicar ao computador que se trata de uma soma entre registradores.
 
 ## Quer saber mais?
 
