@@ -21,7 +21,21 @@ tarefa, seja executado, ele deve ser antes convertido para linguagem de máquina
 sequência ordenada de bits (`0`s e `1`s) que recebem um significado especial,
 representando o passo a passo dos comandos que devem ser executados.
 
-Percebe-se que seria extremamente difícil
+Percebe-se que seria extremamente difícil e trabalhoso programar diretamente extensas
+sequências binárias. Para isso foram criadas abstrações para essas instruções numéricas 
+de forma a se assemelhar a linguagem humana. Esse conjunto de abstrações chama-se
+linguagem de programação, e sua função principal é facilitar a criação de programas. 
+
+Algumas das linguagens mais comuns atualmente são:
+
+ * Python
+ * Java
+ * C++
+ * JavaScript
+
+Após produzir o código em linguagem de alto nível que mais se encaixar com suas
+necessidades, é necessário convertê-la para a linguagem de máquina para que possa ser
+executada pelo computador. É justamente esse processo de conversão que iremos nos aprofundar.
 
 ## Como um computador funciona 
 
