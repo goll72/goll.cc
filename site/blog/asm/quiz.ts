@@ -56,16 +56,16 @@ function checkQuiz(quiz : HTMLElement, singleChoice : boolean, correct : boolean
 
 		if(correct[i] != choices[i].querySelector("input").checked) {
 			if(singleChoice && correct[i]) {
-				choices[i].style.color = "green";
+				choices[i].classList.add("correct");
 			}
 			else {
-				choices[i].style.color = "red";
+				choices[i].classList.add("wrong");
 			}
 
 			choices[i].querySelector(".explanation").hidden = false;
 		}
 		else if(correct[i]) {
-			choices[i].style.color = "green";
+			choices[i].classList.add("correct");
 		}
 
 	}
