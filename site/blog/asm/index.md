@@ -43,6 +43,7 @@ Em bem mais alto nível podemos definir um computador composto pela CPU, memóri
  de Entrada e Saída, sendo tais componentes interconectado entre si por barramentos.
 
 ### CPU e seu papel na execução de instruções
+
 A CPU possui como principal funcionamento decodificar a combinação unica de bits que 
 carregam uma instrução, em sinais de controle na Unidade de Controle (UC), que orquestram 
 todo o comportamento da CPU. Além disso no interior da CPU, temos a Unidade Logica Aritmetica 
@@ -51,37 +52,62 @@ de tais operações.
 
 ### Registradores, memória, barramentos
 
-Nosso programa precisa ser armazenado em um ambiente no qual podemos acessar de forma
- sequencial e direta, nesse sentido temos a memória, que além de ser usada para guardar
-  nossas instruções, podem guardar resultados de operações realizadas pela ULA.
+Nosso programa precisa ser armazenado em um ambiente no qual podemos acessar de forma 
+sequencial e direta, nesse sentido temos a memória, que além de ser usada para guardar 
+nossas instruções, podem guardar resultados de operações realizadas pela ULA.
 
 Fazendo a interconexão entre a todos os dispotivos temos os barramentos, que ligam 
 fisicamente todos os dispositivos, permitindo a interconexão
 
 ### Unidade de controle
 
-A Unidade de Controle (UC) funciona como um maestro de uma orquestra, direcionando
- todas as instruções para suas devidas unidades, além de controlar o fluxo e 
- temporização de controle
+A Unidade de Controle (UC) funciona como um maestro de uma orquestra, direcionando 
+todas as instruções para suas devidas unidades, além de controlar o fluxo e 
+temporização de controle
 
-A ULA pode ser definida como um circuito digital que realiza operações matemáticas
- como (soma, subtração, divisão e multiplicação) além de operações logicas (and, or, xor)
+A ULA pode ser definida como um circuito digital que realiza operações matemáticas 
+como (soma, subtração, divisão e multiplicação) além de operações logicas (and, or, xor)
 
 ## Assembly: uma receita bem minuciosa
 
+Podemos definir um Assembly como uma linguagem de montagem, como se fosse uma notação 
+mais simples e legível para nós humanos (porque ninguém merece ter que ler binário em 
+todo momento né) por exemplo:
+
+MOV A0, 1       ; Move o valor 1 para o espaço de memória A0
+isso é análogo em escrever:
+10111000 00000001 00000000 00000000 00000000
+
+Logo, com Assembly é possível que possamos ter uma correspondência unica entre um comando
+e seu respectivo valor binário, além de ser muito mais legível para nos humanos :-)
+
 ## Compilador
 
-### As várias análises
+Podemos pensar de maneira bem simplificada que um compilador é um transformador de uma 
+linguagem de programação que é mais textualmente entendida, por uma linguagem mais próxima 
+da linguagem de maquina ou do nosso Assembly.
 
 ### Código intermediário
 
-### Otimização
+No meio do caminho entre a linguagem de alto nível e Assembly, o compilador pode transformar 
+em vários códigos intermediários, e tentar fazer uma série de otimizações e melhorias durante 
+esse processo
 
 ### Geração de código assembly
 
-> ### Compiladores *vs.* interpretadores
-> 
-> 
+Por fim, nosso compiladar alcança seu grande objetivo de transformar a linguagem de alto nível 
+no último estágio antes do código binária, o código Assembly
+
+### Compiladores *vs.* interpretadores
+
+Uma curiosidade que pode aparecer é a diferença entre dois grandes rivais, Compilador contra 
+interpretador. De forma bem resumida também podemos pensar que o compilador é como se fosse um engenheiro 
+que projeta e entrega um prédio pronto, com o cliente apenas para usar, ou seja, o compilador 
+faz todo o processo por trás e entrega o resultado depois de tudo feito, enquanto o interpretador 
+é como se fosse um mestre de obras que vai construindo o prédio passo a passo com o cliente 
+assistindo, logo, o interpretador vai executando linha por linha de forma imediata e executando
+
+Sobre quem é o melhor, vai depender de vários contextos e seus objetivos
 
 ## Montador
 
