@@ -1,3 +1,8 @@
+/* Needed for Pandoc < 3.12 */
+.inline-svg[sodipodi\:docname="chip0.svg"] {
+    width: 120px;
+}
+
 :root {
     width: 100vw !important;
     margin: 0;
