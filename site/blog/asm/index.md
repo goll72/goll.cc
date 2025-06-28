@@ -174,16 +174,15 @@ todo momento, né?). Por exemplo:
 
 <!-- que arquitetura é essa? -->
 
-asm
+```asm
 mov a0, 1       ; Move o valor 1 para o espaço de memória A0
-
-
+```
 
 Isso é análogo a escrever:
 
+```
 10111000 00000001 00000000 00000000 00000000
-
-
+```
 
 Logo, com assembly é possível que possamos ter uma correspondência única entre um comando
 e seu respectivo valor binário, além de ser muito mais legível para nos humanos :-)
@@ -265,8 +264,7 @@ mov A0, 1       ; Mover o valor 1 para o registrador A0
 add A0, 2       ; Adicionar 2 no resultado de A0
 ```
 
-
-viram o opcode binários:
+viram os opcodes:
 
 ```
 B8 01 00 00 00 (em hexadecimal)
@@ -283,9 +281,8 @@ Resumo do que discutimos até o momento:
 Codigo em C -> Compilador (gcc) -> Assembly (.s) -> Montador (as) -> Objeto (.o) -> Ligador (ld) -> Executável
 ```
 
-
 > Uma dica de site para brincar: [Compiler](https://godbolt.org/)! Lá você pode digitar em C, e vê assembly sendo gerado na horinha, explicando esse caminho que discutimos ;-)
->
+
 
 ## Linguagem de máquina
 
@@ -304,14 +301,15 @@ linguagem de máquina
 
 Vamos ver alguns formatos de instruções presentes em uma arquitetura conhecida chamada RISC-V:
 
-asm
+```asm
 add x5, x6, x7   # x5 = x6 + x7
-
+```
 
 Transformando em binário:
 
+```
 00000000011100110000001010110011
-
+```
 
 Formato de interpretação do binário:
 
