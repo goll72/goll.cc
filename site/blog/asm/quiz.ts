@@ -24,7 +24,7 @@ for(let quiz of allQuizzes) {
 
 	const answerBlocks : NodeListOf<HTMLElement> = quiz.querySelectorAll(".explanation");
 	for(let ansBlk of answerBlocks) {
-		ansBlk.hidden = true;
+		ansBlk.classList.add("hidden");
 	}
 
 	const button : HTMLButtonElement = document.createElement("button");
@@ -62,7 +62,7 @@ function checkQuiz(quiz : HTMLElement, singleChoice : boolean, correct : boolean
 				choices[i].classList.add("wrong");
 			}
 
-			choices[i].querySelector(".explanation").hidden = false;
+			choices[i].querySelector(".explanation")!.classList.remove("hidden");
 		}
 		else if(correct[i]) {
 			choices[i].classList.add("correct");

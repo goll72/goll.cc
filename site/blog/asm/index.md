@@ -51,14 +51,14 @@ Qual das seguintes afirmativas está correta?
    em uma linguagem mais natural e compreensível.]{.explanation}
        
  - [ ] As linguagens de programação são semelhantes às linguagens de máquina, de modo que é
- necessário apenas uma simples tradução entre as duas.
+       necessário apenas uma simples tradução entre as duas.
 
    [As linguagens de programação contém letras, palavras e diversas abstrações que auxiliam
    o programador, enquanto a linguagem de máquina consiste apenas de `0`s e `1`s. O processo
    de tradução da linguagem de alto nível para de máquina é muito complexo.]{.explanation}
 
  - [x] São necessárias diversas etapas para converter o código escrito por humanos para o
- código que o computador entende.
+       código que o computador entende.
 
    [Os programadores preferem utilizar linguagens de programação, que são mais próximas da
    linguagem falada, porém computadores apenas processam código binário. Diversas ferramentas
@@ -71,12 +71,11 @@ Qual das seguintes afirmativas está correta?
 ## O que é o computador? 
 
 De forma simplificada, é possível definir um computador como um sistema composto de
-uma CPU e memória e outros dispositivos, chamados de dispositivos de entrada/saída,
-que o permite conversar com o mundo ao seu redor: internet, armazenamento, áudio,
-vídeo, tudo isso é realizado usando dispositivos de E/S.
+uma CPU e memória, que conversa com o mundo ao seu redor por meio de dispositivos de
+entrada/saída. Por meio destes, internet, armazenamento, áudio, vídeo, tudo isso é realizado usando dispositivos de E/S.
 
 Todo esse sistema deve seguir alguma especificação para que os componentes possam interagir
-entre si: em especial, a especificação da CPU quanto à sua estrutura e a estrutura dos
+entre si. Em especial, a especificação da CPU quanto à sua estrutura e a estrutura dos
 programas que a CPU é capaz de executar é chamada de arquitetura.
 
 ### A CPU
@@ -88,17 +87,16 @@ Para tal, deve decodificar a combinação única de bits que compõe uma instru�
 arquitetura), convertendo-os para sinais de controle na Unidade de Controle (UC), que
 orquestra todo o comportamento da CPU.
 
-Para executar as instruções, essas instruções devem ser primeiro guardadas em algum lugar:
-a memória. As instruções podem ser dispostas aleatoriamente na memória, no entanto, sua
-execução é sequencial, na maior parte do tempo. Afinal, isso faz mais sentido. Você não
-começaria uma receita de bolo no final, né?
+Para executar as instruções, elas devem ser primeiro guardadas em algum lugar: a memória.
+A execução é sequencial, na maior parte do tempo, ou seja, a próxima instrução a ser executada
+corresponde à próxima posição da memória. Bem intuitivo, não?
 
 Mas, se cada instrução é extremamente simples, como é possível escrever programas tão complexos?
-Isso se deve ao conceito de instruções de *branching* (saltos/desvios), que são instruções
-especiais que permitem usar uma outra instrução como a próxima instrução a ser executada, em vez
-da instrução seguinte na memória. *Branches* podem ser condicionais ou não. *Branches* condicionais
-são essenciais para implementar estruturas de controle e repetição, como `if` e `while`, enquanto
-as incondicionais permitem reutilizar código, na forma de funções ou procedimentos.
+Isso se deve ao conceito de instruções de *branching* (saltos/desvios), que permitem continuar
+a execução a partir de outra instrução, em vez da instrução seguinte na memória.
+*Branches* podem ser condicionais ou não, sendo os *branches* condicionais essenciais
+para implementar estruturas de controle e repetição, como `if` e `while`, enquanto as
+incondicionais permitem reutilizar código, na forma de funções ou procedimentos.
 
 > ### CPUs bizarras
 >
@@ -119,8 +117,8 @@ as incondicionais permitem reutilizar código, na forma de funções ou procedim
 ### Registradores, memória, barramentos
 
 Bem, já estabelecemos que um programa precisa ser armazenado de modo que suas instruções
-possam ser buscadas eficientemente não apenas de modo sequencial, mas também aleatório:
-a memória, além de resolver esse problema, guarda dados e resultados de operações
+possam ser buscadas eficientemente tanto de forma sequencial quanto ao usar saltos.
+A memória, além de resolver esse problema, guarda dados e resultados de operações
 realizadas pela ULA.
 
 Fazendo a interconexão entre a todos os dispositivos temos os barramentos, que ligam 
@@ -153,7 +151,7 @@ Isso é análogo a escrever:
 10111000 00000001 00000000 00000000 00000000
 ```
 
-Logo, com assembly é possível que possamos ter uma correspondência unica entre um comando
+Logo, com assembly é possível que possamos ter uma correspondência única entre um comando
 e seu respectivo valor binário, além de ser muito mais legível para nos humanos :-)
 
 ## Compilador

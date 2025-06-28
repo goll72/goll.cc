@@ -46,13 +46,39 @@ p {
     background-color: var(--bg-contrast);
 
     > ul {
-        padding-left: 1em;
+        padding-left: 0.5em;
 
         > li {
             list-style-type: none;
 
+            padding: 0.15em 0.7em;
+            border-radius: 0.3em;
+
             input {
                 margin-right: 1em;
+            }
+
+            .explanation {
+                margin-left: 3em;
+            }
+
+            &.correct {
+                background-color: rgb(60, 170, 40);
+                color: rgb(20, 80, 30);
+            }
+            
+            &.wrong {
+                background-color: rgb(170, 60, 40);
+                color: rgb(80, 20, 30);
+            }
+
+            &:is(.correct, .wrong) .explanation {
+                color: #fdfdfd;
+                display: block;
+            }
+
+            p:has(.explanation.hidden) {
+                display: none;
             }
         }
     }
