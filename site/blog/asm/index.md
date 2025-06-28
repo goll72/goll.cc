@@ -325,12 +325,18 @@ deve percorrê-lo, identificando e processando:
    ou uma pseudo-instrução (não existe de fato na arquitetura, é implementada em termos de uma ou mais
    instruções existentes)
 
+[^absolute-relative-remark]: Embora tenhamos mencionado apenas "posições de memória", para simplificar
+a explicação, é importante ressaltar que instruções de *branch* podem usar dois modos de endereçamento
+de memória: absoluto (que foi abordado) ou relativo. No endereçamento relativo, o endereço é somado ao
+conteúdo de outro registrador (geralmente o PC) antes de ser usado, permitindo que menos bits sejam
+usados para representar um endereço.
+
 Geralmente, não é necessário realizar análise léxica ou sintática no código *assembly*, pois sua estrutura
 é muito rígida e não-ambígua. No entanto, deve-se considerar a possibilidade de usar uma *label* antes
 que ela seja definida. Uma possível solução para esse problema é percorrer o arquivo *assembly* duas vezes,
 uma vez apenas para calcular os endereços das *labels*, e outra para processá-lo de fato.
 
-Já uma solução menos gambiarrenta, porém mais complexa, envolve criar relocações ("buracos") no código,
+Já uma solução menos "gambiarrenta", porém mais complexa, envolve criar relocações ("buracos") no código,
 preechendo-os quando necessário.
 
 > # Curiosidade sobre o Linker
