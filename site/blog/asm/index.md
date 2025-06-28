@@ -297,6 +297,7 @@ computador entende é o binário, que vai indicar onde deve interromper a corren
 componentes do computador. Essa sequencia de 0´s e 1´s que indicam a execução de um programa é chamado de
 linguagem de máquina
 
+
 ### Formato
 
 Vamos ver alguns formatos de instruções presentes em uma arquitetura conhecida chamada RISC-V:
@@ -331,29 +332,33 @@ quais registradores devem ser utilizados. Se convertermos esses valores binário
 Os demais números presentes na sequência servem para indicar ao computador que a instrução se trata
 de uma soma entre registradores.
 
-## Quer saber mais?
+::: {.quiz-question .single-choice #compilador}
 
-::: {.quiz-question .multiple-choice}
+Selecione o processo de compilação correto:
 
-Lorem ipsum dolor sit amet. Consectetur adipising elit.
+ - [ ] Código intermediário -> linguagem de alto nível -> assembly -> código de máquina
 
- - [ ] Wrong answer
+   [O código intermediário é um produto da início do processo de compilação da linguagem de alto
+   nível, quando ela está sendo processado em uma estrutura que é mais facilmente traduzida ao
+   assembly. Ou seja, o intermediário é após a linguagem.]{.explanation}
+       
+ - [x] Linguagem de alto nível -> código intermediário -> assembly -> código de máquina.
 
-   [Você está errado porque eu estou correto]{.explanation}
+   [Primeiramente, um programador escreve, em uma linguagem de programação (alto nível) o código.
+   Então, no processo de compilação, ele passa por um código, ou representação, intermediário para
+   se tornar assembly. Finalmente, o montador realiza os processos finais e gera o código binário
+   de máquina.]{.explanation}
 
- - [x] Correct answer
+ - [ ] Linguagem de alto nível -> assembly -> código intermediário -> código de máquina
 
-   [Tá certo. Fonte: vozes da minha cabeça]{.explanation}
-
- - [x] Correct answer
-
-   [Tá certo. Fonte: vozes da minha cabeça]{.explanation}
-      
- - [ ] Wrong answer
-
-   [Você não sabe o algoritmo]{.explanation}
+   [O código intermediário não está entre o assembly e o código de máquina, mas sim entre a
+   linguagem e o assembly. Após o assembly, há apenas o código de máquina, não sendo
+   necessário uma representação intermediária, já que os dois estão bem próximos.]{.explanation}
 
 :::
+
+## Quer saber mais?
+
 
 ::: {.quiz-question .single-choice #bar}
 
