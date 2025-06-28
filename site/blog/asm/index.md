@@ -43,7 +43,7 @@ compilada para código de máquina antes de ser executada.
 
 ::: {.quiz-question .single-choice #linguagens}
 
-Qual das seguintes afirmativas está correta?
+Qual das seguintes afirmatições sobre código e linguagem está correta?
 
  - [ ] As pessoas costumam escrever código que o computador já consegue processar.
 
@@ -133,6 +133,38 @@ temporização de controle
 
 A ULA pode ser definida como um circuito digital que realiza operações matemáticas 
 como (soma, subtração, divisão e multiplicação) além de operações logicas (and, or, xor)
+
+::: {.quiz-question .multiple-choice}
+
+Se você entendeu como funciona um computador, assinale quais das seguintes frases estão corretas!
+
+ - [x] As três componentes básicas de um computador são a CPU, a memória e os dispositivos de E/S.
+
+   [Tudo que um computador precisa para poder executar instruções é de uma CPU, onde está o processador,
+   e da memória, onde estão os dados e instruções. Além disso, os dispositivos de entrada e saída são
+   essenciais para o sistema se comunicar com o usuário.]{.explanation}
+
+ - [x] O conjunto das especificações de como são as estruturas que funcionam com certa CPU, assim como
+ as instruções que funcionam nela, são chamadas de arquitetura.
+
+   [Diferentes computadores e processadores funcionam de modos diferentes e, assim, podem
+   funcionar com apenas certos tipos de memória, barramentos e, especialmente, um conjunto de
+   instruções específico.]{.explanation}
+
+ - [x] Entre os componentes que estão na CPU, há a unidade de controle, a unidade de lógica e aritmética
+ e os registradores.
+
+   [Para efetivamente realizar a execução de um programa, a CPU conta com a UC, que decodifica as
+   instruções e coordena os outros componentes, a ULA, que realiza operações matemáticas e relacionadas,
+   e os registradores, uma memória interna à CPU que conectam-se diretamente à ULA.]{.explanation}
+      
+ - [ ] O processador recebe as instruções que ele deve executar da memória de maneira sequencial.
+
+   [A unidade de controle (UC) realmente precisa receber instruções vindas da memória, que
+   são sequenciais por padrão. Porém, as instruções de `branch` (desvio), que são comumente
+   utilizadas permitem a execução não sequencial de um conjunto de instruções.]{.explanation}
+
+:::
 
 ## Assembly
 
