@@ -4,6 +4,7 @@ script:
 css:
  - /code.css
  - ./styles.css
+description: Veja como um programa escrito em uma linguagem de alto nível é convertido em código de máquina
 ---
 
 # O caminho do código --- do C à máquina
@@ -19,7 +20,7 @@ para exemplificar.
 Bem, o que é um programa e como um computador interpreta um programa? Para que um
 programa, que nada mais é que um conjunto de instruções para realizar uma determinada
 tarefa, seja executado, ele deve ser antes convertido para linguagem de máquina, uma
-sequência ordenada de bits (0s e 1s) que recebem um significado especial,
+sequência ordenada de bits (`0`s e `1`s) que recebem um significado especial,
 representando o passo a passo dos comandos que devem ser executados.
 
 Seria extremamente difícil e trabalhoso programar diretamente extensas sequências
@@ -115,36 +116,23 @@ incondicionais permitem reutilizar código, na forma de funções ou procediment
 >
 > ![](./assets/icons/chip0.svg){.inline-svg}
 
-### Registradores, memória, barramentos
+### Registradores, memória e barramentos
 
 Bem, já estabelecemos que um programa precisa ser armazenado de modo que suas instruções
 possam ser buscadas eficientemente tanto de forma sequencial quanto ao usar saltos.
 A memória, além de resolver esse problema, guarda dados e resultados de operações
 realizadas pela ULA.
 
-Fazendo a interconexão entre todos os dispositivos temos os barramentos, que ligam 
-fisicamente todos os dispositivos, permitindo a transmissão de informações entre eles.Existem 
-diversos barramentos dentro da estrutura do computador e que apresentam funções especificas, como:
+No entanto, a memória é lenta; por isso a CPU armazena internamente valores que estão
+sendo usados em operações em um banco (conjunto) de registradores. Esses registradores,
+além do PC e do IR (*Instruction Register*), que guarda a instrução sendo executada,
+são denominados registradores de propósito geral (ou GPRs), sendo usados como operandos
+e resultados de operações lógicas e aritméticas, bem como para endereçar a memória.
 
->Barramento de dados: Transporta os dados de um local para o outro
-
->Barramento de endereços: transmitem valores que indicam a posição dos dados a serem acessados
-
->Barramento de controle: coordena as operações matemáticas e lógicas dentro das componentes do
-sistemas.
-
-Entretanto, devido o tempo de leitura dos dados em memória ser muito demorada, tem-se, como opção para
-reduzir a quantidade de acessos à memória, os registradores. As principais características 
-dos registradores são: alta recuperação de dados, ou seja pegar os dados dentro dele é muito mais rápido
-que pegar da memória, eles se encontram dentro da CPU e são utilizados para armazenar valores temporariamente
-de operações ou outras manipulações de dados antes de serem escritos diretamente na memória. 
-
-Principais registradores presentes nas arquiteturas:
-
-1. PC(contador do programa) -> armazena a próxima posição de memória que deve ser buscada
-2. IR(registrador de instrução) -> armazena a intrução que está sendo processada
-3. MAR(registrador de memórua) -> guarda o endereço que precisa ser lido ou escrito
-4. MDR(registrador de dados de memória) -> guarda dados que foram lidos ou que serão escritos na memória
+Para que os diversos componentes do computador possam interagir entre si, é necessário
+que haja conexões entre eles, de modo a permitir a transmissão de informações. Essas
+interconexões são chamadas de barramentos, que servem para transmitir dados, endereços
+ou sinais de controle.
 
 ### Unidade de controle
 
@@ -166,14 +154,14 @@ Se você entendeu como funciona um computador, assinale quais das seguintes fras
    essenciais para o sistema se comunicar com o usuário.]{.explanation}
 
  - [x] O conjunto das especificações de como são as estruturas que funcionam com certa CPU, assim como
- as instruções que funcionam nela, são chamadas de arquitetura.
+       as instruções que funcionam nela, são chamadas de arquitetura.
 
    [Diferentes computadores e processadores funcionam de modos diferentes e, assim, podem
    funcionar com apenas certos tipos de memória, barramentos e, especialmente, um conjunto de
    instruções específico.]{.explanation}
 
  - [x] Entre os componentes que estão na CPU, há a unidade de controle, a unidade de lógica e aritmética
- e os registradores.
+       e os registradores.
 
    [Para efetivamente realizar a execução de um programa, a CPU conta com a UC, que decodifica as
    instruções e coordena os outros componentes, a ULA, que realiza operações matemáticas e relacionadas,
@@ -191,22 +179,43 @@ Se você entendeu como funciona um computador, assinale quais das seguintes fras
 
 Assembly é nada mais que uma representação em forma de texto do código de máquina, uma 
 forma mais simples e legível para nós humanos (ninguém merece ter que ler binário a
-todo momento, né?). Por exemplo:
-
-<!-- que arquitetura é essa? -->
+todo momento, né?). Veja o seguinte código em RISC-V, por exemplo:
 
 ```asm
-mov a0, 1       ; Move o valor 1 para o espaço de memória A0
+lw t0, 0(t1)  # Escreve o valor de `t0` na posição de memória apontada por `t1` 
 ```
 
-Isso é análogo a escrever:
+A representação dessa instrução em binário é:
 
 ```
-10111000 00000001 00000000 00000000 00000000
+10000011 00100010 00000011 00000000 00000000
 ```
 
-Logo, com assembly é possível que possamos ter uma correspondência única entre um comando
-e seu respectivo valor binário, além de ser muito mais legível para nos humanos :-)
+Além de nos dar uma correspondência entre "mnemônicas", como `lw`, e uma sequência de
+bits que pode ser interpretada pela CPU como uma instrução, o *assembly* permite que
+*labels*, ou rótulos, sejam usados juntamente com instruções de *branch* a fim de
+indicar para onde o desvio será realizado:
+
+```asm
+    li t2, 10
+    li t0, 0
+repeat:
+    addi t0, t0, 1
+    blt t0, t2, repeat
+```
+
+Além disso, também é possível guardar dados estáticos (que não mudam entre execuções do
+mesmo programa), usando diretivas:
+
+```asm
+hi:
+    .asciz "Olá mundo"
+important:
+    .word 42
+```
+
+Note que esse exemplo, além de diretivas, também usa *labels*, para que seja possível
+usar esses dados no código, referindo-se a eles por meio do rótulo correspondente.
 
 ## Compilador
 
@@ -214,30 +223,32 @@ Podemos pensar, de maneira bem simplificada, que um compilador é um programa ca
 de transformar um outro programa de uma linguagem de programação mais abstrata e "intuitiva"
 para uma linguagem mais próxima da linguagem de maquina ou do *assembly*.
 
-A primeiras etapas para esse processo são a analise lexical e a análise sintática. A primeira é
-responsável por remover espaços e comentários realizados pelo programador além de juntar as
-palavras de forma a representarem valores válidos para a linguagem tipo if, while, operadores
-matemáticos etc. Tudo que não estiver definido na linguagem será reportado um erro para o programador e 
-impede de prosseguir para a proxima fase de análise.Segue abaixo um exemplo de erro léxico:
+A primeiras etapas para esse processo são a análise lexical e a análise sintática. A primeira é
+responsável por remover "lixo" (tudo aquilo que não importa para o compilador), como comentários,
+além de separar o código em *tokens* válidos para a linguagem, como `if`, `while`, operadores
+matemáticos etc. Quando não é possível formar um *token*, temos um erro de análise lexical. Por
+exemplo:
+
 ```c
 int numero% = 5;
 ```
-O erro nesse código está na presença do % no nome da variável, o que não é permitido pela linguagem C.
 
-A segunda etapa após verificar os erros lexicais é a parte de análise do sintaxe do programa em que é visto 
-se segue-se a sintaxe adequada dos comandos estipulados pela linguagem. Segue-se abaixo um possível código que
-tem um erro que seria identificado nessa etapa
+O erro nesse código está na presença do `%` no nome da variável, o que não é permitido pela linguagem C.
+
+Após essa análise, é construída uma árvore de sintaxe abstrata, durante a fase de análise sintática.
+Nessa fase, é analisada a sintaxe, ou seja, a relação entre os *tokens* e a ordem em que aparecem.
+O código a seguir é um exemplo de erro sintático, uma vez que dois literais numéricos não constituem
+uma sequência de *tokens* válida nesse contexto:
 
 ```c
-int numero = 1 3
+//  identificador
+//      vvv
+    int num = 1 3;
+//  ^^^     ^ ^ ^
+//  tipo    | | |
+//          | literais numéricos
+//      operador
 ```
-Esse código passa na primeira etapa pois na parte lexical é possivel agrupar de maneira adequada o nome da variável,
-o valor do primeiro e do segundo número. Assim ocódigo passa para a etapa sintática em que verifíca se é possível essa
-estrutura representar uma operação válida para a linguagem. De fato, isso não ocorre para essa linha de código pois em C
-não é possível ter dois números um seguido do outro sem ter entre eles um operador como `+`, `-` e `/` por exemplo.
-
-Se o código passar por esses dois processos o próximo passo é gerar os códigos intermediários antes de chegar na sua
-conversão em assembly.
 
 ### Código intermediário
 
@@ -257,10 +268,10 @@ de análises e otimizações do código. Algumas dessas representações interme
 Existem diversas otimizações que podem ser aplicadas em um determinado código. Entre elas,
 temos:
 
- - *Constant folding*: substitui expressões constantes, como 2 + 3 * 4, por seu resultado
-   (nesse caso, 14)
+ - *Constant folding*: substitui expressões constantes, como `2 + 3 * 4`, por seu resultado
+   (nesse caso, `14`)
 
- - Loop rolling/unrolling: expande laços de repetição em um código que repete *n* vezes ou
+ - *Loop rolling*/*unrolling*: expande laços de repetição em um código que repete *n* vezes ou
    vice-versa
 
  - *Common subexpression elimination* (CSE): encontra subexpressões em comum sem efeitos
@@ -268,12 +279,9 @@ temos:
 
 Além disso, há outras técnicas como *tail call optimization* (TCO) e *inlining*.
 Alocação de registradores e reordenação do código também são tarefas realizadas
-pelo compilador, que têm grande impacto no desempenho dos programas gerados. Um exemplo disso tudo é o compildor de C (gcc) que faz tudo isso
-
-### Geração de código assembly
-
-Por fim, nosso compilador alcança seu grande objetivo de transformar a linguagem de alto nível 
-no último estágio antes do código binário, o código Assembly
+pelo compilador, que têm grande impacto no desempenho dos programas gerados. `gcc` e
+`clang` são exemplos de compiladores C e C++ capazes de aplicar essas otimizações,
+bem como diversas outras.
 
 > ### Compiladores *vs.* interpretadores
 >
@@ -295,28 +303,35 @@ no último estágio antes do código binário, o código Assembly
 
 Mesmo tendo o código de nossa aplicação próximo da linguagem de máquina por meio do *assembly*, ainda é
 necessário fazer a conversão desse mesmo código para a sequência binária que um computador será capaz
-de processar. Essa conversão é feita pelo montador, como por exemplo, os montadores (as, nasm) que converte o *assembly* em código binário, gerando o arquivo objeto (.o)
+de processar. Essa conversão é feita pelo montador, que pode gerar um arquivo objeto ou um *flat binary*.
 
-### O que faz um assembler?
+A diferença entre um arquivo objeto e um *flat binary* é que o arquivo objeto é estruturado em seções,
+contendo diversos metadados que se tornam necessários em um ambiente hospedado. Já um *flat
+binary* é uma simples sequência de dados e instruções, cujo objetivo é ser gravado diretamente na
+memória para que seja executado. *Flat binaries* são mais comumente usados em sistemas embarcados.
 
-<!-- na maioria das vezes o assembler não gera um arquivo executável diretamente, mencionar linker? -->
+A tarefa de um montador é bem mais simples que a de um compilador: dado um arquivo *assembly*, o montador
+deve percorrê-lo, identificando e processando:
 
-O montador (também chamado de *assembler*), de acordo com as regras impostas pela arquitetura, consegue
-identificar a correspondência de uma instrução em linguagem assembly e sua respectiva sequência binária.
-Assim, ao analisar todo o código *assembly*, o assembler irá produzir um arquivo binário correspondente, gerando o arquivo objeto (.o), logo, instruções como:
+ - *Labels*/rótulos: permitem dar um nome à posição de memória[^absolute-relative-remark] do que vier
+   após a *label*
 
-```asm
-mov A0, 1       ; Mover o valor 1 para o registrador A0
-add A0, 2       ; Adicionar 2 no resultado de A0
-```
+ - Diretivas: possuem várias finalidades, desde alterar o alinhamento usado para posicionar código e
+   dados na memória, até mesmo definir dados estáticos ou metadados guardados nos arquivos objeto gerados
 
-viram os opcodes:
+ - Comentários
 
-```
-B8 01 00 00 00 (em hexadecimal)
-```
+ - Mnemônicas: o conjunto de mnemônica e operandos compõe uma instrução (definida pela arquitetura)
+   ou uma pseudo-instrução (não existe de fato na arquitetura, é implementada em termos de uma ou mais
+   instruções existentes)
 
-o qual poderá ser executado pelo computador.(Isso não é tão mágico)
+Geralmente, não é necessário realizar análise léxica ou sintática no código *assembly*, pois sua estrutura
+é muito rígida e não-ambígua. No entanto, deve-se considerar a possibilidade de usar uma *label* antes
+que ela seja definida. Uma possível solução para esse problema é percorrer o arquivo *assembly* duas vezes,
+uma vez apenas para calcular os endereços das *labels*, e outra para processá-lo de fato.
+
+Já uma solução menos gambiarrenta, porém mais complexa, envolve criar relocações ("buracos") no código,
+preechendo-os quando necessário.
 
 > # Curiosidade sobre o Linker
 > Um programa pode ser dependente de várias partes, 
@@ -327,7 +342,7 @@ Resumo do que discutimos até o momento:
 Codigo em C -> Compilador (gcc) -> Assembly (.s) -> Montador (as) -> Objeto (.o) -> Ligador (ld) -> Executável
 ```
 
-> Uma dica de site para brincar: [Compiler](https://godbolt.org/)! Lá você pode digitar em C, e vê assembly sendo gerado na horinha, explicando esse caminho que discutimos ;-)
+> Uma dica de site para brincar: [Compiler Explorer](https://godbolt.org/)! Lá você pode digitar em C, e vê assembly sendo gerado na horinha, explicando esse caminho que discutimos ;-)
 
 
 ## Linguagem de máquina
@@ -355,25 +370,27 @@ add x5, x6, x7   # x5 = x6 + x7
 Transformando em binário:
 
 ```
-00000000011100110000001010110011
+00000000 01110011 00000010 10110011
 ```
 
 Formato de interpretação do binário:
 
+```
 0000000 | 00111 | 00110 | 000 | 00101 | 0110011
           ^^^^^   ~~~~~         -----
+```
 
 ## Análise do código
 
 O comando acima executa a função de pegar os valores dentro dos registradores x6 e x7,soma eles
 e guarda o resultado em x5. Cada pedaço do código binário tem um significado que são importantes para o computador
 entender o que deve fazer. 
-Por exemplo as sequências (-), (~) e (^) são as partes do código que representam
+Por exemplo as sequências `(-)`, `(~)` e `(^)` são as partes do código que representam
 quais registradores devem ser utilizados. Se convertermos esses valores binários para decimal, obtemos:
 
- - 00101 = 5
- - 00110 = 6
- - 00111 = 7
+ - `00101` = 5
+ - `00110` = 6
+ - `00111` = 7
 
 Os demais números presentes na sequência servem para indicar ao computador que a instrução se trata
 de uma soma entre registradores.
