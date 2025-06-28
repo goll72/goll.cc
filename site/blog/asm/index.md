@@ -275,6 +275,31 @@ computador entende é o binário, que vai indicar onde deve interromper a corren
 componentes do computador. Essa sequencia de 0´s e 1´s que indicam a execução de um programa é chamado de
 linguagem de máquina
 
+::: {.quiz-question .single-choice #compilador}
+
+Selecione o processo de compilação correto:
+
+ - [ ] Código intermediário -> linguagem de alto nível -> assembly -> código de máquina
+
+   [O código intermediário é um produto da início do processo de compilação da linguagem de alto
+   nível, quando ela está sendo processado em uma estrutura que é mais facilmente traduzida ao
+   assembly. Ou seja, o intermediário é após a linguagem.]{.explanation}
+       
+ - [x] Linguagem de alto nível -> código intermediário -> assembly -> código de máquina.
+
+   [Primeiramente, um programador escreve, em uma linguagem de programação (alto nível) o código.
+   Então, no processo de compilação, ele passa por um código, ou representação, intermediário para
+   se tornar assembly. Finalmente, o montador realiza os processos finais e gera o código binário
+   de máquina.]{.explanation}
+
+ - [ ] Linguagem de alto nível -> assembly -> código intermediário -> código de máquina
+
+   [O código intermediário não está entre o assembly e o código de máquina, mas sim entre a
+   linguagem e o assembly. Após o assembly, há apenas o código de máquina, não sendo
+   necessário uma representação intermediária, já que os dois estão bem próximos.]{.explanation}
+
+:::
+
 ### Formato
 
 Vamos ver alguns formatos de instruções presentes em uma arquitetura conhecida chamada RISC-V:
