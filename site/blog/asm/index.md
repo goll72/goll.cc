@@ -72,7 +72,8 @@ Qual das seguintes afirmativas está correta?
 
 De forma simplificada, é possível definir um computador como um sistema composto de
 uma CPU e memória, que conversa com o mundo ao seu redor por meio de dispositivos de
-entrada/saída. Por meio destes, internet, armazenamento, áudio, vídeo, tudo isso é realizado usando dispositivos de E/S.
+entrada/saída. Conectividade com a internet, armazenamento, áudio, vídeo:
+tudo isso e muito mais é realizado usando dispositivos de E/S.
 
 Todo esse sistema deve seguir alguma especificação para que os componentes possam interagir
 entre si. Em especial, a especificação da CPU quanto à sua estrutura e a estrutura dos
@@ -91,10 +92,10 @@ Para executar as instruções, elas devem ser primeiro guardadas em algum lugar:
 A execução é sequencial, na maior parte do tempo, ou seja, a próxima instrução a ser executada
 corresponde à próxima posição da memória. Bem intuitivo, não?
 
-Mas, se cada instrução é extremamente simples, como é possível escrever programas tão complexos?
-Isso se deve ao conceito de instruções de *branching* (saltos/desvios), que permitem continuar
-a execução a partir de outra instrução, em vez da instrução seguinte na memória.
-*Branches* podem ser condicionais ou não, sendo os *branches* condicionais essenciais
+Mas, se cada instrução é extremamente simples e a execução é sequencial, como é possível escrever
+programas tão complexos? Isso se deve ao conceito de instruções de *branching* (saltos/desvios),
+que permitem continuar a execução a partir de outra instrução, em vez da instrução seguinte na
+memória. *Branches* podem ser condicionais ou não, sendo os *branches* condicionais essenciais
 para implementar estruturas de controle e repetição, como `if` e `while`, enquanto as
 incondicionais permitem reutilizar código, na forma de funções ou procedimentos.
 
@@ -158,7 +159,7 @@ e seu respectivo valor binário, além de ser muito mais legível para nos human
 
 Podemos pensar, de maneira bem simplificada, que um compilador é um programa capaz
 de transformar um outro programa de uma linguagem de programação mais abstrata e "intuitiva"
-para uma linguagem mais próxima da linguagem de maquina ou do nosso Assembly.
+para uma linguagem mais próxima da linguagem de maquina ou do *assembly*.
 
 ### Código intermediário
 
@@ -185,7 +186,7 @@ temos:
    vice-versa
 
  - *Common subexpression elimination* (CSE): encontra subexpressões em comum sem efeitos
-   colaterais, calcula seu resultado uma única vez e o reutiliza
+   colaterais, faz com que seu resultado seja calculado uma única vez e reutilizado
 
 Além disso, há outras técnicas como *tail call optimization* (TCO) e *inlining*.
 Alocação de registradores e reordenação do código também são tarefas realizadas
@@ -216,16 +217,18 @@ no último estágio antes do código binária, o código Assembly
 
 ## Montador
 
-Mesmo tendo o código de nossa aplicação próximo da linguagem de máquina por meio do assembly, ainda é
+Mesmo tendo o código de nossa aplicação próximo da linguagem de máquina por meio do *assembly*, ainda é
 necessário fazer a conversão desse mesmo código para a sequência binária que um computador será capaz
 de processar. Essa conversão é feita pelo montador.
 
 ### O que faz um assembler?
 
+<!-- na maioria das vezes o assembler não gera um arquivo executável diretamente, mencionar linker? -->
+
 O montador (também chamado de *assembler*), de acordo com as regras impostas pela arquitetura, consegue
 identificar a correspondência de uma instrução em linguagem assembly e sua respectiva sequência binária.
-Assim, ao analisar todo o código Assembly, o assembler irá produzir um arquivo binário correspondente o qual poderá ser executado pelo 
-computador.
+Assim, ao analisar todo o código *assembly*, o assembler irá produzir um arquivo binário correspondente
+o qual poderá ser executado pelo computador.
 
 ## Linguagem de máquina
 
