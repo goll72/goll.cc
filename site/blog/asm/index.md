@@ -19,7 +19,7 @@ para exemplificar.
 Bem, o que é um programa e como um computador interpreta um programa? Para que um
 programa, que nada mais é que um conjunto de instruções para realizar uma determinada
 tarefa, seja executado, ele deve ser antes convertido para linguagem de máquina, uma
-sequência ordenada de bits (`0`s e `1`s) que recebem um significado especial,
+sequência ordenada de bits (0s e 1s) que recebem um significado especial,
 representando o passo a passo dos comandos que devem ser executados.
 
 Seria extremamente difícil e trabalhoso programar diretamente extensas sequências
@@ -54,7 +54,7 @@ Qual das seguintes afirmatições sobre código e linguagem está correta?
        necessário apenas uma simples tradução entre as duas.
 
    [As linguagens de programação contém letras, palavras e diversas abstrações que auxiliam
-   o programador, enquanto a linguagem de máquina consiste apenas de `0`s e `1`s. O processo
+   o programador, enquanto a linguagem de máquina consiste apenas de 0s e 1s. O processo
    de tradução da linguagem de alto nível para de máquina é muito complexo.]{.explanation}
 
  - [x] São necessárias diversas etapas para converter o código escrito por humanos para o
@@ -96,7 +96,7 @@ Mas, se cada instrução é extremamente simples e a execução é sequencial, c
 programas tão complexos? Isso se deve ao conceito de instruções de *branching* (saltos/desvios),
 que permitem continuar a execução a partir de outra instrução, em vez da instrução seguinte na
 memória. *Branches* podem ser condicionais ou não, sendo os *branches* condicionais essenciais
-para implementar estruturas de controle e repetição, como `if` e `while`, enquanto as
+para implementar estruturas de controle e repetição, como if e while, enquanto as
 incondicionais permitem reutilizar código, na forma de funções ou procedimentos.
 
 > ### CPUs bizarras
@@ -161,7 +161,7 @@ Se você entendeu como funciona um computador, assinale quais das seguintes fras
  - [ ] O processador recebe as instruções que ele deve executar da memória de maneira sequencial.
 
    [A unidade de controle (UC) realmente precisa receber instruções vindas da memória, que
-   são sequenciais por padrão. Porém, as instruções de `branch` (desvio), que são comumente
+   são sequenciais por padrão. Porém, as instruções de branch (desvio), que são comumente
    utilizadas permitem a execução não sequencial de um conjunto de instruções.]{.explanation}
 
 :::
@@ -174,15 +174,16 @@ todo momento, né?). Por exemplo:
 
 <!-- que arquitetura é essa? -->
 
-```asm
+asm
 mov a0, 1       ; Move o valor 1 para o espaço de memória A0
-```
+
+
 
 Isso é análogo a escrever:
 
-```
 10111000 00000001 00000000 00000000 00000000
-```
+
+
 
 Logo, com assembly é possível que possamos ter uma correspondência única entre um comando
 e seu respectivo valor binário, além de ser muito mais legível para nos humanos :-)
@@ -211,8 +212,8 @@ de análises e otimizações do código. Algumas dessas representações interme
 Existem diversas otimizações que podem ser aplicadas em um determinado código. Entre elas,
 temos:
 
- - *Constant folding*: substitui expressões constantes, como `2 + 3 * 4`, por seu resultado
-   (nesse caso, `14`)
+ - *Constant folding*: substitui expressões constantes, como 2 + 3 * 4, por seu resultado
+   (nesse caso, 14)
 
  - Loop rolling/unrolling: expande laços de repetição em um código que repete *n* vezes ou
    vice-versa
@@ -222,14 +223,12 @@ temos:
 
 Além disso, há outras técnicas como *tail call optimization* (TCO) e *inlining*.
 Alocação de registradores e reordenação do código também são tarefas realizadas
-pelo compilador, que têm grande impacto no desempenho dos programas gerados.
+pelo compilador, que têm grande impacto no desempenho dos programas gerados. Um exemplo disso tudo é o compildor de C (gcc) que faz tudo isso
 
 ### Geração de código assembly
 
-<!-- compiladar binária??? -->
-
-Por fim, nosso compiladar alcança seu grande objetivo de transformar a linguagem de alto nível 
-no último estágio antes do código binária, o código Assembly
+Por fim, nosso compilador alcança seu grande objetivo de transformar a linguagem de alto nível 
+no último estágio antes do código binário, o código Assembly
 
 > ### Compiladores *vs.* interpretadores
 >
@@ -251,7 +250,7 @@ no último estágio antes do código binária, o código Assembly
 
 Mesmo tendo o código de nossa aplicação próximo da linguagem de máquina por meio do *assembly*, ainda é
 necessário fazer a conversão desse mesmo código para a sequência binária que um computador será capaz
-de processar. Essa conversão é feita pelo montador.
+de processar. Essa conversão é feita pelo montador, como por exemplo, os montadores (as, nasm) que converte o *assembly* em código binário, gerando o arquivo objeto (.o)
 
 ### O que faz um assembler?
 
@@ -259,8 +258,34 @@ de processar. Essa conversão é feita pelo montador.
 
 O montador (também chamado de *assembler*), de acordo com as regras impostas pela arquitetura, consegue
 identificar a correspondência de uma instrução em linguagem assembly e sua respectiva sequência binária.
-Assim, ao analisar todo o código *assembly*, o assembler irá produzir um arquivo binário correspondente
-o qual poderá ser executado pelo computador.
+Assim, ao analisar todo o código *assembly*, o assembler irá produzir um arquivo binário correspondente, gerando o arquivo objeto (.o), logo, instruções como:
+
+```asm
+mov A0, 1       ; Mover o valor 1 para o registrador A0
+add A0, 2       ; Adicionar 2 no resultado de A0
+```
+
+
+viram o opcode binários:
+
+```
+B8 01 00 00 00 (em hexadecimal)
+```
+
+o qual poderá ser executado pelo computador.(Isso não é tão mágico)
+
+> # Curiosidade sobre o Linker
+> Um programa pode ser dependente de várias partes, 
+> tanto de bibliotecas, como acessos a endereços de memória, e nosso código ou receita principal, logo, precisamos de uma pessoa que possa unir tudo isso e gerar um executável, esse trabalho fica com o Linker (ligador), que gera a nossa ./main
+
+```mathematica
+Resumo do que discutimos até o momento:
+Codigo em C -> Compilador (gcc) -> Assembly (.s) -> Montador (as) -> Objeto (.o) -> Ligador (ld) -> Executável
+```
+
+
+> Uma dica de site para brincar: [Compiler](https://godbolt.org/)! Lá você pode digitar em C, e vê assembly sendo gerado na horinha, explicando esse caminho que discutimos ;-)
+>
 
 ## Linguagem de máquina
 
@@ -275,63 +300,35 @@ computador entende é o binário, que vai indicar onde deve interromper a corren
 componentes do computador. Essa sequencia de 0´s e 1´s que indicam a execução de um programa é chamado de
 linguagem de máquina
 
-::: {.quiz-question .single-choice #compilador}
-
-Selecione o processo de compilação correto:
-
- - [ ] Código intermediário -> linguagem de alto nível -> assembly -> código de máquina
-
-   [O código intermediário é um produto da início do processo de compilação da linguagem de alto
-   nível, quando ela está sendo processado em uma estrutura que é mais facilmente traduzida ao
-   assembly. Ou seja, o intermediário é após a linguagem.]{.explanation}
-       
- - [x] Linguagem de alto nível -> código intermediário -> assembly -> código de máquina.
-
-   [Primeiramente, um programador escreve, em uma linguagem de programação (alto nível) o código.
-   Então, no processo de compilação, ele passa por um código, ou representação, intermediário para
-   se tornar assembly. Finalmente, o montador realiza os processos finais e gera o código binário
-   de máquina.]{.explanation}
-
- - [ ] Linguagem de alto nível -> assembly -> código intermediário -> código de máquina
-
-   [O código intermediário não está entre o assembly e o código de máquina, mas sim entre a
-   linguagem e o assembly. Após o assembly, há apenas o código de máquina, não sendo
-   necessário uma representação intermediária, já que os dois estão bem próximos.]{.explanation}
-
-:::
-
 ### Formato
 
 Vamos ver alguns formatos de instruções presentes em uma arquitetura conhecida chamada RISC-V:
 
-```asm
+asm
 add x5, x6, x7   # x5 = x6 + x7
-```
+
 
 Transformando em binário:
 
-```
 00000000011100110000001010110011
-```
+
 
 Formato de interpretação do binário:
 
-```
 0000000 | 00111 | 00110 | 000 | 00101 | 0110011
           ^^^^^   ~~~~~         -----
-```
 
 ## Análise do código
 
-O comando acima executa a função de pegar os valores dentro dos registradores `x6` e `x7`,soma eles
-e guarda o resultado em `x5`. Cada pedaço do código binário tem um significado que são importantes para o computador
+O comando acima executa a função de pegar os valores dentro dos registradores x6 e x7,soma eles
+e guarda o resultado em x5. Cada pedaço do código binário tem um significado que são importantes para o computador
 entender o que deve fazer. 
-Por exemplo as sequências `(-)`, `(~)` e `(^)` são as partes do código que representam
+Por exemplo as sequências (-), (~) e (^) são as partes do código que representam
 quais registradores devem ser utilizados. Se convertermos esses valores binários para decimal, obtemos:
 
- - `00101` = 5
- - `00110` = 6
- - `00111` = 7
+ - 00101 = 5
+ - 00110 = 6
+ - 00111 = 7
 
 Os demais números presentes na sequência servem para indicar ao computador que a instrução se trata
 de uma soma entre registradores.
@@ -379,4 +376,3 @@ Lorem ipsum.
 :::
 
 <!-- não há necessidade de uma seção dedicada para referências (use footnotes Markdown) -->
-
