@@ -122,8 +122,29 @@ possam ser buscadas eficientemente tanto de forma sequencial quanto ao usar salt
 A memória, além de resolver esse problema, guarda dados e resultados de operações
 realizadas pela ULA.
 
-Fazendo a interconexão entre a todos os dispositivos temos os barramentos, que ligam 
-fisicamente todos os dispositivos, permitindo a interconexão
+Fazendo a interconexão entre todos os dispositivos temos os barramentos, que ligam 
+fisicamente todos os dispositivos, permitindo a transmissão de informações entre eles.Existem 
+diversos barramentos dentro da estrutura do computador e que apresentam funções especificas, como:
+
+>Barramento de dados: Transporta os dados de um local para o outro
+
+>Barramento de endereços: transmitem valores que indicam a posição dos dados a serem acessados
+
+>Barramento de controle: coordena as operações matemáticas e lógicas dentro das componentes do
+sistemas.
+
+Entretanto, devido o tempo de leitura dos dados em memória ser muito demorada, tem-se, como opção para
+reduzir a quantidade de acessos à memória, os registradores. As principais características 
+dos registradores são: alta recuperação de dados, ou seja pegar os dados dentro dele é muito mais rápido
+que pegar da memória, eles se encontram dentro da CPU e são utilizados para armazenar valores temporariamente
+de operações ou outras manipulações de dados antes de serem escritos diretamente na memória. 
+
+Principais registradores presentes nas arquiteturas:
+
+1. PC(contador do programa) -> armazena a próxima posição de memória que deve ser buscada
+2. IR(registrador de instrução) -> armazena a intrução que está sendo processada
+3. MAR(registrador de memórua) -> guarda o endereço que precisa ser lido ou escrito
+4. MDR(registrador de dados de memória) -> guarda dados que foram lidos ou que serão escritos na memória
 
 ### Unidade de controle
 
@@ -192,6 +213,31 @@ e seu respectivo valor binário, além de ser muito mais legível para nos human
 Podemos pensar, de maneira bem simplificada, que um compilador é um programa capaz
 de transformar um outro programa de uma linguagem de programação mais abstrata e "intuitiva"
 para uma linguagem mais próxima da linguagem de maquina ou do *assembly*.
+
+A primeiras etapas para esse processo são a analise lexical e a análise sintática. A primeira é
+responsável por remover espaços e comentários realizados pelo programador além de juntar as
+palavras de forma a representarem valores válidos para a linguagem tipo if, while, operadores
+matemáticos etc. Tudo que não estiver definido na linguagem será reportado um erro para o programador e 
+impede de prosseguir para a proxima fase de análise.Segue abaixo um exemplo de erro léxico:
+```c
+int numero% = 5;
+```
+O erro nesse código está na presença do % no nome da variável, o que não é permitido pela linguagem C.
+
+A segunda etapa após verificar os erros lexicais é a parte de análise do sintaxe do programa em que é visto 
+se segue-se a sintaxe adequada dos comandos estipulados pela linguagem. Segue-se abaixo um possível código que
+tem um erro que seria identificado nessa etapa
+
+```c
+int numero = 1 3
+```
+Esse código passa na primeira etapa pois na parte lexical é possivel agrupar de maneira adequada o nome da variável,
+o valor do primeiro e do segundo número. Assim ocódigo passa para a etapa sintática em que verifíca se é possível essa
+estrutura representar uma operação válida para a linguagem. De fato, isso não ocorre para essa linha de código pois em C
+não é possível ter dois números um seguido do outro sem ter entre eles um operador como `+`, `-` e `/` por exemplo.
+
+Se o código passar por esses dois processos o próximo passo é gerar os códigos intermediários antes de chegar na sua
+conversão em assembly.
 
 ### Código intermediário
 
