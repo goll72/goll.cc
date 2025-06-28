@@ -45,7 +45,7 @@ for(let quiz of allQuizzes) {
 
 
 function checkQuiz(quiz : HTMLElement, singleChoice : boolean, correct : boolean[]): void {
-	const choices: HTMLCollectionOf<HTMLInputElement> = quiz.getElementsByTagName("li");
+	const choices: HTMLCollectionOf<HTMLLIElement> = quiz.getElementsByTagName("li");
 
 	for(let i = 0; i < choices.length; i++) {
 		// An answer will be marked green, in a single choice quiz,
@@ -53,8 +53,11 @@ function checkQuiz(quiz : HTMLElement, singleChoice : boolean, correct : boolean
 		// if it is marked. It will be marked red if it was incorrect but was
 		// selected. The ones that were not selected and also were not correct
 		// will be left the original color.
+		const input = choices[i].querySelector("input")!;
 
-		if(correct[i] != choices[i].querySelector("input").checked) {
+		input.disabled = true;
+
+		if(correct[i] != input.checked) {
 			if(singleChoice && correct[i]) {
 				choices[i].classList.add("correct");
 			}
@@ -67,6 +70,5 @@ function checkQuiz(quiz : HTMLElement, singleChoice : boolean, correct : boolean
 		else if(correct[i]) {
 			choices[i].classList.add("correct");
 		}
-
 	}
 }

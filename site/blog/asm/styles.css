@@ -25,12 +25,12 @@ p {
     article > *:not(.quiz-question),
     .quiz-question > *,
     header {
-        max-width: min(75vw, 1200px);
-        margin: 0.5rem 2rem 0.5rem 10vw;
+        max-width: min(70vw, 1200px);
+        margin: 0.5rem 2rem 0.5rem 15vw;
     }
 
     header {
-        padding: 0 2em;
+        padding: 0 2rem;
     }
 }
 
@@ -51,7 +51,8 @@ p {
         > li {
             list-style-type: none;
 
-            padding: 0.15em 0.7em;
+            margin: 0.3em 0 0.3em 0;
+            padding: 0.1em 0.75em;
             border-radius: 0.3em;
 
             input {
