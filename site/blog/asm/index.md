@@ -134,7 +134,7 @@ temporização de controle
 A ULA pode ser definida como um circuito digital que realiza operações matemáticas 
 como (soma, subtração, divisão e multiplicação) além de operações logicas (and, or, xor)
 
-## Assembly: uma receita bem minuciosa
+## Assembly
 
 Assembly é nada mais que uma representação em forma de texto do código de máquina, uma 
 forma mais simples e legível para nós humanos (ninguém merece ter que ler binário a
