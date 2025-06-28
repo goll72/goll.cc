@@ -5,12 +5,12 @@ My website, written in Markdown, using Pandoc.
 
 ## Dependencies
 
- - Pandoc 3
+ - Pandoc 3.12+
  - Lua 5.4
  - Node.js
  - jq
- - Python 3.12
- - Ninja 1.10
+ - Python 3.12+
+ - Ninja 1.10+
  - A C compiler
 
 > [!NOTE] 
