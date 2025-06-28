@@ -101,5 +101,6 @@ header {
 
     * {
         font-family: "Fira Sans";
+        -webkit-text-stroke-width: 0;
     }
 }
