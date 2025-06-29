@@ -68,7 +68,7 @@
     --initial-x: 7.45em;
     --initial-y: 3.25em;
 
-    --final-x: calc(var(--initial-x) + 14.9em);
+    --final-x: calc(var(--initial-x) + 16em);
     --final-y: var(--initial-y);
 }
 
@@ -76,7 +76,7 @@
     --initial-x: 10.75em;
     --initial-y: 3.25em;
 
-    --final-x: calc(var(--initial-x) + 12.9em);
+    --final-x: calc(var(--initial-x) + 14em);
     --final-y: var(--initial-y);
 }
 
@@ -84,7 +84,7 @@
     --initial-x: 5.07em;
     --initial-y: 7.3em;
 
-    --final-x: 22.45em;
+    --final-x: 23.5em;
     --final-y: 3.25em;
 }
 
