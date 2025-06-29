@@ -227,11 +227,12 @@ repeat:
 ```
 
 Além disso, também é possível guardar dados estáticos (que não mudam entre execuções do
-mesmo programa), usando diretivas:
+mesmo programa) ou alterar o alinhamento de código e dados na memória usando diretivas:
 
 ```asm
 hi:
     .asciz "Olá mundo"
+    .align 2
 important:
     .word 42
 ```
@@ -398,35 +399,44 @@ uma vez apenas para calcular os endereços das *labels*, e outra para processá-
 Já uma solução menos "gambiarrenta", porém mais complexa, envolve criar relocações ("buracos") no código,
 preechendo-os quando necessário.
 
-> ### Curiosidade sobre o Linker
-> Um programa pode ser dependente de várias partes, 
-> tanto de bibliotecas, como acessos a endereços de memória, e nosso código ou receita principal, logo, precisamos de uma pessoa que possa unir tudo isso e gerar um executável, esse trabalho fica com o Linker (ligador), que gera a nossa ./main
+> ### O linker
 >
-```
-Resumo do que discutimos até o momento:
-Codigo em C -> Compilador (gcc) -> Assembly (.s) -> Montador (as) -> Objeto (.o) -> Ligador (ld) -> Executável
-```
+> Um programa pode ser composto de várias partes, sendo que essas partes podem vir de vários lugares
+> diferentes: afinal, o que nos impede de juntar um "módulo" de código de máquina pronto com o nosso
+> código-fonte (em linguagem de alto nível) que está sendo compilado? De fato, isso é muito útil, pois
+> facilita o reúso de código. Para que seja possível juntar essas partes em um único executável, temos
+> o *linker*, que junta vários arquivos objeto, gerando um executável.
 >
-> Uma dica de site para brincar: [Compiler Explorer](https://godbolt.org/)! Lá você pode digitar em C, e vê assembly sendo gerado na horinha, explicando esse caminho que discutimos ;-)
+> Em vez de juntar vários arquivos objeto em um executável (denominado ligação/linkagem estática), o
+> *linker* também é capaz de criar um executável com informações sobre as dependências
+> (bibliotecas compartilhadas) necessárias, delegando o trabalho de "juntar" as partes
+> para o tempo de execução (no que é chamado de linkagem dinâmica).
+>
+> ```
+> Resumo do que discutimos até o momento:
+> Código em C --> Compilador (cc) -> Assembly (.s) --> Montador (as) -> Objeto (.o) --> Linker (ld) -> Executável
+> ```
+>
+> Uma dica de site para brincar: [Compiler Explorer](https://godbolt.org/)!
+> Lá você pode escrever algum código em C, e ver *assembly* sendo gerado na horinha,
+> explicando esse caminho que discutimos ;-)
 >
 > ![](./assets/icons/chip0.svg){.inline-svg}
 
 
 ## Linguagem de máquina
 
-Mas porquê a linguagem de máquina é tão importante e necessária? Bom, isso ocorre devido ao funcionamentos dos
-circuitos eletrônicos presentes no computador. Os circuitos podem ter apenas dois estados:
-
-1. Sem corrente elétrica(0)
-2. Com corrente elétrica(1)
+Mas por quê a linguagem de máquina é tão importante e necessária? Bem, isso ocorre devido ao funcionamento
+do computador, cujos circuitos se baseiam em um princípio de lógica binária, possuindo apenas dois estados:
+com tensão ou sem tensão elétrica, representando os valores binários `0` e `1`.
 
 Com isso é muito benéfico representar esses estados com os valores 0 e 1. Por isso que a única linguagem que o
 computador entende é o binário, que vai indicar onde deve interromper a corrente e onde deve passar corrente nos
-componentes do computador. Essa sequencia de 0´s e 1´s que indicam a execução de um programa é chamado de
-linguagem de máquina
+componentes do computador. Essa sequencia de `0`s e `1`s que indicam a execução de um programa é chamado de
+linguagem de máquina.
 
 
-### Formato
+### Formato das instruções
 
 Vamos ver alguns formatos de instruções presentes em uma arquitetura conhecida chamada RISC-V:
 
@@ -447,42 +457,41 @@ Formato de interpretação do binário:
           ^^^^^   ~~~~~         -----
 ```
 
-## Análise do código
-
-O comando acima executa a função de pegar os valores dentro dos registradores x6 e x7,soma eles
-e guarda o resultado em x5. Cada pedaço do código binário tem um significado que são importantes para o computador
-entender o que deve fazer. 
-Por exemplo as sequências `(-)`, `(~)` e `(^)` são as partes do código que representam
-quais registradores devem ser utilizados. Se convertermos esses valores binários para decimal, obtemos:
+O comando acima executa a função de pegar os valores dentro dos registradores `x6` e `x7`,
+soma eles e guarda o resultado em `x5`. Cada pedaço do código binário tem um significado,
+representando uma determinada ação que deve ser tomada, ou um endereço de um registrador etc.
+Por exemplo, as sequências `(-)`, `(~)` e `(^)` são as partes do código que representam
+quais registradores devem ser utilizados. Se convertermos esses valores binários para decimal,
+obtemos:
 
  - `00101` = 5
  - `00110` = 6
  - `00111` = 7
 
-Os demais números presentes na sequência servem para indicar ao computador que a instrução se trata
-de uma soma entre registradores.
+Os demais números presentes na sequência servem para indicar ao computador que a instrução se
+trata de uma soma entre registradores.
 
 ::: {.quiz-question .single-choice #compilador}
 
 Selecione o processo de compilação correto:
 
- - [ ] Código intermediário -> linguagem de alto nível -> assembly -> código de máquina
+ - [ ] Código intermediário $\rightarrow$ linguagem de alto nível $\rightarrow$ *assembly* $\rightarrow$ código de máquina
 
    [O código intermediário é um produto da início do processo de compilação da linguagem de alto
    nível, quando ela está sendo processado em uma estrutura que é mais facilmente traduzida ao
-   assembly. Ou seja, o intermediário é após a linguagem.]{.explanation}
+   *assembly*. Ou seja, o intermediário é após a linguagem.]{.explanation}
        
- - [x] Linguagem de alto nível -> código intermediário -> assembly -> código de máquina.
+ - [x] Linguagem de alto nível $\rightarrow$ código intermediário $\rightarrow$ *assembly* $\rightarrow$ código de máquina
 
    [Primeiramente, um programador escreve, em uma linguagem de programação (alto nível) o código.
    Então, no processo de compilação, ele passa por um código, ou representação, intermediário para
-   se tornar assembly. Finalmente, o montador realiza os processos finais e gera o código binário
+   se tornar *assembly*. Finalmente, o montador realiza os processos finais e gera o código binário
    de máquina.]{.explanation}
 
- - [ ] Linguagem de alto nível -> assembly -> código intermediário -> código de máquina
+ - [ ] Linguagem de alto nível $\rightarrow$ *assembly* $\rightarrow$ código intermediário $\rightarrow$ código de máquina
 
-   [O código intermediário não está entre o assembly e o código de máquina, mas sim entre a
-   linguagem e o assembly. Após o assembly, há apenas o código de máquina, não sendo
+   [O código intermediário não está entre o *assembly* e o código de máquina, mas sim entre a
+   linguagem e o *assembly*. Após o *assembly*, há apenas o código de máquina, não sendo
    necessário uma representação intermediária, já que os dois estão bem próximos.]{.explanation}
 
 :::
