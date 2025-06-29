@@ -99,6 +99,7 @@ Alguns exemplos de arquitetura como a x86, ARM ou RISC-V, cada uma com seus conj
 >
 >    A arquitetura é como as regras e o idioma que o computador fala internamente.
 >    Para o programa rodar direitinho, ele precisa ser traduzido para esse idioma específico que o processador entender.
+>
 >![](./assets/icons/chip0.svg){.inline-svg}
 
 ### A CPU
@@ -375,13 +376,15 @@ preechendo-os quando necessário.
 > ### Curiosidade sobre o Linker
 > Um programa pode ser dependente de várias partes, 
 > tanto de bibliotecas, como acessos a endereços de memória, e nosso código ou receita principal, logo, precisamos de uma pessoa que possa unir tudo isso e gerar um executável, esse trabalho fica com o Linker (ligador), que gera a nossa ./main
-
+>
 ```
 Resumo do que discutimos até o momento:
 Codigo em C -> Compilador (gcc) -> Assembly (.s) -> Montador (as) -> Objeto (.o) -> Ligador (ld) -> Executável
 ```
-
+>
 > Uma dica de site para brincar: [Compiler Explorer](https://godbolt.org/)! Lá você pode digitar em C, e vê assembly sendo gerado na horinha, explicando esse caminho que discutimos ;-)
+>
+> ![](./assets/icons/chip0.svg){.inline-svg}
 
 
 ## Linguagem de máquina
