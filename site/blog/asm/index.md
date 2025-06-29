@@ -8,6 +8,16 @@ css:
 description: Veja como um programa escrito em uma linguagem de alto nível é convertido em código de máquina
 ---
 
+<!--
+     ainda daria para falar sobre:
+       - registradores temporários/salvos
+       - conversão de variáveis para registradores/posições na stack
+       - funções (em mais detalhe)
+       - calling conventions e ABI
+
+     (o último tópico não foi abordado muito à fundo na disciplina)
+-->
+
 # O caminho do código --- do C à máquina
 
 Como um programa escrito em uma linguagem de alto nível, como C, é transformado em
@@ -340,7 +350,7 @@ um compilador poderia reescrever esse código usando CSE. Note que `y > w` é eq
 a `y - w > 0` (assumindo que `y` e `w` são inteiros). O compilador deve detectar essa
 equivalência para então reutilizar o valor de `y - w` calculado e armazenado em `t`.
 
-Além das técnicas mostradas acimas, há outras, como *tail call optimization* (TCO)
+Além das técnicas mostradas acima, há outras, como *tail call optimization* (TCO)
 e *inlining*. Alocação de registradores e reordenação do código também são tarefas
 realizadas pelo compilador que têm grande impacto no desempenho dos programas gerados.
 `gcc` e `clang` são exemplos de compiladores C e C++ capazes de aplicar essas otimizações,
@@ -418,7 +428,7 @@ preechendo-os quando necessário.
 >
 > ```
 > Resumo do que discutimos até o momento:
-> Código em C --> Compilador (cc) -> Assembly (.s) --> Montador (as) -> Objeto (.o) --> Linker (ld) -> Executável
+> Código em C -> Compilador (cc) --> Assembly (.s) -> Montador (as) --> Objeto (.o) -> Linker (ld) --> Executável
 > ```
 >
 > Uma dica de site para brincar: [Compiler Explorer](https://godbolt.org/)!
