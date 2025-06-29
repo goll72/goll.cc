@@ -205,7 +205,7 @@ forma mais simples e legível para nós humanos (ninguém merece ter que ler bin
 todo momento, né?). Veja o seguinte código em RISC-V, por exemplo:
 
 ```asm
-lw t0, 0(t1)  # Escreve o valor de `t0` na posição de memória apontada por `t1` 
+lw t0, 0(t1)  # Lê o valor na posição de memória apontada por `t1` e o guarda em `t0`
 ```
 
 A representação dessa instrução em binário é:
@@ -245,9 +245,9 @@ usar esses dados no código, referindo-se a eles por meio do rótulo corresponde
 
 Podemos pensar, de maneira bem simplificada, que um compilador é um programa capaz
 de transformar um outro programa de uma linguagem de programação mais abstrata e "intuitiva"
-para uma linguagem mais próxima da linguagem de maquina ou do *assembly*.
+para uma linguagem mais próxima da linguagem de máquina ou do *assembly*.
 
-A primeiras etapas para esse processo são a análise lexical e a análise sintática. A primeira é
+As primeiras etapas desse processo são a análise lexical e a análise sintática. A primeira é
 responsável por remover "lixo" (tudo aquilo que não importa para o compilador), como comentários,
 além de separar o código em *tokens* válidos para a linguagem, como `if`, `while`, operadores
 matemáticos etc. Quando não é possível formar um *token*, temos um erro de análise lexical. Por
@@ -306,13 +306,13 @@ temos:
 ::: {#cse .render-as-code}
 
 ::: {.before}
-[y]{.y}[- w]{.m_w}[y - w]{.y_m_w}
+[y]{.y}[- w]{.m_w}[y]{.y2}[w]{.w2}
 ```c
 int main(void) {
     int x = y + z - w;
 
 
-    if (y - w > 0)
+    if (y > w)
         fazer_algo(x);
 }
 ```
@@ -336,7 +336,9 @@ int main(void) {
 :::
 
 Posicione o cursor do mouse (ou o dedo) sobre o primeiro bloco de código para ver como
-um compilador poderia reescrever esse código usando CSE.
+um compilador poderia reescrever esse código usando CSE. Note que `y > w` é equivalente
+a `y - w > 0` (assumindo que `y` e `w` são inteiros). O compilador deve detectar essa
+equivalência para então reutilizar o valor de `y - w` calculado e armazenado em `t`.
 
 Além das técnicas mostradas acimas, há outras, como *tail call optimization* (TCO)
 e *inlining*. Alocação de registradores e reordenação do código também são tarefas
