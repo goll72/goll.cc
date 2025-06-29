@@ -16,7 +16,7 @@ description: Veja como um programa escrito em uma linguagem de alto nível é co
        - funções (em mais detalhe)
        - calling conventions e ABI
 
-     (o último tópico não foi abordado muito à fundo na disciplina)
+     (o último tópico não foi abordado muito a fundo na disciplina)
 -->
 
 # O caminho do código --- do C à máquina
