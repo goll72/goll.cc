@@ -323,7 +323,7 @@ int main(void) {
     int x = y + z - w;
 
 
-    if (y > w)
+    if (y < w + 1)
         fazer_algo(x);
 }
 ```
@@ -338,7 +338,7 @@ int main(void) {
 
     int x =   + z;
 
-    if (  > 0)
+    if (  < 1)
         fazer_algo(x); 
 }
 ```
@@ -347,9 +347,10 @@ int main(void) {
 :::
 
 Posicione o cursor do mouse (ou o dedo) sobre o primeiro bloco de código para ver como
-um compilador poderia reescrever esse código usando CSE. Note que `y > w` é equivalente
-a `y - w > 0` (assumindo que `y` e `w` são inteiros). O compilador deve detectar essa
-equivalência para então reutilizar o valor de `y - w` calculado e armazenado em `t`.
+um compilador poderia reescrever esse código usando CSE. Note que `y < w + 1` é
+equivalente a `y - w < 1` (assumindo que `y` e `w` são inteiros). O compilador deve
+detectar essa equivalência para então reutilizar o valor de `y - w` calculado e
+armazenado em `t`.
 
 Além das técnicas mostradas acima, há outras, como *tail call optimization* (TCO)
 e *inlining*. Alocação de registradores e reordenação do código também são tarefas
