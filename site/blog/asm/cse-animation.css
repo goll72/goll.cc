@@ -41,7 +41,7 @@
     position: relative;
 }
 
-#cse .before :is(.y, .m_w, .y_m_w),
+#cse .before :is(.y, .m_w, .y2, .w2),
 #cse .after .hidden {
     font-family: "Fira Code";
 
@@ -58,14 +58,14 @@
     z-index: 9;
 }
 
-#cse .before:hover :is(.y, .m_w, .y_m_w),
+#cse .before:hover :is(.y, .m_w, .y2, .w2),
 #cse:has(.before:hover) .after .hidden {
     animation-duration: 2s;
     animation-fill-mode: forwards;
 }
 
 #cse .before .y {
-    --initial-x: 7.45em;
+    --initial-x: 7.6em;
     --initial-y: 3.25em;
 
     --final-x: calc(var(--initial-x) + 16em);
@@ -73,14 +73,14 @@
 }
 
 #cse .before .m_w {
-    --initial-x: 10.75em;
+    --initial-x: 10.9em;
     --initial-y: 3.25em;
 
     --final-x: calc(var(--initial-x) + 14em);
     --final-y: var(--initial-y);
 }
 
-#cse .before .y_m_w {
+#cse .before .y2 {
     --initial-x: 5.07em;
     --initial-y: 7.3em;
 
@@ -88,11 +88,19 @@
     --final-y: 3.25em;
 }
 
+#cse .before .w2 {
+    --initial-x: 7.5em;
+    --initial-y: 7.3em;
+
+    --final-x: 26em;
+    --final-y: 3.25em;
+}
+
 #cse .after .hidden {
     opacity: 0;
 }
 
-#cse .before:hover :is(.y, .m_w, .y_m_w) {
+#cse .before:hover :is(.y, .m_w, .y2, .w2) {
     animation-name: cse-slide;
 }
 
