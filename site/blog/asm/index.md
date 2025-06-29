@@ -45,7 +45,7 @@ compilada para código de máquina antes de ser executada.
 
 ::: {.quiz-question .single-choice #linguagens}
 
-Qual das seguintes afirmatições sobre código e linguagem está correta?
+Qual das seguintes afirmações sobre código e linguagem está correta?
 
  - [ ] As pessoas costumam escrever código que o computador já consegue processar.
 
@@ -68,8 +68,6 @@ Qual das seguintes afirmatições sobre código e linguagem está correta?
 
 :::
 
-<!-- será que é muito relevante essa seção? -->
-
 ## O que é o computador? 
 
 De forma simplificada, é possível definir um computador como um sistema composto de
@@ -81,26 +79,29 @@ Todo esse sistema deve seguir alguma especificação para que os componentes pos
 entre si. Em especial, a especificação da CPU quanto à sua estrutura e a estrutura dos
 programas que a CPU é capaz de executar é chamada de arquitetura.
 
-### Arquitetura de Computador
+### Arquitetura
 
-A arquitetura de um computador é como o projeto ou o manual que define como todas as partes do computador trabalham juntas.
-Ela explica:
+A arquitetura de um computador é como o projeto ou o manual que define como todas as partes
+do computador trabalham juntas. Ela define como o processador (CPU) entende e executa comandos
+(instruções), bem como o tamanho de uma palavra[^word-ambiguity].
+Cada tipo de arquitetura tem um "jeito próprio" de organizar essas partes do sistema e
+um conjunto de instruções que o processador entende. É por isso que programas feitos para um
+tipo de processador nem sempre funcionam em outro sem adaptações. Alguns exemplos de arquitetura
+são x86, ARM, RISC-V, MIPS, VAX, entre outras, cada uma com seu conjunto de instruções ou
+ISA --- *Instruction Set Architecture*.
 
-* como o processador (CPU) entende e executa comandos,
-
-* como ele se comunica com a memória para buscar dados e instruções,
-
-* como o computador se conecta com outros dispositivos, como teclado, mouse e tela.
-
-Cada tipo de arquitetura tem um “jeito próprio” de organizar essas partes e um conjunto de instruções que o processador entende. É por isso que programas feitos para um tipo de processador nem sempre funcionam em outro sem adaptações.
-Alguns exemplos de arquitetura como a x86, ARM ou RISC-V, cada uma com seus conjunto de instruções ou ISA — Instruction Set Architecture.
+[^word-ambiguity]: O termo "palavra" é historicamente impreciso e ambíguo, sendo que a definição
+de "palavra" pode variar de uma arquitetura para outra. *Geralmente*, uma palavra é definida como
+um valor de *n* bits, onde *n* é a quantidade de bits de um registrador da CPU. Similarmente, se
+define "meia-palavra" (*half word*) e *double word*, para $n/2$ e $2n$, respectivamente.
 
 > Dá para pensar assim:
 >
 >    A arquitetura é como as regras e o idioma que o computador fala internamente.
->    Para o programa rodar direitinho, ele precisa ser traduzido para esse idioma específico que o processador entender.
+>    Para o programa rodar direitinho, ele precisa ser traduzido para esse idioma
+>    específico que o processador entende.
 >
->![](./assets/icons/chip0.svg){.inline-svg}
+> ![](./assets/icons/chip0.svg){.inline-svg}
 
 ### A CPU
 
@@ -119,7 +120,7 @@ Mas, se cada instrução é extremamente simples e a execução é sequencial, c
 programas tão complexos? Isso se deve ao conceito de instruções de *branching* (saltos/desvios),
 que permitem continuar a execução a partir de outra instrução, em vez da instrução seguinte na
 memória. *Branches* podem ser condicionais ou não, sendo os *branches* condicionais essenciais
-para implementar estruturas de controle e repetição, como if e while, enquanto as
+para implementar estruturas de controle e repetição, como `if` e `while`, enquanto as
 incondicionais permitem reutilizar código, na forma de funções ou procedimentos.
 
 > ### CPUs bizarras
@@ -192,8 +193,8 @@ Se você entendeu como funciona um computador, assinale quais das seguintes fras
  - [ ] O processador recebe as instruções que ele deve executar da memória de maneira sequencial.
 
    [A unidade de controle (UC) realmente precisa receber instruções vindas da memória, que
-   são sequenciais por padrão. Porém, as instruções de branch (desvio), que são comumente
-   utilizadas permitem a execução não sequencial de um conjunto de instruções.]{.explanation}
+   são sequenciais por padrão. Porém, as instruções de *branch* (desvio), que são comumente
+   utilizadas, permitem a execução não sequencial de um grupo de instruções.]{.explanation}
 
 :::
 
@@ -365,10 +366,10 @@ Mesmo tendo o código de nossa aplicação próximo da linguagem de máquina por
 necessário fazer a conversão desse mesmo código para a sequência binária que um computador será capaz
 de processar. Essa conversão é feita pelo montador, que pode gerar um arquivo objeto ou um *flat binary*.
 
-A diferença entre um arquivo objeto e um *flat binary* é que o arquivo objeto é estruturado em seções,
-contendo diversos metadados que se tornam necessários em um ambiente hospedado. Já um *flat
-binary* é uma simples sequência de dados e instruções, cujo objetivo é ser gravado diretamente na
-memória para que seja executado. *Flat binaries* são mais comumente usados em sistemas embarcados.
+A diferença entre os dois é que o arquivo objeto é estruturado em seções, contendo diversos metadados
+que se tornam necessários em um ambiente hospedado. Já um *flat binary* é uma simples sequência de
+dados e instruções, cujo objetivo é ser gravado diretamente na memória para que seja executado.
+*Flat binaries* são mais comumente usados em sistemas embarcados.
 
 A tarefa de um montador é bem mais simples que a de um compilador: dado um arquivo *assembly*, o montador
 deve percorrê-lo, identificando e processando:
@@ -404,13 +405,14 @@ preechendo-os quando necessário.
 > Um programa pode ser composto de várias partes, sendo que essas partes podem vir de vários lugares
 > diferentes: afinal, o que nos impede de juntar um "módulo" de código de máquina pronto com o nosso
 > código-fonte (em linguagem de alto nível) que está sendo compilado? De fato, isso é muito útil, pois
-> facilita o reúso de código. Para que seja possível juntar essas partes em um único executável, temos
+> facilita o reúso de código. Para que seja possível combinar essas partes em um único binário, temos
 > o *linker*, que junta vários arquivos objeto, gerando um executável.
 >
 > Em vez de juntar vários arquivos objeto em um executável (denominado ligação/linkagem estática), o
 > *linker* também é capaz de criar um executável com informações sobre as dependências
-> (bibliotecas compartilhadas) necessárias, delegando o trabalho de "juntar" as partes
-> para o tempo de execução (no que é chamado de linkagem dinâmica).
+> (bibliotecas dinâmicas/compartilhadas) necessárias, delegando o trabalho de "juntar" as partes
+> para o tempo de execução (no que é chamado de linkagem dinâmica). Para tal, o conceito de
+> relocações é essencial e, nesse caso, elas são preenchidas apenas em tempo de execução.
 >
 > ```
 > Resumo do que discutimos até o momento:
@@ -430,7 +432,7 @@ Mas por quê a linguagem de máquina é tão importante e necessária? Bem, isso
 do computador, cujos circuitos se baseiam em um princípio de lógica binária, possuindo apenas dois estados:
 com tensão ou sem tensão elétrica, representando os valores binários `0` e `1`.
 
-Com isso é muito benéfico representar esses estados com os valores 0 e 1. Por isso que a única linguagem que o
+Com isso é muito benéfico representar esses estados com os valores `0` e `1`. Por isso que a única linguagem que o
 computador entende é o binário, que vai indicar onde deve interromper a corrente e onde deve passar corrente nos
 componentes do computador. Essa sequencia de `0`s e `1`s que indicam a execução de um programa é chamado de
 linguagem de máquina.
