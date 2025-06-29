@@ -1,0 +1,78 @@
+#cse_before .y,
+#cse_before .m_w,
+#cse_before .y_m_w,
+#cse_after .hidden {
+    display: inline-block;
+}
+
+#cse_before:hover .y {
+    animation-duration: 2s;
+    animation-name: slide-y;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slide-y {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(15em + 10px));
+    }
+}
+
+#cse_before:hover .m_w {
+    animation-duration: 2s;
+    animation-name: slide-m-w;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slide-m-w {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(12.5em + 11px));
+    }
+}
+
+#cse_before:hover .y_m_w {
+    animation-duration: 2s;
+    animation-name: slide-y-m-w;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slide-y-m-w {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(calc(17em + 15px), calc(-1 * (2em + 10px)));
+    }
+}
+
+#cse_after .hidden {
+    opacity: 0;
+}
+
+body:has(#cse_before:hover) #cse_after .hidden {
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+    animation-name: slide-t-decls;
+}
+
+@keyframes slide-t-decls {
+    0%, 25% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+pre:is(#cse_before, #cse_after) {
+    overflow-x: hidden;
+}

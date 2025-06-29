@@ -4,6 +4,7 @@ script:
 css:
  - /code.css
  - ./styles.css
+ - ./cse-animation.css
 description: Veja como um programa escrito em uma linguagem de alto nível é convertido em código de máquina
 ---
 
@@ -297,10 +298,22 @@ temos:
  - *Common subexpression elimination* (CSE): encontra subexpressões em comum sem efeitos
    colaterais, faz com que seu resultado seja calculado uma única vez e reutilizado
 
-Além disso, há outras técnicas como *tail call optimization* (TCO) e *inlining*.
-Alocação de registradores e reordenação do código também são tarefas realizadas
-pelo compilador, que têm grande impacto no desempenho dos programas gerados. `gcc` e
-`clang` são exemplos de compiladores C e C++ capazes de aplicar essas otimizações,
+<!-- sinto muito -->
+
+```{=html}
+<div class="code-side-by-side" id="cse">
+    <div><pre id="cse_before" class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span><br>    <span class="dt">int</span> x <span class="op">=</span> <span class="y">y</span> <span class="op">+</span> z <span class="m_w"><span class="op">-</span> w</span><span class="op">;</span><br><br><br>    <span class="cf">if</span> <span class="op">(</span><span class="y_m_w">y <span class="op">-</span> w</span> <span class="op">></span> 0<span class="op">)</span><br>        fazer_algo<span class="op">(</span>x<span class="op">);</span><br><span class="op">}</span></code></pre></div>
+    <div><pre id="cse_after" class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span><br>    <span class="hidden"><span class="dt">int</span> t <span class="op">=</span> y <span class="op">-</span> w;</span><br>    <span class="dt">int</span> x <span class="op">=</span> <span class="hidden">t</span> <span class="op">+</span> z;<br><br>    <span class="cf">if</span> <span class="op">(</span><span class="hidden">t</span> <span class="op">></span> 0<span class="op">)</span><br>        fazer_algo<span class="op">(</span>x<span class="op">);</span><br>}</code></pre></div>
+</div>
+```
+
+Posicione o cursor do mouse (ou o dedo) sobre o primeiro bloco de código para ver como
+um compilador poderia reescrever esse código usando CSE.
+
+Além das técnicas mostradas acimas, há outras, como *tail call optimization* (TCO)
+e *inlining*. Alocação de registradores e reordenação do código também são tarefas
+realizadas pelo compilador que têm grande impacto no desempenho dos programas gerados.
+`gcc` e `clang` são exemplos de compiladores C e C++ capazes de aplicar essas otimizações,
 bem como diversas outras.
 
 > ### Compiladores *vs.* interpretadores
