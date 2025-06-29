@@ -80,6 +80,26 @@ Todo esse sistema deve seguir alguma especificação para que os componentes pos
 entre si. Em especial, a especificação da CPU quanto à sua estrutura e a estrutura dos
 programas que a CPU é capaz de executar é chamada de arquitetura.
 
+### Arquitetura de Computador
+
+A arquitetura de um computador é como o projeto ou o manual que define como todas as partes do computador trabalham juntas.
+Ela explica:
+
+* como o processador (CPU) entende e executa comandos,
+
+* como ele se comunica com a memória para buscar dados e instruções,
+
+* como o computador se conecta com outros dispositivos, como teclado, mouse e tela.
+
+Cada tipo de arquitetura tem um “jeito próprio” de organizar essas partes e um conjunto de instruções que o processador entende. É por isso que programas feitos para um tipo de processador nem sempre funcionam em outro sem adaptações.
+Alguns exemplos de arquitetura como a x86, ARM ou RISC-V, cada uma com seus conjunto de instruções ou ISA — Instruction Set Architecture.
+
+> Dá para pensar assim:
+>
+>    A arquitetura é como as regras e o idioma que o computador fala internamente.
+>    Para o programa rodar direitinho, ele precisa ser traduzido para esse idioma específico que o processador entender.
+>![](./assets/icons/chip0.svg){.inline-svg}
+
 ### A CPU
 
 <!-- a separação entre as seções provalvemente não ficou muito clara após essa edição -->
