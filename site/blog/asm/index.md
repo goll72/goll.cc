@@ -1,6 +1,7 @@
 ---
 script:
  - ./quiz.js
+ - ./playground.js
 css:
  - /code.css
  - ./styles.css
@@ -449,6 +450,30 @@ computador entende é o binário, que vai indicar onde deve interromper a corren
 componentes do computador. Essa sequencia de `0`s e `1`s que indicam a execução de um programa é chamado de
 linguagem de máquina.
 
+::: {.quiz-question .single-choice #compilador}
+
+Selecione o processo de compilação correto:
+
+ - [ ] Código intermediário $\rightarrow$ linguagem de alto nível $\rightarrow$ *assembly* $\rightarrow$ código de máquina
+
+   [O código intermediário é um produto da início do processo de compilação da linguagem de alto
+   nível, quando ela está sendo processado em uma estrutura que é mais facilmente traduzida ao
+   *assembly*. Ou seja, o intermediário é após a linguagem.]{.explanation}
+       
+ - [x] Linguagem de alto nível $\rightarrow$ código intermediário $\rightarrow$ *assembly* $\rightarrow$ código de máquina
+
+   [Primeiramente, um programador escreve, em uma linguagem de programação (alto nível) o código.
+   Então, no processo de compilação, ele passa por um código, ou representação, intermediário para
+   se tornar *assembly*. Finalmente, o montador realiza os processos finais e gera o código binário
+   de máquina.]{.explanation}
+
+ - [ ] Linguagem de alto nível $\rightarrow$ *assembly* $\rightarrow$ código intermediário $\rightarrow$ código de máquina
+
+   [O código intermediário não está entre o *assembly* e o código de máquina, mas sim entre a
+   linguagem e o *assembly*. Após o *assembly*, há apenas o código de máquina, não sendo
+   necessário uma representação intermediária, já que os dois estão bem próximos.]{.explanation}
+
+:::
 
 ### Formato das instruções
 
@@ -485,50 +510,84 @@ obtemos:
 Os demais números presentes na sequência servem para indicar ao computador que a instrução se
 trata de uma soma entre registradores.
 
-::: {.quiz-question .single-choice #compilador}
 
-Selecione o processo de compilação correto:
+::: {#asmDiv}
 
- - [ ] Código intermediário $\rightarrow$ linguagem de alto nível $\rightarrow$ *assembly* $\rightarrow$ código de máquina
+### Assembly playground
 
-   [O código intermediário é um produto da início do processo de compilação da linguagem de alto
-   nível, quando ela está sendo processado em uma estrutura que é mais facilmente traduzida ao
-   *assembly*. Ou seja, o intermediário é após a linguagem.]{.explanation}
+::: {.playground #instruction}
+
+Escolha a instrução:
+
+ - [ ] Load
        
- - [x] Linguagem de alto nível $\rightarrow$ código intermediário $\rightarrow$ *assembly* $\rightarrow$ código de máquina
+ - [ ] Store
 
-   [Primeiramente, um programador escreve, em uma linguagem de programação (alto nível) o código.
-   Então, no processo de compilação, ele passa por um código, ou representação, intermediário para
-   se tornar *assembly*. Finalmente, o montador realiza os processos finais e gera o código binário
-   de máquina.]{.explanation}
+ - [x] Add
 
- - [ ] Linguagem de alto nível $\rightarrow$ *assembly* $\rightarrow$ código intermediário $\rightarrow$ código de máquina
+ - [ ] Add Immediate
 
-   [O código intermediário não está entre o *assembly* e o código de máquina, mas sim entre a
-   linguagem e o *assembly*. Após o *assembly*, há apenas o código de máquina, não sendo
-   necessário uma representação intermediária, já que os dois estão bem próximos.]{.explanation}
+ - [ ] Branch
+
+:::
+
+::: {.playground #branch}
+
+Escolha a condição da `branch`:
+
+ - [x] Igualdade (==)
+
+ - [ ] Desigualdade (!=)
+
+ - [ ] Menor que (<)
+
+ - [ ] Maior ou igual que (>=)
+
+:::
+
+::: {.playground #register}
+
+Escolha os registros que serão usados:
+
+ - [Escolha um registro de destino: ]{#rd}
+
+ - [Escolha um registro de entrada: ]{#rs1}
+
+ - [Escolha o segundo registro de entrada: ]{#rs2}
+
+:::
+
+::: {.playground #immediate}
+
+Escolha um valor imediato (se nenhum for colocado, zero é o padrão):
+
+:::
+
+
+::: {.playground #result}
+
+Formato em assembly:
+
+```
+Assembly: add t0, t1, t2
+
+```
+
+Resultado do montador:
+
+```
+Binário: 0000000 | 00111 | 00110 | 000 | 00101 | 0110011  
+          funct7    rs2     rs1    f3*     rd     opcode
+```
+
+*funct3
+
+:::
 
 :::
 
 ## Quer saber mais?
 
 
-::: {.quiz-question .single-choice #bar}
-
-Lorem ipsum.
-
- - [x] Correct answer
-
-   [vvvvvv]{.explanation}
-       
- - [ ] Wrong answer
-
-   [xxxxxx]{.explanation}
-
- - [ ] Wrong answer
-
-   [aaaaaa]{.explanation}
-
-:::
 
 <!-- não há necessidade de uma seção dedicada para referências (use footnotes Markdown) -->
