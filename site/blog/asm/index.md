@@ -339,11 +339,11 @@ uma vez apenas para calcular os endereços das *labels*, e outra para processá-
 Já uma solução menos "gambiarrenta", porém mais complexa, envolve criar relocações ("buracos") no código,
 preechendo-os quando necessário.
 
-> # Curiosidade sobre o Linker
+> ### Curiosidade sobre o Linker
 > Um programa pode ser dependente de várias partes, 
 > tanto de bibliotecas, como acessos a endereços de memória, e nosso código ou receita principal, logo, precisamos de uma pessoa que possa unir tudo isso e gerar um executável, esse trabalho fica com o Linker (ligador), que gera a nossa ./main
 
-```mathematica
+```
 Resumo do que discutimos até o momento:
 Codigo em C -> Compilador (gcc) -> Assembly (.s) -> Montador (as) -> Objeto (.o) -> Ligador (ld) -> Executável
 ```
