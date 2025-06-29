@@ -104,3 +104,16 @@ header {
         -webkit-text-stroke-width: 0;
     }
 }
+
+.code-side-by-side {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    
+    margin: 0.5em auto;
+
+    pre {
+        margin: 0.5em;
+    }
+}
