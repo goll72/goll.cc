@@ -301,12 +301,37 @@ temos:
 
 <!-- sinto muito -->
 
-```{=html}
-<div class="code-side-by-side" id="cse">
-    <div><pre id="cse_before" class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span><br>    <span class="dt">int</span> x <span class="op">=</span> <span class="y">y</span> <span class="op">+</span> z <span class="m_w"><span class="op">-</span> w</span><span class="op">;</span><br><br><br>    <span class="cf">if</span> <span class="op">(</span><span class="y_m_w">y <span class="op">-</span> w</span> <span class="op">></span> 0<span class="op">)</span><br>        fazer_algo<span class="op">(</span>x<span class="op">);</span><br><span class="op">}</span></code></pre></div>
-    <div><pre id="cse_after" class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span><br>    <span class="hidden"><span class="dt">int</span> t <span class="op">=</span> y <span class="op">-</span> w;</span><br>    <span class="dt">int</span> x <span class="op">=</span> <span class="hidden">t</span> <span class="op">+</span> z;<br><br>    <span class="cf">if</span> <span class="op">(</span><span class="hidden">t</span> <span class="op">></span> 0<span class="op">)</span><br>        fazer_algo<span class="op">(</span>x<span class="op">);</span><br>}</code></pre></div>
-</div>
+::: {#cse .render-as-code}
+
+::: {.before}
+[y]{.y}[- w]{.m_w}[y - w]{.y_m_w}
+```c
+int main(void) {
+    int x = y + z - w;
+
+
+    if (y - w > 0)
+        fazer_algo(x);
+}
 ```
+:::
+
+::: {.after}
+[[int]{.dt} t [=]{.op} y [-]{.op} w[;]{.op}]{#t_assignment .hidden}
+[t]{#t_use_in_x .hidden}
+[t]{#t_use_in_if .hidden}
+```c
+int main(void) {
+
+    int x =   + z;
+
+    if (  > 0)
+        fazer_algo(x); 
+}
+```
+:::
+
+:::
 
 Posicione o cursor do mouse (ou o dedo) sobre o primeiro bloco de código para ver como
 um compilador poderia reescrever esse código usando CSE.

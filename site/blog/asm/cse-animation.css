@@ -1,69 +1,143 @@
-#cse_before .y,
-#cse_before .m_w,
-#cse_before .y_m_w,
-#cse_after .hidden {
+#cse {
+    width: 100vw;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    margin: 0 auto;
+
+    *, pre code {
+        font-size: 1rem !important;
+        line-height: 1.35rem;
+    }
+}
+
+@media (max-width: 30em) {
+    #cse {
+        width: 100vw;
+        overflow-x: scroll;
+    }
+    
+    #cse .before {
+        margin-left: 20em;
+    }
+
+    #cse .after {
+        margin-right: 5em;
+    }
+}
+
+#cse .before {
+    margin-right: 0.2em;
+}
+
+#cse .after {
+    margin-left: 0.2em;
+}
+
+#cse :is(.before, .after) {
     display: inline-block;
+    position: relative;
 }
 
-#cse_before:hover .y {
+#cse .before :is(.y, .m_w, .y_m_w),
+#cse .after .hidden {
+    font-family: "Fira Code";
+
+    color: #fff;
+
+    -webkit-text-stroke-width: 0;
+    display: inline-block;
+
+    opacity: 0;
+
+    position: absolute;
+    transform: translate(var(--initial-x), var(--initial-y));
+
+    z-index: 9;
+}
+
+#cse .before:hover :is(.y, .m_w, .y_m_w),
+#cse:has(.before:hover) .after .hidden {
     animation-duration: 2s;
-    animation-name: slide-y;
     animation-fill-mode: forwards;
 }
 
-@keyframes slide-y {
-    from {
-        transform: translateX(0);
-    }
+#cse .before .y {
+    --initial-x: 7.45em;
+    --initial-y: 3.25em;
 
-    to {
-        transform: translateX(calc(15em + 10px));
-    }
+    --final-x: calc(var(--initial-x) + 14.9em);
+    --final-y: var(--initial-y);
 }
 
-#cse_before:hover .m_w {
-    animation-duration: 2s;
-    animation-name: slide-m-w;
-    animation-fill-mode: forwards;
+#cse .before .m_w {
+    --initial-x: 10.75em;
+    --initial-y: 3.25em;
+
+    --final-x: calc(var(--initial-x) + 12.9em);
+    --final-y: var(--initial-y);
 }
 
-@keyframes slide-m-w {
-    from {
-        transform: translateX(0);
-    }
+#cse .before .y_m_w {
+    --initial-x: 5.07em;
+    --initial-y: 7.3em;
 
-    to {
-        transform: translateX(calc(12.5em + 11px));
-    }
+    --final-x: 22.45em;
+    --final-y: 3.25em;
 }
 
-#cse_before:hover .y_m_w {
-    animation-duration: 2s;
-    animation-name: slide-y-m-w;
-    animation-fill-mode: forwards;
-}
-
-@keyframes slide-y-m-w {
-    from {
-        transform: translate(0, 0);
-    }
-
-    to {
-        transform: translate(calc(17em + 15px), calc(-1 * (2em + 10px)));
-    }
-}
-
-#cse_after .hidden {
+#cse .after .hidden {
     opacity: 0;
 }
 
-body:has(#cse_before:hover) #cse_after .hidden {
-    animation-duration: 4s;
-    animation-fill-mode: forwards;
-    animation-name: slide-t-decls;
+#cse .before:hover :is(.y, .m_w, .y_m_w) {
+    animation-name: cse-slide;
 }
 
-@keyframes slide-t-decls {
+@keyframes cse-slide {
+    0% {
+        transform: translate(var(--initial-x), var(--initial-y));
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--final-x), var(--final-y));
+        opacity: 0;
+    }
+}
+
+#cse:has(.before:hover) .after .hidden {
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+    animation-name: cse-show-t;
+}
+
+#cse .after #t_assignment {
+    --initial-x: 3.2rem;
+    --initial-y: 3.3rem;   
+}
+
+#cse .after #t_use_in_x {
+    --initial-x: 8rem;
+    --initial-y: 4.75rem;
+}
+
+#cse .after #t_use_in_if {
+    --initial-x: 5.6rem;
+    --initial-y: 7.45rem;
+}
+
+@keyframes cse-show-t {
     0%, 25% {
         opacity: 0;
     }
@@ -71,8 +145,4 @@ body:has(#cse_before:hover) #cse_after .hidden {
     100% {
         opacity: 1;
     }
-}
-
-pre:is(#cse_before, #cse_after) {
-    overflow-x: hidden;
 }

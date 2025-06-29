@@ -33,7 +33,7 @@ pre {
 /* Theme inspired on Helix's spin on Fleet Dark:
  * https://github.com/helix-editor/helix/blob/main/runtime/themes/fleet_dark.toml
  */
-.sourceCode {
+.sourceCode, .render-as-code {
     /* NOTE: .bu uses the same color as .dt, otherwise built-in types would
      * be rendered as built-ins rather than types even in a type hint context
      */
