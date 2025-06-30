@@ -324,7 +324,7 @@ int main(void) {
 
 
     if (y < w + 1)
-        fazer_algo(w);
+        fazer_algo(x, w);
 }
 ```
 :::
@@ -339,7 +339,7 @@ int main(void) {
     int x =   + z;
 
     if (  < 1)
-        fazer_algo(w); 
+        fazer_algo(x, w); 
 }
 ```
 :::
