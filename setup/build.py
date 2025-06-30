@@ -131,7 +131,7 @@ with subprocess.Popen([pandoc, "lua", rootdir / "setup" / "find-deps.lua", "filt
 
 def output_for(path):
     output = DISTDIR / path.relative_to(sitedir)
-    
+
     match path.suffix:
         case ".md":
             if path.stem == "index":

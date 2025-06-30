@@ -589,6 +589,6 @@ Binário: 0000000 | 00111 | 00110 | 000 | 00101 | 0110011
 
 ## Quer saber mais?
 
-
+<!-- objdump etc. -->
 
 <!-- não há necessidade de uma seção dedicada para referências (use footnotes Markdown) -->

@@ -8,6 +8,8 @@ local sections = require("filters.sections")
 local page_list = require("filters.page-list")
 local diagram = require("filters.diagram")
 
+-- FIXME: `.ts` doesn't work in `script` (frontmatter)
+
 -- Filters must be ordered such that each
 -- filter is run before its dependents
 local filters = {
