@@ -225,6 +225,27 @@ A representação dessa instrução em binário é:
 10000011 00100010 00000011 00000000 00000000
 ```
 
+`lw` é uma "mnemônica" que corresponde a uma instrução da arquitetura que lê um valor
+de uma determinada posição da memória e armazena esse valor em um registrador. `t0` e
+`t1` são operandos (registradores) usados pela instrução. O `0` é um tipo especial de
+operando (um número), também chamado de imediato.
+
+Para que o código em *assembly* possa fazer algo útil, é necessário atribuir algum
+significado para os registradores. Esse significado pode se dar na forma de restrições
+impostas pela arquitetura ou por meio de convenções que devem ser seguidas pelo código.
+Na arquitetura RISC-V, os registradores têm, convencionalmente, significados especiais:
+
+ - `sp`: ponteiro da *stack*, guarda a posição de memória onde valores temporários
+   são colocados
+
+ - `a0` a `a7`: argumentos/retorno de funções
+
+ - `t0` a `t6`: registradores temporários
+
+ - `s0` a `s11`: registradores salvos
+
+<!-- ... -->
+
 Além de nos dar uma correspondência entre "mnemônicas", como `lw`, e uma sequência de
 bits que pode ser interpretada pela CPU como uma instrução, o *assembly* permite que
 *labels*, ou rótulos, sejam usados juntamente com instruções de *branch* a fim de
