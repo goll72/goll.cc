@@ -230,6 +230,8 @@ de uma determinada posição da memória e armazena esse valor em um registrador
 `t1` são operandos (registradores) usados pela instrução. O `0` é um tipo especial de
 operando (um número), também chamado de imediato.
 
+### Convenções
+
 Para que o código em *assembly* possa fazer algo útil, é necessário atribuir algum
 significado para os registradores. Esse significado pode se dar na forma de restrições
 impostas pela arquitetura ou por meio de convenções que devem ser seguidas pelo código.
@@ -244,9 +246,15 @@ Na arquitetura RISC-V, os registradores têm, convencionalmente, significados es
 
  - `s0` a `s11`: registradores salvos
 
-<!-- ... -->
+<!-- ? -->
 
-Além de nos dar uma correspondência entre "mnemônicas", como `lw`, e uma sequência de
+Registradores temporários/de argumento/retorno podem ser modificados à vontade, enquanto
+os registradores salvos devem ser preservados, ou seja, podem ser modificados, desde
+que seu valor anterior seja restaurado em algum momento (antes da função atual retornar).
+
+### Rótulos e diretivas
+
+Além de nos dar uma correspondência entre texto, como `lw t0, 0(t1)`, e uma sequência de
 bits que pode ser interpretada pela CPU como uma instrução, o *assembly* permite que
 *labels*, ou rótulos, sejam usados juntamente com instruções de *branch* a fim de
 indicar para onde o desvio será realizado:
