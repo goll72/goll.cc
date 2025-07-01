@@ -532,6 +532,18 @@ Escolha a instrução:
 
 :::
 
+::: {.playground #width}
+
+Escolha em que tamanho de dado realizar a operação:
+
+ - [x] Palavra
+
+ - [ ] Meia-palavra
+
+ - [ ] Byte
+
+:::
+
 ::: {.playground #branch}
 
 Escolha a condição da `branch`:

@@ -26,9 +26,9 @@ for (let step of playground) {
 			choices[i].addEventListener("change", chInstrucType)
 		}
 	}
-	// where the user chosses the comparison of the branch
-	else if (id == "branch") {
-		step.hidden = true;
+	// where user chooses the width of load/store or comparison of the branch
+	else if (id == "width" || id == "branch") {
+		step.hidden = true; // starts hidden, as default instrucion is add
 
 		const choices = step.querySelectorAll("input");
 
@@ -128,7 +128,15 @@ function chInstrucType(e) {
 	//			2 -> add
 	//			3 -> add immediate
 	//			4 -> branch
-	
+
+	// load and store are the only ones with width
+	if (instrucType > 1) {
+		asmDiv.querySelector("#width").hidden = true;
+	}
+	else{
+		asmDiv.querySelector("#width").hidden = false;
+	}
+
 	if (instrucType == 4) { // branch needs to chose the comparison
 		asmDiv.querySelector("#branch").hidden = false;
 		asmDiv.querySelector("#immediate").querySelector("p").innerText = "Escolha o número de instruções a serem puladas (se nenhum for colocado, zero é o padrão):"
@@ -140,7 +148,7 @@ function chInstrucType(e) {
 
 	const registerDiv = asmDiv.querySelector("#register");
 
-	if(instrucType == 1 || instrucType == 4){ // branch and store dont have rd
+	if (instrucType == 1 || instrucType == 4) { // branch and store dont have rd
 		asmDiv.querySelector("#rd").parentElement.parentElement.hidden = true;
 	}
 	else{
@@ -148,14 +156,14 @@ function chInstrucType(e) {
 	}
 
 
-	if(instrucType == 0 || instrucType == 3){ //load an addi dont have rs2
+	if (instrucType == 0 || instrucType == 3) { //load an addi dont have rs2
 		asmDiv.querySelector("#rs2").parentElement.parentElement.hidden = true;
 	}
 	else{
 		asmDiv.querySelector("#rs2").parentElement.parentElement.hidden = false;
 	}
 
-	if(instrucType == 2){ // add is the only one without immediate
+	if (instrucType == 2) { // add is the only one without immediate
 		asmDiv.querySelector("#immediate").hidden = true;
 	}
 	else{
@@ -168,7 +176,7 @@ function chInstrucType(e) {
 // when the button for displaying the result is clicked, this
 // function is called. It will take in the user's inputs and
 // generate the text for the assembly and binary results
-function makeAsm(e){
+function makeAsm(e) {
 	const instrucDiv = asmDiv.querySelector("#instruction");
 
 	const instrucType : number = Number(instrucDiv.querySelector("input:checked").value);
@@ -177,6 +185,17 @@ function makeAsm(e){
 	//			2 -> add
 	//			3 -> add immediate
 	//			4 -> branch
+
+	// width is the number of bytes some data has. In the context of the instructions
+	// load and store, it is whether we are dealing with a word, halfword or byte.
+	let widthType : number = -1;
+	if (instrucType < 2) {
+		const widthDiv = asmDiv.querySelector("#width");
+		widthType = Number(widthDiv.querySelector("input:checked").value);
+		// values:	0 -> word
+		//			1 -> halfword
+		//			2 -> byte
+	}
 
 	let branchType : number = -1;
 	if (instrucType == 4) { // if branch, take comparison
@@ -196,19 +215,19 @@ function makeAsm(e){
 	// take the register values. The option values are exactly the numbers
 	// that represent those registers in binary and the index for them in
 	// the registers array
-	if(instrucType != 1 && instrucType != 4) {
+	if (instrucType != 1 && instrucType != 4) {
 		rdValue = Number(asmDiv.querySelector("#rdSelector").value)
 	}
 
 	rs1Value = Number(asmDiv.querySelector("#rs1Selector").value);
 
-	if(instrucType != 0 && instrucType != 3) {
+	if (instrucType != 0 && instrucType != 3) {
 		rs2Value = Number(asmDiv.querySelector("#rs2Selector").value);
 	}
 
 	// pick the immediate and see if its whitin range for 12 bits
 	let immediate = 0;
-	if(instrucType != 2){
+	if (instrucType != 2) {
 		const immDiv = asmDiv.querySelector("#immediate");
 		const pErr = immDiv.querySelector("p#immErr");
 		immediate = Number(immDiv.querySelector("input").value);
@@ -216,12 +235,12 @@ function makeAsm(e){
 		// for branch, it is 2 ^ 11, because the number the user put will
 		// be multiplied by four, so it is the number of instructions of 32 bits
 		// that will be "branched", and the branch immediate is 13 bits (first bit is always 0)
-		if(instrucType == 4 && (immediate > 1023 || immediate < -1024)){
+		if (instrucType == 4 && (immediate > 1023 || immediate < -1024)) {
 			pErr.innerText = "Erro! Deve ser digitado um número entre 1023 e -1024."
 			pErr.hidden = false;
 			return;
 		}
-		else if(immediate > 2047 || immediate < -2048){
+		else if (immediate > 2047 || immediate < -2048) {
 			pErr.innerText = "Erro! Deve ser digitado um número entre 2047 e -2048."
 			pErr.hidden = false;
 			return;
@@ -236,19 +255,47 @@ function makeAsm(e){
 	const assembly = codes[0];
 	const binario = codes[1];
 
-	switch(instrucType){
+	// depending on the instruction, display the assembly line of code and corresponding binary
+	switch (instrucType) {
 		case 0: // load
-			assembly.innerText = `Assembly: lb ${registers[rdValue]}, ${immediate}(${registers[rs1Value]})`;
-			// yes, the opcode are hardcoded ;) (as well as the position/spacement of the labels below)
-			binario.innerText = `Binário: ${binRep(immediate, 12, 0)} | ${binRep(rs1Value, 5, 0)} | 000 | ${binRep(rdValue, 5, 0)} | 0000011\n` +
-								`          immediate      rs1    f3*     rd     opcode`
-			break;
 		case 1: // store
-			assembly.innerText = `Assembly: sb ${registers[rs2Value]}, ${immediate}(${registers[rs1Value]})`;
 
-			binario.innerText = `Binário: ${binRep(immediate, 12, 5)} | ${binRep(rs2Value, 5, 0)} | ${binRep(rs1Value, 5, 0)} | 000 | ${binRep(immediate, 5, 0)} | 0100011\n` +
-								`       imm[11:5]    rs2     rs1    f3*  imm[4:0]  opcode`
-			break;
+			// both load and store use same width and funct3
+			let widthStr : string;
+			let func : string;
+			switch (widthType) {
+				case(0):
+					widthStr = "w";
+					func = "010";
+					break;
+				case(1):
+					widthStr = "h";
+					func = "001";
+					break;
+				case(2):
+					widthStr = "b";
+					func = "000";
+					break;
+			}
+		
+			if (instrucType == 0) {
+				assembly.innerText = `Assembly: l${widthStr} ${registers[rdValue]}, ${immediate}(${registers[rs1Value]})`;
+				// yes, the opcode are hardcoded ;) (as well as the position/spacement of the labels below)
+				binario.innerText = `Binário: ${binRep(immediate, 12, 0)} | ${binRep(rs1Value, 5, 0)} | ${func} | ${binRep(rdValue, 5, 0)} | 0000011\n` +
+									`          immediate      rs1    f3*     rd     opcode`
+				break;
+
+			}
+			else if (instrucType == 1) {
+				assembly.innerText = `Assembly: s${widthStr} ${registers[rs2Value]}, ${immediate}(${registers[rs1Value]})`;
+
+				binario.innerText = `Binário: ${binRep(immediate, 12, 5)} | ${binRep(rs2Value, 5, 0)} | ${binRep(rs1Value, 5, 0)} | ${func} | ${binRep(immediate, 5, 0)} | 0100011\n` +
+									`       imm[11:5]    rs2     rs1    f3*  imm[4:0]  opcode`
+				break;
+
+			}
+
+			console.log("atirador 44 bastos vai puxar uma canção pra nóis")
 		case 2: // add
 			assembly.innerText = `Assembly: add ${registers[rdValue]}, ${registers[rs1Value]}, ${registers[rs2Value]}`;
 
