@@ -281,6 +281,32 @@ important:
 Note que esse exemplo, além de diretivas, também usa *labels*, para que seja possível
 usar esses dados no código, referindo-se a eles por meio do rótulo correspondente.
 
+::: {.quiz-question .multiple-choice}
+
+Sobre a utilidade do código em assembly, escolha as opções verdadeiras:
+
+ - [x] Uma das principais funcionalidades do formato assembly é prover o programador de palavras
+ naturais e semânticas para representar instruções binárias e registradores.
+
+   [O assembly permite leitura e escrita de código de máquina mais fáceis ao usar mnemônicos para
+   representar o que significam os números binários nas instruções de uma arquitetura.]{.explanation}
+
+ - [ ] O assembly é uma simples correspondência às instruções da máquina, ou seja, uma linha de
+ assembly sempre representa o mesmo código em binário.
+
+   [Além de mnemônicos (um código binário representado semânticamente), há diretivas e labels,
+   que não serão representadas diretamente no código binário, mas mudam o binário dependendo
+   de onde são colocados e do resto do programa (contexto).]{.explanation}
+
+ - [x] Além de facilitar o entendimento do código, o nome dos registradores na linguagem assembly
+ diz qual é a função convencional que cada um serve.
+
+   [O nome dado para os registradores na linguagem assembly segue uma convenção imposta pela própria
+   arquitetura da máquina, que dita usos e restrições que devem ser seguidos para o programa ser
+   fácil de se entender e de portar.]{.explanation}
+      
+:::
+
 ## Compilador
 
 Podemos pensar, de maneira bem simplificada, que um compilador é um programa capaz
