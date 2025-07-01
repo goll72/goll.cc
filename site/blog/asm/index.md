@@ -9,16 +9,6 @@ css:
 description: Veja como um programa escrito em uma linguagem de alto nível é convertido em código de máquina
 ---
 
-<!--
-     ainda daria para falar sobre:
-       - registradores temporários/salvos
-       - conversão de variáveis para registradores/posições na stack
-       - funções (em mais detalhe)
-       - calling conventions e ABI
-
-     (o último tópico não foi abordado muito a fundo na disciplina)
--->
-
 # O caminho do código --- do C à máquina
 
 Como um programa escrito em uma linguagem de alto nível, como C, é transformado em
@@ -115,8 +105,6 @@ define "meia-palavra" (*half word*) e *double word*, para $n/2$ e $2n$, respecti
 > ![](./assets/icons/chip0.svg){.inline-svg}
 
 ### A CPU
-
-<!-- a separação entre as seções provalvemente não ficou muito clara após essa edição -->
 
 A CPU se encarrega de executar os comandos, ou instruções, que fazem parte de um programa.
 Para tal, deve decodificar a combinação única de bits que compõe uma instrução (definida pela
@@ -246,8 +234,6 @@ Na arquitetura RISC-V, os registradores têm, convencionalmente, significados es
 
  - `s0` a `s11`: registradores salvos
 
-<!-- ? -->
-
 Registradores temporários/de argumento/retorno podem ser modificados à vontade, enquanto
 os registradores salvos devem ser preservados, ou seja, podem ser modificados, desde
 que seu valor anterior seja restaurado em algum momento (antes da função atual retornar).
@@ -342,8 +328,6 @@ uma sequência de *tokens* válida nesse contexto:
 
 ### Código intermediário
 
-<!-- muito texto, talvez -->
-
 No meio do caminho entre uma linguagem de alto nível e assembly, o compilador pode emitir
 várias representações intermediárias do código, ou seja, converter o código em uma representação
 intermediária antes de chegar no código de máquina. Desse modo, é possível realizar uma série
@@ -366,8 +350,6 @@ temos:
 
  - *Common subexpression elimination* (CSE): encontra subexpressões em comum sem efeitos
    colaterais, faz com que seu resultado seja calculado uma única vez e reutilizado
-
-<!-- sinto muito -->
 
 ::: {#cse .render-as-code}
 
@@ -419,9 +401,6 @@ bem como diversas outras.
 > com o seu computador). É possível também "interpretar": nesse caso, não é gerado código de máquina;
 > o código do programa a ser interpretado é lido e a conversão para instruções em linguagem de máquina
 > é feita na hora de executá-lo. Um programa que interpreta outro programa é chamado de interpretador.
->
-> <!-- a analogia do engenheiro ficou legal também, mas talvez não muito realista -->
-> <!-- já essa pode ter ficado meio confusa -->
 >
 > Se houvesse um programa cujo objetivo fosse uma degustação culinária, o compilador seria um *chef*
 > que prepara, planeja e analisa os pratos com antecedência, entregando-os na mesa para a refeição,
@@ -667,7 +646,4 @@ de compilação e montagem:
 
  -  `objdump` e `readelf`: analisar arquivos objeto
  - `r2` (radare2) e Ghidra: realizar engenharia reversa
-
-<!-- ... -->
-
-<!-- não há necessidade de uma seção dedicada para referências (use footnotes Markdown) -->
+ - `gdb`, `lldb`, `pwndbg`: depuradores interativos
