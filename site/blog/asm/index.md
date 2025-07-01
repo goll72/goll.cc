@@ -514,7 +514,9 @@ trata de uma soma entre registradores.
 
 ::: {#asmDiv}
 
-### Assembly playground
+### Assembly Playground
+
+Veja a sequência binária que será gerada dada uma determinada instrução em *assembly* RISC-V.
 
 ::: {.playground #instruction}
 
@@ -534,15 +536,19 @@ Escolha a instrução:
 
 ::: {.playground #branch}
 
-Escolha a condição da `branch`:
+Escolha a condição da *branch*:
 
- - [x] Igualdade (==)
+ - [x] Igualdade (`==`)
 
- - [ ] Desigualdade (!=)
+ - [ ] Desigualdade (`!=`)
 
- - [ ] Menor que (<)
+ - [ ] Menor que (`<`)
 
- - [ ] Maior ou igual que (>=)
+ - [ ] Maior ou igual que (`>=`)
+
+> `>` e `<=` não estão presentes, uma vez que, para implementar
+> essas condições, basta usar `<` e `>=`, trocando a ordem dos
+> operandos (que é o que o montador faz).
 
 :::
 
@@ -589,6 +595,12 @@ Binário: 0000000 | 00111 | 00110 | 000 | 00101 | 0110011
 
 ## Quer saber mais?
 
-<!-- objdump etc. -->
+Há várias ferramentas que permitem analisar o código gerado no processo
+de compilação e montagem:
+
+ -  `objdump` e `readelf`: analisar arquivos objeto
+ - `r2` (radare2) e Ghidra: realizar engenharia reversa
+
+<!-- ... -->
 
 <!-- não há necessidade de uma seção dedicada para referências (use footnotes Markdown) -->
