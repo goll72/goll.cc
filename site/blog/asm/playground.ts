@@ -112,6 +112,7 @@ for (let step of playground) {
 
 		button.addEventListener("click", makeAsm);
 		step.prepend(button);
+	}
 }
 
 
@@ -307,3 +308,4 @@ function binRep(num : number, end : number, start : number): string {
 	let binaryWhole = (num >>> 0).toString(2).padStart(end, "0"); // cursed
 	return binaryWhole.substring(binaryWhole.length - end, binaryWhole.length - start);
 }
+
