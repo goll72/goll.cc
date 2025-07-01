@@ -302,8 +302,8 @@ Sobre a utilidade do código em assembly, escolha as opções verdadeiras:
  diz qual é a função convencional que cada um serve.
 
    [O nome dado para os registradores na linguagem assembly segue uma convenção imposta pela própria
-   arquitetura da máquina, que dita usos e restrições que devem ser seguidos para o programa ser
-   fácil de se entender e de portar.]{.explanation}
+   arquitetura da máquina, que dita usos e restrições que devem ser seguidos para que o código consiga
+   usar/interagir com outros módulos de código que seguem as mesmas convenções.]{.explanation}
       
 :::
 
