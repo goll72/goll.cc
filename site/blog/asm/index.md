@@ -569,7 +569,7 @@ trata de uma soma entre registradores.
 
 ::: {#asmDiv}
 
-### Assembly Playground
+### Mini-montador
 
 Veja a sequência binária que será gerada dada uma determinada instrução em *assembly* RISC-V.
 
@@ -654,7 +654,7 @@ Binário: 0000000 | 00111 | 00110 | 000 | 00101 | 0110011
           funct7    rs2     rs1    f3*     rd     opcode
 ```
 
-*funct3
+> *funct3
 
 :::
 
