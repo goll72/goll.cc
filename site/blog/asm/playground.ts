@@ -295,7 +295,6 @@ function makeAsm(e) {
 
 			}
 
-			console.log("atirador 44 bastos vai puxar uma canção pra nóis")
 		case 2: // add
 			assembly.innerText = `Assembly: add ${registers[rdValue]}, ${registers[rs1Value]}, ${registers[rs2Value]}`;
 
