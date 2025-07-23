@@ -5,7 +5,7 @@ My website, written in Markdown, using Pandoc.
 
 ## Dependencies
 
- - Pandoc 3.12+
+ - Pandoc 3.1.12+
  - Lua 5.4
  - Node.js
  - jq
