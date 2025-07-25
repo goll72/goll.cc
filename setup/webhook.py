@@ -1,4 +1,5 @@
 import os
+import sys
 import hmac
 import socket
 import itertools
@@ -25,6 +26,10 @@ args = parser.parse_args()
 
 def build(builddir: Path):
     subprocess.run(["git", "pull"]).check_returncode()
+
+    if not builddir.exists():
+        subprocess.run([sys.executable, "-m", "setup.build", builddir]).check_returncode()
+
     subprocess.run(["ninja", "-C", builddir]).check_returncode()
 
     with open(RSYNC_EXCLUDE_FILE, "r") as f:
