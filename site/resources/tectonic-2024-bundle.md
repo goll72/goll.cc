@@ -27,6 +27,9 @@ have to install the full TeX Live distribution (`tectonic` really is very conven
 after all) so I ended up building the `20240312` bundle myself, and, in fact, I am
 hosting it [here](/texlive2024/bundle.ttb).
 
+> temporarily unavailable because my stupid ass forgot to back it up when distrohopping
+> on my server, sorry `>.<`
+
 ## Notes
 
  - If you want to use the `20240312` bundle, you will have to build `tectonic` from
