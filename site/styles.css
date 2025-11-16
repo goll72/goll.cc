@@ -94,7 +94,7 @@ header * {
 /** Misc. */
 :root {
     font-family: "Libertinus Serif";
-    font-size: 1.45rem;
+    font-size: 1.35rem;
 
     line-height: 1.25;
      
@@ -110,7 +110,7 @@ header * {
 
 @media (min-width: 900px) {
     :root {
-        font-size: 1.65rem;
+        font-size: 1.55rem;
         width: min(75vw, 1200px);
     }
 }
