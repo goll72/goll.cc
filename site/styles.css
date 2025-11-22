@@ -3,266 +3,273 @@
 
 /** Header */
 header * {
-    font-family: "Fira Code";
-    -webkit-text-stroke-width: 0;
+  font-family: "Fira Code";
+  -webkit-text-stroke-width: 0;
 }
 
 #site-name {
-    font-size: 2em;
-    font-weight: 700;
+  font-size: 2em;
+  font-weight: 700;
 
-    text-shadow: 3px 3px var(--highlight);
-    color: var(--emphasis);
+  text-shadow: 3px 3px var(--highlight);
+  color: var(--emphasis);
 
-    margin: 0 0.2em;
-    align-self: center;
+  margin: 0 0.2em;
+  align-self: center;
 }
 
-#site-sections > ul {
-    display: flex;
-    flex-direction: row;
-    
-    justify-content: space-around;
+#site-sections>ul {
+  display: flex;
+  flex-direction: row;
 
-    > li, > li > a {
-        display: inline-block;
+  justify-content: space-around;
 
-        color: var(--color);
-        text-decoration: none;
+  >li,
+  >li>a {
+    display: inline-block;
 
-        font-weight: 600;
-        font-size: 1em;
+    color: var(--color);
+    text-decoration: none;
 
-        min-width: 20%;
-        text-align: center;
-    }
+    font-weight: 600;
+    font-size: 1em;
+
+    min-width: 20%;
+    text-align: center;
+  }
 }
 
 #alt-langs {
-    width: fit-content;
-    margin-left: auto;
-    
-    &::before {
-        content: "🌐 | ";
-    }
+  width: fit-content;
+  margin-left: auto;
 
-    > a {
-        text-decoration: none;
-        margin-right: 0.5em;
+  &::before {
+    content: "🌐 | ";
+  }
 
-        display: inline-block;
-    }
+  >a {
+    text-decoration: none;
+    margin-right: 0.5em;
+
+    display: inline-block;
+  }
 }
 
 /** Colors */
 :root {
-    --background: #ddd;
-    --bg-contrast: #bbb;
-    --color: #222;
-    --emphasis: #b72a2a;
-    --highlight: #4b7799;
-    --contrast: #111;
-    --dimmed: #444;
-    --link: #44f;
-    --link-visited: #ad1bff;
+  --background: #ddd;
+  --bg-contrast: #bbb;
+  --color: #222;
+  --emphasis: #b72a2a;
+  --highlight: #4b7799;
+  --contrast: #111;
+  --dimmed: #444;
+  --link: #44f;
+  --link-visited: #ad1bff;
 
-    /* Sorry not sorry */
-    --filter-black-to-color: saturate(0%) brightness(0%) invert(23%) sepia(0%) saturate(1024%) hue-rotate(228deg) brightness(95%) contrast(130%);
+  /* Sorry not sorry */
+  --filter-black-to-color: saturate(0%) brightness(0%) invert(23%) sepia(0%) saturate(1024%) hue-rotate(228deg) brightness(95%) contrast(130%);
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --background: #222;
-        --bg-contrast: #2a2a2a;
-        --color: #ddd;
-        --emphasis: #ffcf00;
-        --highlight: #df00cf;
-        --contrast: #1d1d1d;
-        --dimmed: #aaa;
-        --link: #8e96ff;
-        --link-visited: #d560ff;
+  :root {
+    --background: #222;
+    --bg-contrast: #2a2a2a;
+    --color: #ddd;
+    --emphasis: #ffcf00;
+    --highlight: #df00cf;
+    --contrast: #1d1d1d;
+    --dimmed: #aaa;
+    --link: #8e96ff;
+    --link-visited: #d560ff;
 
-        --filter-black-to-color: saturate(0%) brightness(0%) invert(100%) sepia(46%) saturate(354%) hue-rotate(72deg) brightness(119%) contrast(73%);
-    }
+    --filter-black-to-color: saturate(0%) brightness(0%) invert(100%) sepia(46%) saturate(354%) hue-rotate(72deg) brightness(119%) contrast(73%);
+  }
 }
 
-.mono > img, .mono > .typst-frame *:is(path, use) {
-    filter: var(--filter-black-to-color);
+.mono>img,
+.mono>.typst-frame *:is(path, use) {
+  filter: var(--filter-black-to-color);
 }
 
 
 /** Misc. */
 :root {
-    font-family: "Libertinus Serif";
-    font-size: 1.35rem;
+  font-family: "Libertinus Serif";
+  font-size: 1.15rem;
 
-    line-height: 1.25;
-     
-    text-rendering: optimizeLegibility;
-    -webkit-text-stroke-width: 0.01em;
-    -webkit-font-smoothing: subpixel-antialiased;
-    
-    color: var(--color);
-    background-color: var(--background);
+  line-height: 1.35;
 
-    margin: auto;
+  text-rendering: optimizeLegibility;
+  -webkit-text-stroke-width: 0.01em;
+  -webkit-font-smoothing: subpixel-antialiased;
+
+  color: var(--color);
+  background-color: var(--background);
+
+  margin: auto;
 }
 
 @media (min-width: 900px) {
-    :root {
-        font-size: 1.55rem;
-        width: min(75vw, 1200px);
-    }
+  :root {
+    font-size: 1.45rem;
+    width: min(75vw, 1200px);
+  }
 }
 
 article {
-    margin: 0.6rem;
-    padding: 0.6rem;
+  margin: 0.6rem;
+  padding: 0.6rem;
 }
 
 a[href^="#fnref"] {
-    margin: 0.6em 0.6em 0.7em 0.6em;
+  margin: 0.6em 0.6em 0.7em 0.6em;
 }
 
 
 
 /** Table of contents */
 nav[role="doc-toc"] a {
-    color: var(--color);
-    font-family: "Fira Sans";
+  color: var(--color);
+  font-family: "Fira Sans";
 }
 
 /** Links */
 a {
-    color: var(--link);
+  color: var(--link);
 
-    text-decoration-thickness: 0.07em;
-    text-decoration-style: dotted;
-    text-underline-offset: 2px; 
+  text-decoration-thickness: 0.07em;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
 }
 
 a:visited {
-    color: var(--link-visited);
+  color: var(--link-visited);
 }
 
 a:hover {
-    text-decoration-style: solid;
+  text-decoration-style: solid;
 }
 
 
 /** Prose */
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Fira Code";
-    -webkit-text-stroke-width: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Fira Code";
+  -webkit-text-stroke-width: 0;
 
-    margin: 1.8rem 0 0.6rem 0;
+  margin: 1.8rem 0 0.6rem 0;
 }
 
 p {
-    text-align: justify;
-    hyphens: auto;
+  text-align: justify;
+  hyphens: auto;
 
-    overflow: auto;
+  overflow: auto;
 }
 
 blockquote {
-    border-left: solid var(--dimmed);
-    padding-left: 1em;
-    margin-right: 0;
+  border-left: solid var(--dimmed);
+  padding-left: 1em;
+  margin-right: 0;
 
-    blockquote {
-        margin-left: 0.2em;
-    }
+  blockquote {
+    margin-left: 0.2em;
+  }
 }
 
 
 /** Math */
-:not(span) > .typst-math {
-    display: block;
-    text-align: center;
+:not(span)>.typst-math {
+  display: block;
+  text-align: center;
 
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 
 /* XXX: hacky but needed so overline renders correctly */
 .typst-math .typst-shape[fill="none"] {
-    stroke: var(--color);
+  stroke: var(--color);
 }
 
 .typst-math .typst-frame * {
-    fill: var(--color);
+  fill: var(--color);
 }
 
 
 /** Code */
 code {
-    font-size: 0.85em;
-    font-family: "Fira Code";
+  font-size: 0.85em;
+  font-family: "Fira Code";
 
-    -webkit-text-stroke-width: 0;
-    
-    color: #ddd;
-    background-color: var(--contrast);
+  -webkit-text-stroke-width: 0;
 
-    margin: 0 0.1em;
-    padding: 1px 3px;
-    border-radius: 4px;
+  color: #ddd;
+  background-color: var(--contrast);
+
+  margin: 0 0.1em;
+  padding: 1px 3px;
+  border-radius: 4px;
 }
 
 pre {
-    color: #ddd;
-    background-color: var(--contrast);
+  color: #ddd;
+  background-color: var(--contrast);
 
-    padding: 0.7em;
-    border-radius: 5px;
+  padding: 0.7em;
+  border-radius: 5px;
 
-    overflow: auto;
+  overflow: auto;
 
-    code {
-        font-size: 0.8em;
+  code {
+    font-size: 0.8em;
 
-        margin: 0;
-        padding: 0;
-        border-radius: 0;
-    }
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+  }
 }
 
 
 /** Icon links */
 .icon-links {
-    display: flex;
+  display: flex;
 
-    flex-wrap: wrap;
-    justify-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
 
-    text-align: center;
+  text-align: center;
 
-    > span {
-        margin: 1rem 1.5rem 0.5rem 1.5rem; 
-    }
+  >span {
+    margin: 1rem 1.5rem 0.5rem 1.5rem;
+  }
 
-    a {
-        text-decoration: none;
-        margin: 0 0.4rem;
-    }
+  a {
+    text-decoration: none;
+    margin: 0 0.4rem;
+  }
 
-    img {
-        width: 1.75em;
-    }
+  img {
+    width: 1.75em;
+  }
 }
 
 
 /** Page list */
 ul.page-list {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 
-    li:not(:first-child) :is(h1, h2, h3) {
-        margin-top: 1.2em;
-    }
+  li:not(:first-child) :is(h1, h2, h3) {
+    margin-top: 1.2em;
+  }
 
-    li a {
-        color: var(--color);
-        text-decoration: none;
-    }
+  li a {
+    color: var(--color);
+    text-decoration: none;
+  }
 }

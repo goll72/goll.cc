@@ -1,80 +1,71 @@
 @font-face {
-    font-family: "Fira Code";
-    font-style: normal;
-    font-display: swap;
-    font-weight: 400;
-    src: url("./assets/fonts/FiraCode-Regular.woff2") format("woff2");
+  font-family: "Fira Code";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("./assets/fonts/FiraCode-Regular.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: "Fira Code";
-    font-style: normal;
-    font-display: swap;
-    font-weight: 600;
-    src: url("./assets/fonts/FiraCode-SemiBold.woff2") format("woff2");
+  font-family: "Fira Code";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url("./assets/fonts/FiraCode-SemiBold.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: "Fira Code";
-    font-style: normal;
-    font-display: swap;
-    font-weight: 800;
-    src: url("./assets/fonts/FiraCode-Bold.woff2") format("woff2");
+  font-family: "Fira Code";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 800;
+  src: url("./assets/fonts/FiraCode-Bold.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: "Fira Sans";
-    font-style: normal;
-    font-display: swap;
-    font-weight: 400;
-    src: url("./assets/fonts/FiraSans-Regular.woff2") format("woff2");
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("./assets/fonts/FiraSans-Regular.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: "Fira Sans";
-    font-style: normal;
-    font-display: swap;
-    font-weight: 600;
-    src: url("./assets/fonts/FiraSans-SemiBold.woff2") format("woff2");
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url("./assets/fonts/FiraSans-SemiBold.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: "Fira Sans";
-    font-style: normal;
-    font-display: swap;
-    font-weight: 800;
-    src: url("./assets/fonts/FiraSans-Bold.woff2") format("woff2");
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 800;
+  src: url("./assets/fonts/FiraSans-Bold.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: "Fira Sans";
-    font-style: italic;
-    font-display: swap;
-    font-weight: 400;
-    src: url("./assets/fonts/FiraSans-Italic.woff2") format("woff2");
+  font-family: "Fira Sans";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400;
+  src: url("./assets/fonts/FiraSans-Italic.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: "Libertinus Serif";
-    font-style: normal;
-    font-display: swap;
-    font-weight: 400;
-    src: url("./assets/fonts/LibertinusSerif-Regular.woff2") format("woff2");
+  font-family: "Libertinus Serif";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("./assets/fonts/LibertinusSerif-Regular.woff2") format("woff2");
 }
-
-/* @font-face { */
-    /* font-family: "Libertinus Serif"; */
-    /* font-style: italic, oblique; */
-    /* font-display: swap; */
-    /* font-weight: 400; */
-    /* src: url("./assets/fonts/LibertinusSerif-Italic.woff2") format("woff2"); */
-/* } */
 
 @font-face {
-    font-family: "Libertinus Serif";
-    font-style: normal;
-    font-display: swap;
-    font-weight: 800;
-    src: url("./assets/fonts/LibertinusSerif-Bold.woff2") format("woff2");
+  font-family: "Libertinus Serif";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 800;
+  src: url("./assets/fonts/LibertinusSerif-Bold.woff2") format("woff2");
 }
-
