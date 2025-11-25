@@ -18,6 +18,10 @@
   "/misc": (
     title: [Misc.]
   ),
+  "/misc/brachistochrone": (
+    title: [Brachistochrone],
+    description: [A physics simulation/demo]
+  ),
   "/pt": (
     title: [goll.cc]
   ),
@@ -30,6 +34,10 @@
   ),
   "/pt/misc": (
     title: [Misc.]
+  ),
+  "/pt/misc/brachistochrone": (
+    title: [Curva braquistócrona],
+    description: [Uma demonstração/simulação]
   )
 )
 

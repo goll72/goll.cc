@@ -5,10 +5,12 @@ TYP_SRC := site/index.typ \
            site/blog/restoring-sqrt.typ \
            site/blog/linux-weird.typ \
            site/misc/index.typ \
+           site/misc/brachistochrone.typ \
            site/pt/index.typ \
            site/pt/blog/index.typ \
            site/pt/blog/restoring-sqrt.typ \
-           site/pt/misc/index.typ
+           site/pt/misc/index.typ \
+           site/pt/misc/brachistochrone.typ
 
 CSS_SRC := site/styles.css
 

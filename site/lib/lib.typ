@@ -1,3 +1,5 @@
+#import "@preview/zero:0.5.0": set-num
+
 #import "url.typ": url
 #import "meta.typ": meta, meta-dictionary
 
@@ -84,6 +86,10 @@
     .filter(it => url() == it or url().starts-with(it + "/"))
     .at(0, default: "/en/")
     .slice(1, 3)
+
+  if current-lang == "pt" {
+    set-num(decimal-separator: ",")
+  }
 
   set document(..meta)
   set text(lang: current-lang)

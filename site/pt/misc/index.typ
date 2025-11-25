@@ -4,4 +4,6 @@
 #show: page
 #show: article
 
-= #emoji.cricket
+#page-list(
+  "./brachistochrone"
+)
