@@ -1,10 +1,14 @@
+{
+  "/": "Blog posts on random topics (maybe math and Linux too)",
+  "/pt/": "Posts sobre coisas aleatórias (talvez você encontre matemática e Linux aqui também)"
+} as $map |
 "
 <rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">
   <channel>
     <title>goll.cc</title>
     <link>https://goll.cc\($prefix)</link>
     <description>
-      Blog posts on random topics (maybe math and Linux too)
+      \($map[$prefix])
     </description>
     <language>\(if $prefix == "/" then "en" else $prefix[1:2] end)</language>
     <pubDate>\($date)</pubDate>
