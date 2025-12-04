@@ -1,4 +1,5 @@
 #import "url.typ": url
+#import "util.typ": content-to-string
 
 #let meta-dictionary = (
   "/": (
@@ -44,3 +45,9 @@
 #let meta(path: url()) = {
   meta-dictionary.at(path, default: (:))
 }
+
+#if sys.inputs.at("meta-export", default: none) != none [
+  #metadata(meta-dictionary.pairs().filter(
+    ((_, info)) => info.at("description", default: none) != none
+  ).map(((link, (title, description))) => (link, content-to-string(title), content-to-string(description)))) <meta>
+]

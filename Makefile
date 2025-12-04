@@ -19,6 +19,8 @@ DEP := $(SRC:site/%=$(BUILD)/deps/%.d)
 
 GEN := $(TYP_SRC:%.typ=$(BUILD)/%.html) \
        $(CSS_SRC:%.css=$(BUILD)/%.css) \
+       $(BUILD)/site/rss.xml \
+       $(BUILD)/site/pt/rss.xml \
        $(BUILD)/site/assets/favicon.png
 
 all: $(BUILD)/ $(dir $(DEP) $(GEN)) $(GEN)
@@ -43,9 +45,16 @@ $(BUILD)/%/:
 
 $(BUILD)/site/%.html: site/%.typ
 	typst compile --root site --features html -f html --deps $(BUILD)/deps/$*.typ.d --deps-format make --input path=/$*.typ $< $@
+	sed -i 's: site/lib/meta.typ::' $(BUILD)/deps/$*.typ.d
 
 $(BUILD)/site/%.css: site/%.css
 	esbuild --bundle --format=esm --loader:.woff=file --loader:.woff2=file --asset-names='assets/[name]' --outbase=$(BUILD)/site --outfile=$@ --metafile=/dev/stdout $< | jq -r --arg in $< --arg out $@ '"\($$out): \([ .inputs | keys[] | select(. != $$in)] | join(" "))"' > $(BUILD)/deps/$*.css.d
+
+$(BUILD)/meta.json: site/lib/meta.typ scripts/parse-meta.jq
+	typst query --features html --target html site/lib/meta.typ '<meta>' --input meta-export=true --field value --one | jq --argjson langs '["pt"]' -f scripts/parse-meta.jq > $@
+
+$(BUILD)/site%rss.xml: $(BUILD)/meta.json scripts/generate-rss.jq
+	jq --raw-output --arg prefix $* --arg date "$(shell date --rfc-822)" -f scripts/generate-rss.jq < $(BUILD)/meta.json > $@
 
 $(BUILD)/%: %
 	cp $< $@
