@@ -1,5 +1,5 @@
 # {prefix: [[path, title, description], ...]};
-# $mod: [{"paths": {path: commit}, "commits": [commit, ...], "dates": {commit: date}}]
+# $mod: [{"paths": {path: commit}, "commits": [commit, ...], "dates": {commit: date}}];
 # $date: date
 #    -> "..."
 #
