@@ -19,8 +19,8 @@ DEP := $(SRC:site/%=$(BUILD)/deps/%.d)
 
 GEN := $(TYP_SRC:%.typ=$(BUILD)/%.html) \
        $(CSS_SRC:%.css=$(BUILD)/%.css) \
-       $(BUILD)/site/rss.xml \
-       $(BUILD)/site/pt/rss.xml \
+       $(BUILD)/site/feed.xml \
+       $(BUILD)/site/pt/feed.xml \
        $(BUILD)/site/assets/favicon.png
 
 all: $(BUILD)/ $(dir $(DEP) $(GEN)) $(GEN)
@@ -53,8 +53,17 @@ $(BUILD)/site/%.css: site/%.css
 $(BUILD)/meta.json: site/lib/meta.typ scripts/parse-meta.jq
 	typst query --features html --target html site/lib/meta.typ '<meta>' --input meta-export=true --field value --one | jq --argjson langs '["pt"]' -f scripts/parse-meta.jq > $@
 
-$(BUILD)/site%rss.xml: $(BUILD)/meta.json scripts/generate-rss.jq
-	jq --raw-output --arg prefix $* --arg date "$(shell date --rfc-822)" -f scripts/generate-rss.jq < $(BUILD)/meta.json > $@
+$(BUILD)/last-modified.json: .git/HEAD .git/refs/heads scripts/last-modified.jq
+	@git diff-index --quiet HEAD -- || echo " :: Building $(BUILD)/last-modified.json with a dirty working tree." >&2
+
+	git last-modified -r site | jq -R -n -f scripts/last-modified.jq > $@.tmp
+	git show -s --format=%aI `jq --raw-output '.commits[]' < $@.tmp` \
+	    | jq -R -n --slurpfile mod $@.tmp '[$$mod[0].commits, [inputs]] | transpose | map({(.[0]): .[1]}) | add | ($$mod[0] + {"dates": .})' > $@
+
+	rm $@.tmp
+
+$(BUILD)/site%feed.xml: $(BUILD)/meta.json $(BUILD)/last-modified.json scripts/generate-feed.jq
+	jq --raw-output --arg prefix $* --arg date "$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')" --slurpfile mod $(BUILD)/last-modified.json -f scripts/generate-feed.jq < $(BUILD)/meta.json > $@
 
 $(BUILD)/%: %
 	cp $< $@
