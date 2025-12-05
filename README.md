@@ -9,4 +9,5 @@ My website, written in Typst.
  - GNU make
  - esbuild
  - jq
+ - git
  - miniserve
