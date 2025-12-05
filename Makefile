@@ -48,13 +48,14 @@ $(BUILD)/site/%.html: site/%.typ
 	sed -i 's: site/lib/meta.typ::' $(BUILD)/deps/$*.typ.d
 
 $(BUILD)/site/%.css: site/%.css
-	esbuild --bundle --format=esm --loader:.woff=file --loader:.woff2=file --asset-names='assets/[name]' --outbase=$(BUILD)/site --outfile=$@ --metafile=/dev/stdout $< | jq -r --arg in $< --arg out $@ '"\($$out): \([ .inputs | keys[] | select(. != $$in)] | join(" "))"' > $(BUILD)/deps/$*.css.d
+	esbuild --bundle --format=esm --loader:.woff=file --loader:.woff2=file --asset-names='assets/[name]' --outbase=$(BUILD)/site --outfile=$@ --metafile=/dev/stdout $< \
+	    | jq -r --arg in $< --arg out $@ '"\($$out): \([ .inputs | keys[] | select(. != $$in)] | join(" "))"' > $(BUILD)/deps/$*.css.d
 
 $(BUILD)/meta.json: site/lib/meta.typ scripts/parse-meta.jq
 	typst query --features html --target html site/lib/meta.typ '<meta>' --input meta-export=true --field value --one | jq --argjson langs '["pt"]' -f scripts/parse-meta.jq > $@
 
 $(BUILD)/last-modified.json: .git/HEAD .git/refs/heads scripts/last-modified.jq
-	@git diff-index --quiet HEAD -- || echo " :: Building $(BUILD)/last-modified.json with a dirty working tree." >&2
+	@git diff-index --quiet HEAD -- || echo " :: Building $@ with a dirty working tree." >&2
 
 	git last-modified -r site | jq -R -n -f scripts/last-modified.jq > $@.tmp
 	git show -s --format=%aI `jq --raw-output '.commits[]' < $@.tmp` \
