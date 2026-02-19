@@ -1,17 +1,6 @@
 BUILD ?= build
 
-TYP_SRC := site/index.typ \
-           site/blog/index.typ \
-           site/blog/restoring-sqrt.typ \
-           site/blog/linux-weird.typ \
-           site/misc/index.typ \
-           site/misc/brachistochrone.typ \
-           site/pt/index.typ \
-           site/pt/blog/index.typ \
-           site/pt/blog/restoring-sqrt.typ \
-           site/pt/misc/index.typ \
-           site/pt/misc/brachistochrone.typ
-
+TYP_SRC := $(shell find site -path site/lib -prune -o -name '[^_]*.typ' -print)
 CSS_SRC := site/styles.css
 
 SRC := $(TYP_SRC) $(CSS_SRC)
