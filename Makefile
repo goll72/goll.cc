@@ -17,6 +17,9 @@ all: $(BUILD)/ $(dir $(DEP) $(GEN)) $(GEN)
 serve: all
 	miniserve -I --index index.html --pretty-urls $(BUILD)/site
 
+watch:
+	$(MAKE) && while inotifywait -r -q -e modify,close_write,move,create,delete .; do $(MAKE); done
+
 clean:
 	rm -f $(GEN)
 
@@ -58,4 +61,4 @@ $(BUILD)/site%feed.xml: $(BUILD)/meta.json $(BUILD)/last-modified.json scripts/g
 $(BUILD)/%: %
 	cp $< $@
 
-.PHONY: all serve clean
+.PHONY: all serve watch clean

@@ -16,6 +16,10 @@
     title: [Linux Oddities],
     description: [A log of weird stuff that has happened to me on Linux]
   ),
+  "/blog/debian-oracle-cloud": (
+    title: [Debian on Oracle Cloud Free Tier],
+    description: [How I installed Debian on an Oracle Cloud Free Tier Instance with only 1GB of RAM]
+  ),
   "/misc": (
     title: [Misc.]
   ),

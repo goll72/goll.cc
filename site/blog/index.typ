@@ -6,5 +6,6 @@
 
 #page-list(
   "./restoring-sqrt",
-  "./linux-weird"
+  "./linux-weird",
+  "./debian-oracle-cloud"
 )
