@@ -63,7 +63,7 @@ done
 
 cp $(which busybox) .
 
-cat <<EOF > init
+cat <<'EOF' > init
 #!/bin/sh
 
 export PATH=/bin:/usr/bin:/sbin:/usr/sbin
