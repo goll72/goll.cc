@@ -1,3 +1,4 @@
 .helix/
 .vscode/
 dist/
+node_modules/

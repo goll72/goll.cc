@@ -3,10 +3,15 @@
 
 #set document(
   title: [Raiz quadrada por restauração],
-  description: [Veja como esse algoritmo funciona em binário]
+  description: [Veja como esse algoritmo funciona em binário],
 )
 
-#show: page.with("/pt/blog/restoring-sqrt")
+#show: page.with(
+  "/pt/blog/restoring-sqrt",
+  published: "2024-06-16",
+  updated: "2025-11-16",
+  tags: ("math",)
+)
 
 = Raiz quadrada por restauração
 

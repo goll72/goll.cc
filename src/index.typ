@@ -1,4 +1,6 @@
-#import "lib.typ"
+#import "lib.typ": host
+#import "lib/feed.typ": generate-feed
+#import "lib/tags.typ": tags-init
 
 #include "pages/index.typ"
 #include "pages/blog/index.typ"
@@ -17,6 +19,14 @@
   asset(path, read(path, encoding: none))
 }
 
-// XXX: generate RSS feed
+// Write Atom feed for each language
+#context for path in ("/", "/pt") {
+  let feed = generate-feed(host: host, path)
+  asset(path + "/feed.xml", bytes(feed))
+}
 
-// XXX: generate sitemap
+// Write tag information for all pages
+#context {
+  let tags = state("tags", tags-init).get()
+  asset("/tags.json", bytes(json.encode(tags, pretty: false)))
+}

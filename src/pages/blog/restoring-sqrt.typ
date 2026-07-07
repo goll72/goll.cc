@@ -6,7 +6,12 @@
   description: [This algorithm, although a bit niche, is still quite useful. But how (and why) does it work?]
 )
 
-#show: page.with("/blog/restoring-sqrt")
+#show: page.with(
+  "/blog/restoring-sqrt",
+  published: "2024-06-16",
+  updated: "2025-11-16",
+  tags: ("math",),
+)
 
 = Restoring Square Root Explained
 

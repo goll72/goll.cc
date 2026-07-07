@@ -13,7 +13,12 @@
   description: [A physics simulation/demo]
 )
 
-#show: page.with("/misc/brachistochrone")
+#show: page.with(
+  "/misc/brachistochrone",
+  published: "2025-11-25",
+  updated: "2025-11-25",
+  tags: ("demo",)
+)
 
 = Brachistochrone Demo
 

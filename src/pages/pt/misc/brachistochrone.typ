@@ -13,7 +13,12 @@
   description: [Uma demonstração/simulação]
 )
 
-#show: page.with("/pt/misc/brachistochrone")
+#show: page.with(
+  "/pt/misc/brachistochrone",
+  published: "2025-11-25",
+  updated: "2025-11-25",
+  tags: ("demo",)
+)
 
 = Demonstração --- Curva braquistócrona
 

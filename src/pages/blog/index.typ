@@ -2,9 +2,9 @@
 #import "/lib/common/index.typ": page-list
 
 #let paths = (
-  "restoring-sqrt",
+  "debian-oracle-cloud",
   "linux-weird",
-  "debian-oracle-cloud"
+  "restoring-sqrt",
 ).map(it => "/blog/" + it)
 
 #for path in paths {

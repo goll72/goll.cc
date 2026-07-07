@@ -5,7 +5,12 @@
   description: [How I installed Debian on an Oracle Cloud Free Tier Instance with only 1GB of RAM]
 )
 
-#show: page.with("/blog/debian-oracle-cloud")
+#show: page.with(
+  "/blog/debian-oracle-cloud",
+  published: "2026-04-02",
+  updated: "2026-04-02",
+  tags: ("vps", "linux")
+)
 
 = Debian on Oracle Cloud Free Tier
 

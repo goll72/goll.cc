@@ -5,7 +5,13 @@
   description: [A log of weird stuff that has happened to me on Linux]
 )
 
-#show: page.with("/blog/linux-weird", outlined: true)
+#show: page.with(
+  "/blog/linux-weird",
+  published: "2025-11-16",
+  updated: "2025-11-16",
+  tags: ("linux",),
+  outlined: true
+)
 
 = Linux Oddities
 

@@ -1,26 +1,22 @@
 #import "deps.typ": zero
 
-#import "lib/util.typ": content-to-string
-#import "lib/common/index.typ": h-rule
+#import "lib/util.typ": content-to-string, pretty-path-difference,
+#import "lib/lang.typ": lang-map, langs, default-lang, add-lang-prefix, remove-lang-prefix
+#import "lib/foot.typ": track-footnote, show-footnotes, footnote-init
+#import "lib/tags.typ": add-tags
 
 #import zero: set-num
 
+#let host = "goll.cc"
+
 #let typ(path) = "/pages" + path + ".typ" 
 
-#let page(path, content, outlined: false) = context {
+#let page(path, content, outlined: false, published: none, updated: none, tags: ()) = context {
   let normalized-path = if path.ends-with("/") {
     path.slice(0, -1)
   } else {
     path
   }
-  
-  let lang-map = (
-    "en": [🇺🇸],
-    "pt": [🇧🇷]
-  )
-
-  let default-lang = "en"
-  let langs = lang-map.keys()
 
   let (current-lang, path-without-lang) = path
     .match(regex("^(?:/(\w{2}))?(/.*)/?$"))
@@ -34,75 +30,40 @@
     path-without-lang = "/"
   }
 
+  let date-regex = regex("(\d{4})-(\d{2})-(\d{2})")
+  let date-parse = ((y, m, d)) => datetime(year: int(y), month: int(m), day: int(d))
+  
+  let to-datetime = it => if type(it) == str {
+    date-parse(it.match(date-regex).captures)
+  } else {
+    it
+  }
+
+  let published = to-datetime(published)
+  let updated = to-datetime(updated)
+
+  if published != none and updated != none and published > updated {
+    panic("`updated` date cannot be lower than `published` date: " + path)
+  }
+
+  let tags = if type(tags) == str {
+    (tags,)
+  } else {
+    tags
+  }
+
   [
+    #state("published").update(published)
+    #state("updated").update(updated)
+
+    #add-tags(path, tags)
+
     #document(normalized-path + "/index.html", {
       if current-lang == "pt" {
         set-num(decimal-separator: ",")
       }
 
       set text(lang: current-lang)
-
-      // Returns a pretty-printable difference between paths `from` and `target`.
-      // Prepends absolute paths with `~`.
-      // 
-      // Used in the navigation bar site sections list.
-      let pretty-path-difference(from, target) = {
-        if from == target {
-          return "."
-        }
-
-        if target == "/" {
-          return "~"
-        }
-
-        let path = if from.starts-with(target) {
-          let dotdot-count = from.slice(target.len()).matches(regex("[^/]+/?")).len()
-
-          let path = ""
-
-          for _ in range(0, dotdot-count) {
-            path = path + "../"
-          }
-
-          path
-        } else {
-          "~" + target
-        }
-
-        if path.ends-with("/") {
-          path.slice(0, -1)
-        } else {
-          path
-        }
-      }
-
-      // Returns the same path, but without a language prefix
-      let remove-lang-prefix(path) = {
-        assert(path.at(0) == "/", message: "invalid path")
-
-        if path.len() < 3 {
-          return path
-        }
-
-        let valid-lang-root = path.slice(1, 3) in lang-map
-
-        if valid-lang-root and path.len() == 3 {
-          "/"
-        } else if valid-lang-root and path.at(3, default: none) == "/" {
-          path.slice(3)
-        } else {
-          path
-        }
-      }
-
-      // Returns a path with the appropriate prefix for the given language 
-      let add-lang-prefix(path, lang) = {
-        if lang == default-lang {
-          remove-lang-prefix(path)
-        } else {
-          "/" + lang + (if path == "/" { "" } else { path })
-        }
-      }
 
       let nav-sections = ("/", "/blog", "/misc")
 
@@ -134,42 +95,11 @@
       }
 
       counter(heading).update(0)
-    
-      // (n-backlinks: int, footnotes: array(footnote), backlinks: array(array(int)))
-      let footnotes = state("footnotes", (0, (), ()))
-      footnotes.update((0, (), ()))
+      state("footnotes").update(footnote-init)
 
       // XXX: We will need this while Typst doesn't add native support
       // for footnotes when using a custom show-rule with HTML export
-      show footnote: it => {
-        if type(it.body) == label {
-          it = query(it.body).first()
-        }
-      
-        footnotes.update(old => {
-          let (n, old-fn, old-backlinks) = old
-          let pos = old-fn.position(x => x == it)
-
-          // If this is a new footnote, add it to the array of footnotes
-          if pos == none {
-            (n + 1, (..old-fn, it), (..old-backlinks, (n + 1,)))
-          } else {
-            old-backlinks.at(pos).push(n + 1)
-            (n + 1, old-fn, old-backlinks)
-          }
-        })
-
-        // Number of backlinks in total up to this point
-        let (n, ..) = footnotes.get()
-        // Number of footnotes up to this point 
-        let k = counter(footnote).at(it.location()).at(0) 
-
-        html.elem("sup", attrs: (id: "fnref" + str(n + 1)),
-          html.a(href: "#fn" + str(k),
-            numbering(it.numbering, k)
-          )
-        )
-      }
+      show footnote: track-footnote
 
       html.html(lang: current-lang, {
         html.head({
@@ -185,9 +115,12 @@
 
           if document.title != none {
             html.title(content-to-string(document.title))
-          }
 
-          // XXX: add opengraph attributes
+            html.elem("meta", attrs: (property: "og:title", content: content-to-string(document.title)))
+            html.elem("meta", attrs: (property: "og:type", content: "website"))
+            html.elem("meta", attrs: (property: "og:url", content: "https://" + host + path))
+            html.elem("meta", attrs: (property: "og:image", content: "https://" + host + "/assets/favicon.png"))
+          }
         })
 
         html.body({
@@ -229,28 +162,7 @@
 
           content
 
-          // Footnotes
-          context {
-            let (n, footnotes, backlinks) = footnotes.get()
-
-            if n > 0 {
-              html.elem("div", attrs: (class: "footnote-rule"), h-rule())
-  
-              html.elem("section", attrs: (class: "footnotes"),
-                html.ol({
-                  for (fn, backlinks) in footnotes.zip(backlinks) {
-                    html.li({
-                      fn.body
-
-                      for backlink-idx in backlinks {
-                        html.a(href: "#fnref" + str(backlink-idx), [↩])
-                      }
-                    })
-                  }
-                })
-              )
-            }
-          }
+          context show-footnotes()
         })
       })
     }) #label(path)
