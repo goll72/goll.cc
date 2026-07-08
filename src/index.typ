@@ -10,14 +10,20 @@
 #include "pages/pt/blog/index.typ"
 #include "pages/pt/misc/index.typ"
 
-#asset("styles.css", read("styles.css", encoding: none))
-#asset("fonts.css", read("fonts.css", encoding: none))
+#let serve(..args) = {
+  let files = args.pos()
+
+  for file in files {
+    asset(file, read(file, encoding: none))
+
+    if file.ends-with(".js") {
+      asset(file + ".map", read(file + ".map", encoding: none))
+    }
+  }
+}
 
 #let assets = json(bytes(sys.inputs.at("assets")))
-
-#for path in assets {
-  asset(path, read(path, encoding: none))
-}
+#serve("styles.css", "fonts.css", "scripts/page-list.js", ..assets)
 
 // Write Atom feed for each language
 #context for path in ("/", "/pt") {

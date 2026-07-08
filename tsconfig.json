@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+
+    "rootDir": "./src/scripts",
+    "outDir": "./src/scripts",
+
+    "strict": true,
+
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    "sourceMap": true,
+    "skipLibCheck": true,
+
+    "noEmitOnError": true
+  },
+
+  "include": ["src/scripts/**/*.ts"],
+  "exclude": []
+}

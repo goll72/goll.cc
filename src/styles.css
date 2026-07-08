@@ -164,6 +164,11 @@ a:hover {
 
 
 /** Prose */
+article {
+  margin: 0.6rem;
+  padding: 0.6rem;
+}
+
 h1,
 h2,
 h3,
@@ -263,8 +268,8 @@ ul.page-list {
   list-style-type: none;
   padding: 0;
 
-  li:not(:first-child) :is(h1, h2, h3) {
-    margin-top: 1.2em;
+  h1, h2, h3 {
+    margin-top: 0;
   }
 
   li a {
@@ -272,9 +277,23 @@ ul.page-list {
     text-decoration: none;
   }
 
+  .main-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    margin-top: 1.25em;
+  }
+
+  .date-info {
+    font-family: "Fira Code";
+    font-size: 0.8em;
+    margin-left: 0.2em;
+  }
+
   .tag-list {
     font-family: "Fira Code";
-    font-size: 0.6em;
+    font-size: 0.65em;
     margin: 0 0 0 auto;
     width: fit-content;
     
@@ -288,4 +307,83 @@ ul.page-list {
       background-color: var(--contrast);
     }
   }
+}
+
+.search-container {
+  max-width: 40em;
+  margin-bottom: 1em;
+
+  font-family: "Fira Code";
+  font-size: 0.85em;
+
+  position: relative;
+
+  input {
+    width: 100%;
+    padding: 0.4em 2em 0.4em 0.6em;
+    font: inherit;
+    border: none;
+    border-radius: 4px;
+    background: var(--bg-contrast);
+    color: var(--color);
+
+    position: relative;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.search-clear {
+  position: absolute;
+  right: 0.3em;
+  top: 0.3em;
+  padding: 0.15em 0.45em;
+  font-size: 1.1em;
+  line-height: 1;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--color-muted);
+}
+
+.search-clear:hover {
+  background: var(--background);
+}
+
+.tag-dropdown {
+  position: absolute;
+  top: 120%;
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+  border: none;
+  border-radius: 4px;
+  background: var(--bg-contrast);
+  
+  display: none;
+}
+
+.tag-dropdown-item {
+  padding: 0.35em 0.6em;
+  cursor: pointer;
+  font-family: "Fira Code";
+  font-size: 0.85em;
+}
+
+.tag-dropdown-item.selected,
+.tag-dropdown-item:hover {
+  background: var(--contrast);
+}
+
+.page-list li[style*="display: none"] + hr,
+.page-list hr:has(+ li[style*="display: none"]) {
+  display: none;
 }

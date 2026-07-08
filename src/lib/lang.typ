@@ -34,3 +34,8 @@
     "/" + lang + (if path == "/" { "" } else { path })
   }
 }
+
+#let date-fmt = (
+  en: "[year]-[month]-[day]",
+  pt: "[day]/[month]/[year]"
+)

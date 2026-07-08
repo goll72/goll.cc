@@ -1,4 +1,5 @@
 #import "/lib/tags.typ": get-tags
+#import "/lib/lang.typ": date-fmt
 
 #import "h-rule.typ": h-rule
 
@@ -18,10 +19,31 @@
         description: [No description]
       ))
 
-      #let tags = get-tags(it)
+      #let published = state("published").at(label(it))
+      #let updated = state("updated").at(label(it))
+
+      #let date-fmt = date-fmt.at(text.lang)
       
-      == #link(it, doc.title)
-      #doc.description
+      #let tags = get-tags(it)
+
+      #html.elem("div", attrs: (class: "main-info"), {
+        html.div[
+          == #link(it, doc.title)
+          #doc.description
+        ]
+
+        if published != none or updated != none {
+          html.elem("div", attrs: (class: "date-info"), {
+            if updated != none and updated != published {
+              html.div[#sym.plus #updated.display(date-fmt)]
+            }
+
+            if published != none {
+              html.div[#sym.star #published.display(date-fmt)]
+            }
+          })
+        }
+      })
 
       #if tags.len() > 0 {
         html.elem("div", attrs: (class: "tag-list"),
@@ -32,6 +54,8 @@
       }
     ]
   ))
+
+  html.script(src: "/scripts/page-list.js", type: "module", async: true)
 
   list-items.join(h-rule())
 

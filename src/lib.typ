@@ -160,7 +160,7 @@
             outline(target: selector(heading).within(here()))
           }
 
-          content
+          html.article(content)
 
           context show-footnotes()
         })
