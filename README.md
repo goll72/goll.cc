@@ -20,7 +20,6 @@ npm i
 ./build.sh
 ```
 
-The command above will run the necessary build commands for each
-external subproject, transpile Typescript scripts and then run
-`typst watch`, outputting the website files to `dist` and serving
-them locally.
+`build.sh` will run the necessary build commands for each external
+subproject, transpile Typescript scripts and then run `typst watch`,
+outputting the website files to `dist` and serving them locally.
