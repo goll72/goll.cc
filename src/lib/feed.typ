@@ -2,7 +2,9 @@
 #import "util.typ": xml-escape, content-to-string
 #import "lang.typ": langs, extract-lang, add-lang-prefix
 
-#let generate-feed(host: none, location: none, updated: datetime.today(), path, subtitle: none) = {
+// Generates a feed for all feed pages matching the path passed in (and having the same language)
+// If `updated` is not set, the updated date will be the maximum over all feed entries
+#let generate-feed(host: none, location: none, updated: none, path, subtitle: none) = {
   if location == none {
     location = "https://" + host
   }
@@ -12,8 +14,6 @@
   } else {
     path
   }
-
-  let updated = updated.display("[year]-[month]-[day]")
 
   let entries = {
     let all-entries = state("feed-pages").get()
@@ -25,7 +25,7 @@
     }    
   }
 
-  let xml-entries = entries.map(it => {
+  let entries = entries.map(it => {
     let doc = query(label(it)).first()
 
     let summary = if doc.description == none {
@@ -44,17 +44,15 @@
       }
     }
 
-    let updated = {
-      let date = state("updated").at(label(it))
+    let updated-date = state("updated").at(label(it))
+    assert.ne(updated-date, none, message: "`updated` needs to be set for pages on a feed: " + it)
 
-      assert.ne(date, none, message: "`updated` needs to be set for pages on a feed: " + it)
-      date.display("[year]-[month]-[day]")
-    }
+    let updated = updated-date.display("[year]-[month]-[day]")
 
     let categories = get-tags(it)
       .map(it => "<category term=\"" + it + "\" />")
 
-    return "
+    return (updated-date, "
   <entry>
     <title>" + xml-escape(content-to-string(doc.title)) + "</title>
     <link href=\"" + location + it + "\" />
@@ -64,8 +62,16 @@
     <updated>" + updated + "</updated>
     " + categories.join("\n" + 4 * " ") + "
   </entry>
-"
+")
   })
+
+  let xml-entries = entries.map(((_, entry)) => entry)
+
+  if updated == none {
+    updated = calc.max(..entries.map(((date, _)) => date))
+  }
+
+  let updated = updated.display("[year]-[month]-[day]")
 
   let subtitle = if subtitle == none {
     ""

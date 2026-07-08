@@ -26,8 +26,13 @@
 #serve("styles.css", "fonts.css", "scripts/page-list.js", ..assets)
 
 // Write Atom feed for each language
+#let feed-description = (
+  "/": "Blog posts on random topics (maybe math and Linux too)",
+  "/pt": "Posts sobre coisas aleatórias (talvez você encontre matemática e Linux aqui também)"
+)
+
 #context for path in ("/", "/pt") {
-  let feed = generate-feed(host: host, path)
+  let feed = generate-feed(host: host, path, subtitle: feed-description.at(path))
   asset(path + "/feed.xml", bytes(feed))
 }
 
