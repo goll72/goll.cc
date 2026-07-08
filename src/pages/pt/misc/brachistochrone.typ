@@ -25,8 +25,9 @@
 A curva braquistócrona é a curva que reduz o tempo necessário para
 um corpo se deslocar de um ponto a outro sob influência da gravidade.
 
-// XXX: fix link
-Clique #link("./brachistochrone/demo")[aqui] para ver uma simulação física dessa curva,
+// NOTE: the pt version is broken on the development server because I don't want
+// to duplicate assets, but it works in production due to build script adjustments
+Clique #link("/pt/misc/brachistochrone/demo")[aqui] para ver uma simulação física dessa curva,
 que permite comparar o tempo que uma bola com raio $r = 1/(2 sqrt(pi)) #m()$
 e densidade $mu = 4$ (ou seja, massa $m = #kg(1)$) leva para realizar
 uma trajetória seguindo uma curva braquistócrona e uma linha reta.

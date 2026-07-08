@@ -1,0 +1,3 @@
+[submodule "src/ext/brachistochrone"]
+	path = src/ext/brachistochrone
+	url = https://github.com/goll72/brachistochrone

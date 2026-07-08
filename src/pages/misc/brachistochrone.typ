@@ -13,6 +13,13 @@
   description: [A physics simulation/demo]
 )
 
+#let base = "/misc/brachistochrone/demo/"
+#let brac-assets = ("wasm/brachistochrone_bg.wasm", "wasm/brachistochrone.js", "index.html")
+
+#for path in brac-assets {
+  asset(base + path, read("/ext/brachistochrone/web/" + path, encoding: none))
+}
+
 #show: page.with(
   "/misc/brachistochrone",
   published: "2025-11-25",
@@ -26,8 +33,7 @@ A brachistochrone curve is a curve that reduces the time needed
 for a body under the influence of gravity to go from one point
 to another.
 
-// XXX: fix link
-Click #link("./brachistochrone/demo")[here] to see a physical simulation of such a
+Click #link("/misc/brachistochrone/demo")[here] to see a physical simulation of such a
 curve, that allows for measuring how long a ball with radius $r = 1/(2 sqrt(pi)) #m()$
 and density $mu = 4$ (mass $m = 1$) takes to complete its trajectory going from an
 initial to a final position when following a brachistochrone curve, and comparing it
