@@ -85,6 +85,7 @@ header * {
 
 .mono {
   width: fit-content;
+  max-width: 100%;
   margin: auto;
 }
 
@@ -238,6 +239,11 @@ math {
   font-family: "STIX Two Math";
 }
 
+math[display="block"], .diagram {
+  overflow: auto hidden;
+  padding: 5px 0;
+}
+
 
 /** Icon links */
 .icon-links {
@@ -312,6 +318,10 @@ ul.page-list {
 .search-container {
   max-width: 40em;
   margin-bottom: 1em;
+
+  input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+  }
 
   font-family: "Fira Code";
   font-size: 0.85em;

@@ -35,11 +35,11 @@
         if published != none or updated != none {
           html.elem("div", attrs: (class: "date-info"), {
             if updated != none and updated != published {
-              html.div[#sym.plus #updated.display(date-fmt)]
+              html.div[\+ #updated.display(date-fmt)]
             }
 
             if published != none {
-              html.div[#sym.star #published.display(date-fmt)]
+              html.div[\* #published.display(date-fmt)]
             }
           })
         }

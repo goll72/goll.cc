@@ -35,6 +35,24 @@
   }
 }
 
+// Extracts the language from a path, returning the
+// language and the path without a language prefix
+#let extract-lang(path) = {
+  let (lang, path-without-lang) = path
+    .match(regex("^(?:/(\w{2}))?(/.*)?/?$"))
+    .captures
+
+  if lang == none {
+    lang = default-lang
+  }
+
+  if path-without-lang == none {
+    path-without-lang = "/"
+  }
+
+  return (lang, path-without-lang)
+}
+
 #let date-fmt = (
   en: "[year]-[month]-[day]",
   pt: "[day]/[month]/[year]"

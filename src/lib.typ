@@ -1,7 +1,7 @@
 #import "deps.typ": zero
 
 #import "lib/util.typ": content-to-string, pretty-path-difference,
-#import "lib/lang.typ": lang-map, langs, default-lang, add-lang-prefix, remove-lang-prefix
+#import "lib/lang.typ": lang-map, langs, default-lang, add-lang-prefix, remove-lang-prefix, extract-lang
 #import "lib/foot.typ": track-footnote, show-footnotes, footnote-init
 #import "lib/tags.typ": add-tags
 
@@ -18,18 +18,8 @@
     path
   }
 
-  let (current-lang, path-without-lang) = path
-    .match(regex("^(?:/(\w{2}))?(/.*)/?$"))
-    .captures
-
-  if current-lang == none {
-    current-lang = default-lang
-  }
-
-  if path-without-lang == none {
-    path-without-lang = "/"
-  }
-
+  let (current-lang, path-without-lang) = extract-lang(path)
+  
   let date-regex = regex("(\d{4})-(\d{2})-(\d{2})")
   let date-parse = ((y, m, d)) => datetime(year: int(y), month: int(m), day: int(d))
   

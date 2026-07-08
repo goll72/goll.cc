@@ -17,7 +17,7 @@
   }
 
   set align(center)
-  show: it => html.elem("div", attrs: (class: "mono"), it)
+  show: it => html.elem("div", attrs: (class: "mono diagram"), it)
   show: it => html.frame(v(1em) + it + v(1em))
 
   // XXX: remove this from an `html.frame` once grid is supported natively
