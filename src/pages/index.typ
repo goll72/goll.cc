@@ -8,6 +8,6 @@
 Welcome to my website. I'm a computer science undergraduate student from Brazil.
 Here you can find some thoughts on programming, math, Linux and more.
 
-#icon-links()
+#context icon-links()
 
 #h-rule()

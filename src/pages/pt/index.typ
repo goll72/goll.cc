@@ -7,6 +7,6 @@
 
 Olá! Esse é o meu site, onde irei dissertar sobre programação, matemática, Linux e afins.
 
-#icon-links()
+#context icon-links()
 
 #h-rule()

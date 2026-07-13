@@ -43,6 +43,8 @@
   }
 
   [
+    #state("path").update(path)
+    
     #state("published").update(published)
     #state("updated").update(updated)
 
@@ -156,5 +158,7 @@
         })
       })
     }) #label(path)
+
+    #state("path").update(none)
   ]
 }
