@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Ensure only one instance of the script can be running at a time
 : "${TMPDIR:=/tmp}"
@@ -17,6 +17,7 @@ trap 'flock -u 30; flock -xn 30 && rm -f "$LOCKFILE"; kill -- -$$' EXIT
 assets=$(cd src && find assets -type f -print0 | jq -c --raw-input --slurp '[ split("\u0000") | .[] | select(length > 0) ]')
 
 # Transpile the scripts in src/scripts
+npm i --package-lock-only
 npx tsc
 
 while :; do
