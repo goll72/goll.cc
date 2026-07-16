@@ -140,9 +140,25 @@ a[href^="#fn"] {
 
 
 /** Table of contents */
-nav[role="doc-toc"] a {
-  color: var(--color);
-  font-family: "Fira Sans";
+nav[role="doc-toc"] {
+  margin: 0.6rem;
+  padding: 0.6rem;
+  padding-bottom: 0;
+
+  li {
+    text-indent: -20px;
+
+    &:first-line {
+      text-indent: 0;
+    }
+
+    margin-y: 0.5em;
+  }
+  
+  a {
+    color: var(--color);
+    font-family: "Fira Sans";
+  }
 }
 
 
