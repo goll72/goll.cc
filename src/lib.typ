@@ -77,10 +77,9 @@
         if it.element.func() == heading {
           let c = counter(heading).at(it.element.location())
 
-          link(it.element.location())[
-            #numbering("1.", ..c.slice(1))
-            #it.body()
-          ]
+          numbering("1. ", ..c.slice(1))
+
+          link(it.element.location(), it.body())
         } else {
           it
         }

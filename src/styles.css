@@ -146,13 +146,14 @@ nav[role="doc-toc"] {
   padding-bottom: 0;
 
   li {
-    text-indent: -20px;
-
     &:first-line {
       text-indent: 0;
     }
 
+    text-indent: -20px;
     margin-y: 0.5em;
+
+    list-style-type: none;
   }
   
   a {
@@ -198,11 +199,11 @@ h6 {
   margin: 1.8rem 0 0.6rem 0;
 }
 
-p {
+p, blockquote {
   text-align: justify;
   hyphens: auto;
 
-  overflow: auto;
+  overflow: auto hidden;
 }
 
 blockquote {
@@ -226,9 +227,12 @@ code {
   color: #ddd;
   background-color: var(--contrast);
 
-  margin: 0 0.1em;
   padding: 1px 3px;
   border-radius: 4px;
+}
+
+p code {
+  margin: 0 0.1em;
 }
 
 pre {
@@ -321,7 +325,7 @@ ul.page-list {
     
     display: flex;
 
-    & > * {
+    &>* {
       width: fit-content;
       margin: 0 0.5em;
       padding: 0.15em 0.25em;
