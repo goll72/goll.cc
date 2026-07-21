@@ -150,9 +150,9 @@ nav[role="doc-toc"] {
       text-indent: 0;
     }
 
-    text-indent: -20px;
-    margin-y: 0.5em;
+    font-variant-numeric: tabular-nums;
 
+    text-indent: -20px;
     list-style-type: none;
   }
   
